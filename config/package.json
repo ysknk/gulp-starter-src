@@ -13,9 +13,9 @@
     "animejs": "^2.2.0",
     "axios": "^0.18.0",
     "js-cookie": "^2.2.0",
-    "lodash": "^4.17.10",
-    "ua-parser-js": "^0.7.17",
-    "moment-timezone": "^0.5.25"
+    "lodash": "^4.17.15",
+    "moment-timezone": "^0.5.25",
+    "ua-parser-js": "^0.7.17"
   },
   "devDependencies": {
     "gulp-iconfont": "^10.0.2",
