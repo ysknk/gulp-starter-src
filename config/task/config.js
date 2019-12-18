@@ -81,7 +81,7 @@ module.exports = {
   img: {
     // plugins: [
     //   imageminPngquant({
-    //     quality: '50-100'
+    //     quality: [0.5, 1.0]
     //   }),
     //   imageminMozjpeg({
     //     quality: 85,
@@ -143,7 +143,7 @@ module.exports = {
 
     meta,
 
-    assets_path: '/assets/',//base path
+    assets_path: `/${ASSETS_PATH}`,//base path
     htdocsdir: define.path.htdocs
   }
 };
