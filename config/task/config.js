@@ -144,7 +144,7 @@ module.exports = {
 
     meta,
 
-    assets_path: '/assets/',//base path
+    assets_path: `/${ASSETS_PATH}`,//base path
     htdocsdir: define.path.htdocs
   }
 };
