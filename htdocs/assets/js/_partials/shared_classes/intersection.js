@@ -80,6 +80,7 @@ export default ((win, doc) => {
       _.forEach(elems, (elem, i) => {
         let data = this.getParseData(elem);
         data = _.merge({}, this.options, data);
+        if (elem.classList.contains(data.classname.init)) return;
 
         elem.classList.add(data.classname.init);
         elem.classList.add(data.action);
