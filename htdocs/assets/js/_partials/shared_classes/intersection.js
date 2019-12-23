@@ -110,12 +110,18 @@ export default ((win, doc) => {
             windowData.top <= 0)
         ) {
           this.setIn(elem, data);
+          if (data.isOnce) {
+            elem.removeAttribute(this.dataAttr);
+          }
         }
 
         // 余白含めて画面内
         if (targetData.bottom >= windowData.top + thresholdDiff &&
             windowData.bottom - thresholdDiff >= targetData.top) {
           this.setIn(elem, data);
+          if (data.isOnce) {
+            elem.removeAttribute(this.dataAttr);
+          }
         } else {
           // 一度きりの場合はoutクラスをつけない
           if (!data.isOnce) {
