@@ -133,9 +133,9 @@ export default ((win, doc) => {
      */
     setIn(elem, data) {
       if (!elem.classList.contains(data.classname.in)) {
-        if (data.isOnce) {
-          elem.removeAttribute(this.dataAttr);
-        }
+        // if (data.isOnce) {
+        //   elem.removeAttribute(this.dataAttr);
+        // }
 
         if (data.src) {
           elem.src = data.src;
