@@ -5,7 +5,7 @@ export default ((win, doc) => {
 
   /**
    * Intersection
-   * <div data-intersection='{"action": "fadeout", "threshold": 0.2, "callback": {"in": "onIn"}}'>hoge</div>
+   * <div data-intersection='{"action": "intersection-fadeout", "threshold": 0.2, "callback": {"in": "onIn"}}'>hoge</div>
    */
   return class Intersection {
 
