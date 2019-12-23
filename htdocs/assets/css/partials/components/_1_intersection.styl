@@ -29,10 +29,10 @@ div(style=`height:1000px;background:#00ff00;` data-intersection='{"threshold": 0
 div(style=`height:1000px;background:#0000ff;` data-intersection='{"threshold": 0.2, "callback": {"in": "onOut"}}') piyo
 ```
 */
-[data-intersection]
+.intersection
   $this = selector('^[1..-1]')
 
-  &.fadein
+  &-fadein
     &.is-intersection-init
       opacity 0
       transition opacity $trd $tre
