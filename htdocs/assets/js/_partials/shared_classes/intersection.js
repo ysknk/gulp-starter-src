@@ -100,6 +100,9 @@ export default ((win, doc) => {
         let data = this.getParseData(elem);
         data = _.merge({}, this.options, data);
 
+        if (data.isOnce
+          && elem.classList.contains(data.classname.in)) return;
+
         let targetData = this.getTargetData(elem);
         let thresholdDiff = windowData.height * data.threshold;
 
