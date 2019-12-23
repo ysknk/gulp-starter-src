@@ -27,7 +27,7 @@ export default ((win, doc) => {
           in: 'is-intersection-in',
           out: 'is-intersection-out'
         },
-        action: 'fadein',
+        action: 'intersection-fadein',
         isOnce: true,
         src: '',// image src
         threshold: 0.3,// 0 - 1.0 -> screen top - bottom
@@ -137,10 +137,6 @@ export default ((win, doc) => {
      */
     setIn(elem, data) {
       if (!elem.classList.contains(data.classname.in)) {
-        // if (data.isOnce) {
-        //   elem.removeAttribute(this.dataAttr);
-        // }
-
         if (data.src) {
           elem.src = data.src;
         }
@@ -151,6 +147,9 @@ export default ((win, doc) => {
           data.callback.in
             && _.isFunction(this[data.callback.in])
             && this[data.callback.in](elem, data);
+        }
+        if (data.isOnce) {
+          elem.removeAttribute(this.dataAttr);
         }
       }
     }
