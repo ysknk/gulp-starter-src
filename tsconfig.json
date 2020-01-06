@@ -1,0 +1,8 @@
+{
+  "include": ["./htdocs/**/*"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "baseUrl": "./config/node_modules",
+    "typeRoots": ["./config/node_modules/@types"]
+  }
+}
