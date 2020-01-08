@@ -7,9 +7,9 @@ module.exports = {
     "node": true
   },
   "globals": {
-    "jQuery": true,
-    "$": true,
-    "_": true
+    "jQuery",
+    "$",
+    "_"
   },
   "rules": {
     "no-console": 1,
