@@ -5,7 +5,7 @@ const FILE_NAME = ``;// default index.html
 
 const ASSETS_PATH = `assets/`
 
-let meta = require(`../page.js`);
+let meta = require(`./page.js`);
 
 module.exports = {
 
