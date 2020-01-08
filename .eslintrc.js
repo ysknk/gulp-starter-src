@@ -4,13 +4,13 @@ module.exports = {
   "extends": "eslint:recommended",
   "env": {
     "browser": true,
-    "es6": true,
-    "node": true
+    "es6": true
   },
+  // writable || readonly
   "globals": {
-    "jQuery",
-    "$",
-    "_"
+    "jQuery": "writable",
+    "$": "writable",
+    "_": "writable"
   },
   "rules": {
     "no-console": 1,
