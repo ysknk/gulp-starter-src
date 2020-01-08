@@ -5,7 +5,7 @@ const FILE_NAME = ``;// default index.html
 
 const ASSETS_PATH = `assets/`
 
-let meta = require(`../page.js`);
+let meta = require(`./page.js`);
 
 module.exports = {
 
@@ -44,6 +44,7 @@ module.exports = {
       // notify: false,
       // open: 'local',// argv.no = false(ex: gulp watch --no)
       startPath: `${START_PATH}${FILE_NAME}`,
+      // ghostMode: false,
       // server: {
       //   baseDir: define.path.dest
       // }

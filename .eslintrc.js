@@ -4,7 +4,8 @@ module.exports = {
   "extends": "eslint:recommended",
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "node": true
   },
   // writable || readonly
   "globals": {
