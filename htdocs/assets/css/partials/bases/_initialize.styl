@@ -27,27 +27,22 @@
   color $font_color_default
   break_word()
 
-  +break_point('pc')
-    min-width ($wpc)px
+  min-width ($wmin)px
 
+  .{$p}display-inline-block
+    display inline-block
+
+  +break_point('pc')
     .{$p}display-none
       &.-pc
         display none !important
 
   +break_point('tab')
-    width 100%
-
     .{$p}display-none
       &.-tab
         display none !important
 
   +break_point('sp')
-    min-width 320px
-    width 100%
-    img
-      width 100%
-      height auto
-
     .{$p}display-none
       &.-sp
         display none !important
@@ -147,8 +142,10 @@
     cursor pointer
 
   img
-    vertical-align top
     max-width 100%
+    width 100%
+    height auto
+    vertical-align top
 
   picture
     max-width 100%
