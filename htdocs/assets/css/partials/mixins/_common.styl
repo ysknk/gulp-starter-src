@@ -91,7 +91,7 @@ hidden_text()
 
 break_point($type, $css = false)
   if $css
-    if $wtab
+    if $wtab && $wtab >= 0
       if $type == 'pc'
         @media screen and (min-width: ($wpc + 1)px)
           {block}
