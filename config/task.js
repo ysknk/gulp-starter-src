@@ -19,6 +19,7 @@ module.exports = {
   common: {
     // lint: false,// true || gulp --lint
     // minify: false,// true || gulp --min
+    delete: true,// false || gulp --del
 
     // convert: {
     //   linefeedcode: 'LF',// CRLF || LF || CR
