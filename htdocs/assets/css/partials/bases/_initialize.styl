@@ -4,153 +4,154 @@
   if $init_type == 'normalize'
     @import "_normalize"
 
-  // overscroll-behavior-y none
+  .{$p}wrapper
+    // overscroll-behavior-y none
 
-  font-family $font_family
-
-  font-size ($fpc)px
-  // font-size (($fpc / ($wpc)) * 100)vw
-  // @media (min-width: unit($wpc, 'px'))
-  //   font-size ($fpc)px !important
-
-  line-height $lh
-
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  -webkit-text-size-adjust 100%
-
-  -webkit-print-color-adjust exact
-
-  font-feature-settings 'palt' 1
-  // font-variant-ligatures no-common-ligatures
-  // font-variant-numeric slashed-zero
-
-  // background $color_main
-  color $font_color_default
-  break_word()
-
-  min-width ($wmin)px
-
-  .{$p}display-inline-block
-    display inline-block
-
-  +break_point('pc')
-    .{$p}display-none
-      &.-pc
-        display none !important
-
-  +break_point('tab')
-    .{$p}display-none
-      &.-tab
-        display none !important
-
-  +break_point('sp')
-    .{$p}display-none
-      &.-sp
-        display none !important
-
-  a
-    link_style('', '', '', '')
-    &:focus
-      outline none
-
-  a,
-  input[type="submit"],
-  button
-  label
-    rollover()
-    &:disabled
-      cursor default
-      opacity 1 !important
-
-  input,
-  textarea
-    padding 0
-    background #fff
-    appearance none
-    line-height inherit
-    border none
-    font-size inherit
     font-family $font_family
-    outline none
-    &::-moz-focus-inner
-      border none
-    &:required
-    &:invalid
-      box-shadow none
 
-  button
-    padding 0
-    background none
-    appearance none
-    line-height inherit
-    border none
-    font-size inherit
-    font-family $font_family
-    outline none
-    &::-moz-focus-inner
-      border none
+    font-size ($fpc)px
+    // font-size (($fpc / ($wpc)) * 100)vw
+    // @media (min-width: unit($wpc, 'px'))
+    //   font-size ($fpc)px !important
 
-  input
-    &[type="text"],
-    &[type="search"],
-    &[type="datetime"],
-    &[type="datetime-local"],
-    &[type="date"],
-    &[type="week"],
-    &[type="month"],
-    &[type="time"],
-    &[type="color"],
-    &[type="password"],
-    &[type="url"],
-    &[type="email"],
-    &[type="number"]
-      min-height 2em
+    line-height $lh
 
-    &[type="date"]
+    -webkit-font-smoothing antialiased
+    -moz-osx-font-smoothing grayscale
+    -webkit-text-size-adjust 100%
+
+    -webkit-print-color-adjust exact
+
+    font-feature-settings 'palt' 1
+    // font-variant-ligatures no-common-ligatures
+    // font-variant-numeric slashed-zero
+
+    // background $color_main
+    color $font_color_default
+    break_word()
+
+    min-width ($wmin)px
+
+    .{$p}display-inline-block
+      display inline-block
+
+    +break_point('pc')
+      .{$p}display-none
+        &.-pc
+          display none !important
+
+    +break_point('tab')
+      .{$p}display-none
+        &.-tab
+          display none !important
+
+    +break_point('sp')
+      .{$p}display-none
+        &.-sp
+          display none !important
+
+    a
+      link_style('', '', '', '')
+      &:focus
+        outline none
+
+    a,
+    input[type="submit"],
+    button
+    label
+      rollover()
+      &:disabled
+        cursor default
+        opacity 1 !important
+
+    input,
+    textarea
+      padding 0
+      background #fff
       appearance none
-      &::-webkit-outer-spin-button,
-      &::-webkit-inner-spin-button,
-      &::-webkit-clear-button
-        appearance none
-        margin 0
-      &::-webkit-calendar-picker-indicator
-        position relative
-        padding .2em
-        background none
-        font-size .5em
-
-  select
-    min-height 2em
-    appearance none
-    border-radius 0
-    background #fff url($spacer) no-repeat
-    background-position right center
-    background-size .5em
-    padding-right 1.5em
-    &::-ms-expand
-      display none
-
-  input
-    appearance none
-    border-radius 0
-    &:focus
+      line-height inherit
+      border none
+      font-size inherit
+      font-family $font_family
       outline none
+      &::-moz-focus-inner
+        border none
+      &:required
+      &:invalid
+        box-shadow none
 
-  select,
-  input[type="submit"],
-  button,
-  label
-    cursor pointer
+    button
+      padding 0
+      background none
+      appearance none
+      line-height inherit
+      border none
+      font-size inherit
+      font-family $font_family
+      outline none
+      &::-moz-focus-inner
+        border none
 
-  img
-    max-width 100%
-    width 100%
-    height auto
-    vertical-align top
+    input
+      &[type="text"],
+      &[type="search"],
+      &[type="datetime"],
+      &[type="datetime-local"],
+      &[type="date"],
+      &[type="week"],
+      &[type="month"],
+      &[type="time"],
+      &[type="color"],
+      &[type="password"],
+      &[type="url"],
+      &[type="email"],
+      &[type="number"]
+        min-height 2em
 
-  picture
-    max-width 100%
+      &[type="date"]
+        appearance none
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button,
+        &::-webkit-clear-button
+          appearance none
+          margin 0
+        &::-webkit-calendar-picker-indicator
+          position relative
+          padding .2em
+          background none
+          font-size .5em
+
+    select
+      min-height 2em
+      appearance none
+      border-radius 0
+      background #fff url($spacer) no-repeat
+      background-position right center
+      background-size .5em
+      padding-right 1.5em
+      &::-ms-expand
+        display none
+
+    input
+      appearance none
+      border-radius 0
+      &:focus
+        outline none
+
+    select,
+    input[type="submit"],
+    button,
+    label
+      cursor pointer
+
+    img
+      max-width 100%
+      width 100%
+      height auto
+      vertical-align top
+
+    picture
+      max-width 100%
 
 // responsive fontsize
 font_size_responsive('.' + $p + 'base')
