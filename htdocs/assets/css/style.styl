@@ -11,7 +11,8 @@ flex-version = flex;
 @import "partials/bases/_initialize"
 
 .{$p}base
-  // this = selector('^[1..-1]')
-  @import "partials/components/**/*"
-  @import "partials/layouts/**/*"
-  @import "partials/pages/**/*"
+  .{$p}wrapper
+    // this = selector('^[1..-1]')
+    @import "partials/components/**/*"
+    @import "partials/layouts/**/*"
+    @import "partials/pages/**/*"
