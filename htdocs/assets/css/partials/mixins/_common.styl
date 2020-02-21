@@ -89,26 +89,26 @@ hidden_text()
   overflow hidden
   line-height 1
 
-break_point($type, $media = $mediaquery_type)
-  if $media == 'js'
-    {$layout}{$type} &
+break_point($media, $type = $mediaquery_type)
+  if $type == 'js'
+    {$layout}{$media} &
       {block}
   else
     if $wtab && $wtab >= 0
-      if $type == 'pc'
+      if $media == 'pc'
         @media screen and (min-width: ($wpc + 1)px)
           {block}
-      if $type == 'tab'
+      if $media == 'tab'
         @media screen and (min-width: ($wtab)px) and (max-width: ($wpc)px)
           {block}
-      if $type == 'sp'
+      if $media == 'sp'
         @media screen and (max-width: ($wtab - 1)px)
           {block}
     else
-      if $type == 'pc'
+      if $media == 'pc'
         @media screen and (min-width: ($wsp + 1)px)
           {block}
-      if $type == 'sp'
+      if $media == 'sp'
         @media screen and (max-width: ($wsp)px)
           {block}
 
