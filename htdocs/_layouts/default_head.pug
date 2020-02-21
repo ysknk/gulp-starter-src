@@ -50,17 +50,29 @@ if css
   if(typeof css === 'object')
     for item, key in css
       if item
-        link(href!=`${assets_path}css/${item}` rel="stylesheet")
+        if item.match(/\/\//)
+          link(href!=`${item}` rel="stylesheet")
+        else
+          link(href!=`${assets_path}css/${item}` rel="stylesheet")
   if(typeof css === 'string')
-    link(href!=`${assets_path}css/${css}` rel="stylesheet")
+    if item.match(/\/\//)
+      link(href!=`${css}` rel="stylesheet")
+    else
+      link(href!=`${assets_path}css/${css}` rel="stylesheet")
 block css
 
 if js
   if(typeof js === 'object')
     for item, key in js
       if item
-        script(src!=`${assets_path}js/${item}`)
+        if item.match(/\/\//)
+          script(src!=`${item}`)
+        else
+          script(src!=`${assets_path}js/${item}`)
   if(typeof js === 'string')
-    script(src!=`${assets_path}js/${js}`)
+    if item.match(/\/\//)
+      script(src!=`${js}`)
+    else
+      script(src!=`${assets_path}js/${js}`)
 block js
 
