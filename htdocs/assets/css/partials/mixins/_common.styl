@@ -89,8 +89,11 @@ hidden_text()
   overflow hidden
   line-height 1
 
-break_point($type, $css = false)
-  if $css
+break_point($type, $type = ＄mediaquery_type)
+  if $type.match(/^js$/i)
+    {$layout}{$type} &
+      {block}
+  else
     if $wtab && $wtab >= 0
       if $type == 'pc'
         @media screen and (min-width: ($wpc + 1)px)
@@ -108,9 +111,6 @@ break_point($type, $css = false)
       if $type == 'sp'
         @media screen and (max-width: ($wsp)px)
           {block}
-  else
-    {$layout}{$type} &
-      {block}
 
 link_color($link, $hover, $visited, $active)
   if !$link || $link == ''
