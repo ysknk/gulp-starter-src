@@ -28,7 +28,7 @@ mixin img_src(path, alt)
 //- ex) +section('hoge')
 mixin section(name, tag="section", indent="          ")
   != `\n${indent}<!-- ${name}-->`
-  #{tag}(id=name class=`${p}section -${name}`)&attributes(attributes)
+  #{tag}(id=name class=`${p}section ${p}section--${name}`)&attributes(attributes)
     if block
       block
     else
@@ -36,7 +36,7 @@ mixin section(name, tag="section", indent="          ")
   != `\n${indent}<!-- /${name}-->`
 
 mixin title(en, ja, h="h2")
-  #{h}(class=`${p}title -${h}`)&attributes(attributes)
+  #{h}(class=`${p}title ${p}title--${h}`)&attributes(attributes)
     if block
       span(class=`${p}title_inner`)
         block
