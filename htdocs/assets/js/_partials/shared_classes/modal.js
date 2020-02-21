@@ -26,7 +26,7 @@ export default ((win, doc) => {
         return new Modal(opts_);
       }
 
-      this.baseElem = 'body';
+      this.baseElem = '#wrapper';
 
       this.isFixed = true;
       this.isSetHeight = false;
