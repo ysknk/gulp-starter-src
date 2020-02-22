@@ -54,10 +54,10 @@ script#modal1(type="text/template")
   $this = selector('^[2..-1]')
   $close_size = 1em
 
-  &_container
+  &__container
     relative top 0 left 0
 
-  &_close
+  &__close
     absolute top 0 right 0
     a
       relative top 0 left 0
@@ -78,20 +78,19 @@ script#modal1(type="text/template")
       &::after
         transform rotate(-45deg)
 
-  &_content
+  &__content
     clear both
     overflow hidden
-    border-radius(15px)
     background #fff
     // padding-top close_size
 
-  &_wrapper
+  &__wrapper
     absolute top 0 left 0
     width 100%
     height 100%
     z-index 0
 
-  &_background
+  &__background
     absolute top 0 left 0
     z-index 0
     width 100%
@@ -99,7 +98,7 @@ script#modal1(type="text/template")
     background #000
     opacity .6
 
-  &_outer
+  &__outer
     overflow auto
     box-sizing border-box
     max-width 100%
@@ -123,7 +122,7 @@ script#modal1(type="text/template")
     //   width 100%
     //   height 100%
 
-  &_inner
+  &__inner
     relative top 0 left 0
     z-index 10
     display inline-block
