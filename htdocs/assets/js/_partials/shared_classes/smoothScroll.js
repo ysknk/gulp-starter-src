@@ -28,6 +28,8 @@ export default ((win, doc) => {
       this.easing = 'easeInOutQuart';
       this.duration = 500;
 
+      this.diffOffsetY = 0;
+
       _.isObject(opts_) && _.extend(this, opts_);
 
       // this.initialize();
@@ -121,6 +123,15 @@ export default ((win, doc) => {
     }
 
     /**
+     * setDiffOffsetY
+     *
+     * @param {number} posY
+     */
+    setDiffOffsetY(posY) {
+      this.diffOffsetY = posY;
+    }
+
+    /**
      * getOffsetPos
      *
      * @param {object} elem element
@@ -168,7 +179,7 @@ export default ((win, doc) => {
 
       FN.anime({
         targets: scrollPos,
-        y: elemPos.y,
+        y: elemPos.y - this.diffOffsetY,
         duration: this.duration,
         easing: this.easing,
         update: () => win.scroll(scrollPos.x, scrollPos.y),
