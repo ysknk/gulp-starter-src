@@ -84,9 +84,9 @@ export default ((win, doc) => {
       };
 
       this.template = ['',
-        `<div id="${this.name.wrapper}">`,
+        `<div id="${this.name.wrapper}" data-modal-close="" onclick="">`,
           `<div id="${this.name.outer}">`,
-            `<div id="${this.name.background}" data-modal-close="" onclick=""></div>`,
+            `<div id="${this.name.background}"></div>`,
             `<div id="${this.name.inner}">`,
 
               `<div id="${this.name.container}">`,
