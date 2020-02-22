@@ -7,9 +7,9 @@ html.no-js(lang!=lang dir!=dir)
   head
     include default_head.pug
 
-  body(class!=`${p}base ${p}${page_name}`)
+  body(class!=`${p}base`)
     // wrapper
-    #wrapper(class!=`${p}wrapper`)
+    #wrapper(class!=`${p}wrapper ${p}${page_name}`)
       != '\n'
 
       include header.pug
