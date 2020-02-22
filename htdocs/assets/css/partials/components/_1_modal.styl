@@ -85,13 +85,14 @@ script#modal1(type="text/template")
     // padding-top close_size
 
   &__wrapper
+    overflow auto
     absolute top 0 left 0
     width 100%
     height 100%
     z-index 0
 
   &__background
-    absolute top 0 left 0
+    fixed top 0 left 0
     z-index 0
     width 100%
     height 100%
@@ -99,13 +100,11 @@ script#modal1(type="text/template")
     opacity .6
 
   &__outer
-    overflow auto
     box-sizing border-box
     max-width 100%
-    width ($wsp)px
+    width ($wpc)px
     padding-right 20px
     padding-left @padding-right
-    height 100%
     margin-right auto
     margin-left @margin-right
     &::before
