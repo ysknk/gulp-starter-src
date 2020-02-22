@@ -58,6 +58,7 @@ module.exports = {
     // minify_options: {},
     // ex: https://github.com/yaniswang/HTMLHint/wiki/Rules
     // lint_options: {},
+    root_path: `${START_PATH}`,//base absolute path
     assets_path: `${START_PATH}${ASSETS_PATH}`,//base absolute path
   },
 
