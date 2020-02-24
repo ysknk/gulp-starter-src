@@ -10,7 +10,8 @@ if favicon
   //- link(rel="shortcut icon" href!=favicon type="image/vnd.microsoft.icon")
 
 if apple_touch_icon
-  link(rel="apple-touch-icon" href!=apple_touch_icon)
+  for item in apple_touch_icon
+    link(rel!=item.rel sizes!=item.sizes href!=item.href)
 
 if charset
   meta(charset!=charset)
