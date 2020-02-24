@@ -3,7 +3,7 @@
 const START_PATH = `/`;
 const FILE_NAME = ``;// default index.html
 
-const ASSETS_PATH = `assets/`
+const ASSETS_PATH = `${START_PATH}assets/`
 
 let meta = require(`./page.js`);
 
@@ -19,6 +19,7 @@ module.exports = {
   common: {
     // lint: false,// true || gulp --lint
     // minify: false,// true || gulp --min
+    delete: true,// false || gulp --del
 
     // convert: {
     //   linefeedcode: 'LF',// CRLF || LF || CR
@@ -58,8 +59,7 @@ module.exports = {
     // minify_options: {},
     // ex: https://github.com/yaniswang/HTMLHint/wiki/Rules
     // lint_options: {},
-    root_path: `${START_PATH}`,//base absolute path
-    assets_path: `${START_PATH}${ASSETS_PATH}`,//base absolute path
+    root_path: `${START_PATH}`//base absolute path
   },
 
   /* css @stylus */
@@ -145,7 +145,7 @@ module.exports = {
 
     meta,
 
-    assets_path: `/${ASSETS_PATH}`,//base path
+    assets_path: `${ASSETS_PATH}`,//base path
     htdocsdir: define.path.htdocs
   }
 };
