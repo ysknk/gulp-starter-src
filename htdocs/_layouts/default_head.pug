@@ -53,12 +53,12 @@ if css
         if item.match(/\/\//) || item.match(/^\./)
           link(href!=`${item}` rel="stylesheet")
         else
-          link(href!=`${assets_path}css/${item}` rel="stylesheet")
+          link(href!=`${css_path}${item}` rel="stylesheet")
   if(typeof css === 'string')
     if item.match(/\/\//) || item.match(/^\./)
       link(href!=`${css}` rel="stylesheet")
     else
-      link(href!=`${assets_path}css/${css}` rel="stylesheet")
+      link(href!=`${css_path}${css}` rel="stylesheet")
 block css
 
 if js
@@ -68,11 +68,11 @@ if js
         if item.match(/\/\//) || item.match(/^\./)
           script(src!=`${item}`)
         else
-          script(src!=`${assets_path}js/${item}`)
+          script(src!=`${js_path}${item}`)
   if(typeof js === 'string')
     if item.match(/\/\//) || item.match(/^\./)
       script(src!=`${js}`)
     else
-      script(src!=`${assets_path}js/${js}`)
+      script(src!=`${js_path}${js}`)
 block js
 

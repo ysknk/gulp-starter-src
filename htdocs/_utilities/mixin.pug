@@ -17,12 +17,12 @@ mixin inline(tag, name, attr)
 //- responsive img
 //- ex) +img_device_src('/common/', 'hoge')
 mixin img_device_src(path, alt)
-  img(src=`${assets_path}img/pc/${path}` data-pc-src=`${assets_path}img/pc/${path}` data-sp-src=`${assets_path}img/sp/${path}` alt!=alt)&attributes(attributes)
+  img(src=`${img_path}pc/${path}` data-pc-src=`${assets_path}img/pc/${path}` data-sp-src=`${img_path}sp/${path}` alt!=alt)&attributes(attributes)
 
 //- img
 //- ex) +img_src('/common/', 'hoge')
 mixin img_src(path, alt)
-  img(src=`${assets_path}img/${path}` alt!=alt)&attributes(attributes)
+  img(src=`${img_path}${path}` alt!=alt)&attributes(attributes)
 
 //- section
 //- ex) +section('hoge')
