@@ -9,11 +9,7 @@ let meta = require(`./page.js`);
 
 module.exports = {
 
-  tasks: {
-    styleguide: true,
-    iconfont: true,
-    mass_production: false,
-  },
+  tasks: {},
 
   /* common */
   common: {
