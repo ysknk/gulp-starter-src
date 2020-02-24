@@ -12,7 +12,17 @@ const head = {
   // canonical: `${url}`,
 
   // favicon: '/favicon.ico',
-  // apple_touch_icon: '/apple-touch-icon.png',
+  // apple_touch_icon: [
+  //   {
+  //     rel: 'apple-touch-icon-precomposed',
+  //     sizes: '180x180',
+  //     href: '/apple-touch-icon.png'
+  //   },
+  //   {
+  //     rel: 'apple-touch-icon-precomposed',
+  //     href: '/apple-touch-icon.png'
+  //   }
+  // ],
 
   x_ua_compatible: 'IE=edge',
   robots: '',
