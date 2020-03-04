@@ -99,50 +99,11 @@ module.exports = {
 
   /* copy */
   copy: { // other filetype
+    // src: define.path.src('!(pug|styl|js|jsx|vue|tag|jpg|jpeg|png|gif|svg|d.ts|ts|tsx)')
   },
 
   /* delete */
   delete: { // all
-  },
-
-  /* styleguide */
-  styleguide: {
-    src: [`${define.path.config}tasks/styleguide/src/aigis_config.yml`],
-  },
-
-  /* iconfont */
-  /* ../tasks/iconfont/src/uF001-hoge1.svg */
-  /* ../tasks/iconfont/src/uF002-huga1.svg */
-  iconfont: {
-    src: [`${define.path.config}tasks/iconfont/**/*.svg`],
-    dest: `${define.path.dest}${ASSETS_PATH}font/`,
-    options: {
-      startUnicode: 0xF001,
-      fontName: 'icon1',
-      normalize: true,
-      fontHeight: 500,
-      prependUnicode: true,
-      formats: ['ttf', 'eot', 'woff', 'woff2'],
-    }
-  },
-
-  /* mass_production */
-  mass_production: {
-    src: `${define.path.htdocs}_layouts/default.pug`,
-    dest: define.path.dest,
-
-    itemsfile: `${define.path.config}tasks/mass_production/src/items`,
-
-    extension: '.html',
-
-    options: {
-      pretty: true
-    },
-
-    meta,
-
-    assets_path: `${ASSETS_PATH}`,//base path
-    htdocsdir: define.path.htdocs
   }
 };
 
