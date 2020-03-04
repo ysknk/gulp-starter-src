@@ -103,6 +103,7 @@ module.exports = {
 
   /* copy */
   copy: { // other filetype
+    // src: define.path.src('!(pug|styl|js|jsx|vue|tag|jpg|jpeg|png|gif|svg|d.ts|ts|tsx)')
   },
 
   /* delete */
