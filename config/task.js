@@ -77,6 +77,19 @@ module.exports = {
     // minify_options: {},
     // ex: http://eslint.org/docs/rules/
     // lint_options: {},
+    // options: {
+    //   plugins: [
+    //     new webpack.DefinePlugin({
+    //       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    //       meta: {
+    //         p: JSON.stringify(meta.p)
+    //       }
+    //     }),
+    //     new licenseInfoWebpackPlugin({
+    //       glob: '{LICENSE,license,License}*'
+    //     })
+    //   ]
+    // },
   },
 
   /* img @imagemin */
