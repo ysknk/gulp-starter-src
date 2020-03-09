@@ -1,0 +1,45 @@
+/*
+---
+name: icon
+category:
+  - components
+  - components/icon
+tag:
+  - base
+  - latest
+  - pc
+  - sp
+  - js
+  - data
+---
+
+icon styles
+
+* Base icon style.
+
+```html
+```
+```jade
+```
+*/
+font_face('icons1', '', normal, normal)
+
+ICON_ARROW1 = '\F001'
+
+.{$p}icon
+  $this = selector($component_selector)
+
+  display inline-block
+  vertical-align middle
+  line-height 0
+  margin-right .3em
+  margin-left @margin-right
+
+  & ~ {$this}__text
+    display inline-block
+    vertical-align middle
+
+  &--arrow1
+    &::before
+      font_icon('icons1', ICON_ARROW1)
+
