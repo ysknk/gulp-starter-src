@@ -40,13 +40,13 @@ mixin section(name, tag="section", indent="          ")
 mixin title(en, ja, h="h2")
   #{h}(class=`${p}title ${p}title--${h}`)&attributes(attributes)
     if block
-      span(class=`${p}title_inner`)
+      span(class=`${p}title__inner`)
         block
     else
       if en
-        span(class=`${p}title_en`)!= en
+        span(class=`${p}title__en`)!= en
       if ja
-        span(class=`${p}title_ja`)!= ja
+        span(class=`${p}title__ja`)!= ja
 
 //- sns
 //- ex) +set_sns(['twitter', 'facebook', 'line'])
