@@ -100,7 +100,11 @@ module.exports = {
     //   }),
     //   imageminGifsicle(),
     //   imageminOptipng(),
-    //   imageminSvgo()
+    //   imageminSvgo({
+    //     plugins: [
+    //       {removeViewBox: false}
+    //     ]
+    //   })
     // ],
     // options: {
     //   interlaced: true,
