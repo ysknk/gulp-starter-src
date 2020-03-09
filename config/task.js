@@ -140,7 +140,7 @@ module.exports = {
     dest: `${define.path.dest}${ASSETS_PATH}font/`,
     options: {
       startUnicode: 0xF001,
-      fontName: 'icon1',
+      fontName: 'icons1',
       normalize: true,
       fontHeight: 500,
       prependUnicode: true,
