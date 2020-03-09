@@ -12,9 +12,9 @@ Include and export should be described with absolute path with extension.
 cd $(root)/_app
 
 # node-aigis
-gulp styleguide
+npx gulp styleguide
 # gulp-iconfont
-gulp iconfont
+npx gulp iconfont
 ```
 ___* Gulp command only___
 
