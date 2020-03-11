@@ -9,7 +9,7 @@ Include and export should be described with absolute path with extension.
 ## Mock API Server
 
 ```Shell
-# mock api server
+# mock api server. use data `config/db.js`
 cd $(root)/_src/
 npm run json-server
 ```
