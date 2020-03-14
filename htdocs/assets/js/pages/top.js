@@ -2,11 +2,10 @@
   'use strict';
 
   const FN = win[NS];
-  const PAGE_NAME = `${PREFIX}index-page`;
+  const PAGE_NAME = `${PREFIX}top-page`;
 
   function isCurrentPage() {
-    let bodyElem = doc.body;
-    return bodyElem.classList.contains(PAGE_NAME);
+    return doc.querySelector(`.${PAGE_NAME}`) || ``
   }
 
   function initialize() {}

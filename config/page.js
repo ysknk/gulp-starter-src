@@ -59,16 +59,16 @@ module.exports = {
   // /^\// -> directory
   // /^$/ -> file
   '$index': {
-    title: 'index title',
-    description: 'index description',
-    keywords: 'index keywords',
-    js: [...head.js, 'pages/index.js'],
+    title: 'top title',
+    description: 'top description',
+    keywords: 'top keywords',
+    js: [...head.js, 'pages/top.js'],
     // og: Object.assign({}, head.og, {
     //   type: `website`,
-    //   title: 'index title',
-    //   description: 'index description',
+    //   title: 'top title',
+    //   description: 'top description',
     // }),
-    page_name: 'index-page',
+    page_name: 'top-page',
     extension: '.html'
   },
 };
