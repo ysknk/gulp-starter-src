@@ -5,6 +5,12 @@ export default ((win, doc) => {
 
   /**
    * Menu
+   * <div class="js-menu">
+   *   <div class="js-menu__button"><a href="javascript:void(0)">button</a></div>
+   *   <div>
+   *     <div class="js-menu__wrapper">content</div>
+   *   </div>
+   * </div>
    */
   return class Menu {
 
