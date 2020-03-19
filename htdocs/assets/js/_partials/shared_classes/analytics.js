@@ -35,8 +35,7 @@ export default ((win, doc) => {
     /**
      * initialize
      */
-    initialize() {
-    }
+    // initialize() {}
 
     /**
      * sendEvent
