@@ -45,7 +45,7 @@ const head = {
   //   description,
   // },
   // twitter: {
-  //   url: `${url}`,
+  //   card: `summary_large_image`,
   // }
 };
 
