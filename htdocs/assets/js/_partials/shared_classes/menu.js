@@ -7,7 +7,7 @@ export default ((win, doc) => {
    * Menu
    * <div class="js-menu">
    *   <div class="js-menu__button"><a href="javascript:void(0)">button</a></div>
-   *   <div>
+   *   <div class="js-menu__content">
    *     <div class="js-menu__wrapper">content</div> // overflow auto
    *   </div>
    * </div>
@@ -27,6 +27,7 @@ export default ((win, doc) => {
       this.baseElemSelector = '#wrapper';
       this.elemSelector = `.js-menu`;
       this.buttonElemSelector = `${this.elemSelector}__button`;
+      this.contentElemSelector = `${this.elemSelector}__content`;
       this.contentWrapperElemSelector = `${this.elemSelector}__wrapper`;
       this.closeElemSelector = `${this.elemSelector}__close`;
 
@@ -81,6 +82,14 @@ export default ((win, doc) => {
       let baseElem = this.getElem(`baseElem`);
       baseElem.classList.add(this.openClassName);
 
+      let contentElem = this.getElem(`contentElem`);
+      FN.anime({
+        targets: contentElem,
+        opacity: 1,
+        duration: this.duration,
+        easing: this.easing
+      });
+
       let contentWrapper = this.getElem(`contentWrapperElem`);
       if (contentWrapper) {
         contentWrapper.scrollTo(0, 0);
@@ -93,6 +102,14 @@ export default ((win, doc) => {
     close() {
       if (!this.isOpen) return;
       this.isOpen = false;
+
+      let contentElem = this.getElem(`contentElem`);
+      FN.anime({
+        targets: contentElem,
+        opacity: 0,
+        duration: this.duration,
+        easing: this.easing
+      });
 
       let baseElem = this.getElem(`baseElem`);
       baseElem.classList.remove(this.openClassName);
