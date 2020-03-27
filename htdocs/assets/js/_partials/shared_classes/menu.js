@@ -54,6 +54,9 @@ export default ((win, doc) => {
         this.closeElemSelector
       ].join(' ');
 
+      let contentElem = this.getElem(`contentElem`);
+      contentElem.style.opacity = 0
+
       doc.addEventListener('click', (e) => {
         if (!e.target || !e.target.closest) return;
         let elem = e.target.closest(button);// delegate
