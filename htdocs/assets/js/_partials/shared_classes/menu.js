@@ -55,7 +55,9 @@ export default ((win, doc) => {
       ].join(' ');
 
       let contentElem = this.getElem(`contentElem`);
-      contentElem.style.opacity = 0
+      if (contentElem) {
+        contentElem.style.opacity = 0
+      }
 
       doc.addEventListener('click', (e) => {
         if (!e.target || !e.target.closest) return;
@@ -86,12 +88,14 @@ export default ((win, doc) => {
       baseElem.classList.add(this.openClassName);
 
       let contentElem = this.getElem(`contentElem`);
-      FN.anime({
-        targets: contentElem,
-        opacity: 1,
-        duration: this.duration,
-        easing: this.easing
-      });
+      if (contentElem) {
+        FN.anime({
+          targets: contentElem,
+          opacity: 1,
+          duration: this.duration,
+          easing: this.easing
+        });
+      }
 
       let contentWrapper = this.getElem(`contentWrapperElem`);
       if (contentWrapper) {
@@ -107,12 +111,14 @@ export default ((win, doc) => {
       this.isOpen = false;
 
       let contentElem = this.getElem(`contentElem`);
-      FN.anime({
-        targets: contentElem,
-        opacity: 0,
-        duration: this.duration,
-        easing: this.easing
-      });
+      if (contentElem) {
+        FN.anime({
+          targets: contentElem,
+          opacity: 0,
+          duration: this.duration,
+          easing: this.easing
+        });
+      }
 
       let baseElem = this.getElem(`baseElem`);
       baseElem.classList.remove(this.openClassName);
