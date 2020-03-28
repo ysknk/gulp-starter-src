@@ -63,7 +63,7 @@ class MassProduction extends TaskMaster {
             this.task.data.meta,
             item.data
           );
-          item.data.assets_path = this.task.data.assets_path;
+          item.data.root_path = this.task.data.root_path;
           return item.data;
         }))
 
