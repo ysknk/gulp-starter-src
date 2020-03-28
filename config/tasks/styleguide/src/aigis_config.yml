@@ -6,7 +6,7 @@ name: Styleguide
 source:
   # - ./css
   # - ./demo.md
-  - ../../../../htdocs/assets/css/
+  - ../../../../htdocs/css/
 
 # The types that aigis will scan to document comment
 source_type:
