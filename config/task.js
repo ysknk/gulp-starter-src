@@ -7,6 +7,14 @@ const ASSETS_PATH = `${START_PATH}assets/`
 
 let meta = require(`./page.js`);
 
+// const base_dir = {
+//   html: `html/`,
+//   css: `css/`,
+//   js: `js/`,
+//   img: `img/`,
+//   copy: `copy/`,
+// };
+
 module.exports = {
 
   tasks: {},
@@ -50,6 +58,11 @@ module.exports = {
 
   /* html @pug */
   html: {
+    // src: define.path.src('pug'),
+    // src: [`${define.path.srcDir}htdocs/${base_dir.html}**/*.pug`],
+    // dest: define.path.dest,
+    // base_dir: base_dir.html,
+
     path_type: 'absolute',// relative | absolute
     // ex: https://github.com/kangax/html-minifier/
     // minify_options: {},
@@ -60,6 +73,12 @@ module.exports = {
 
   /* css @stylus */
   css: {
+    // src: define.path.src('styl'),
+    // src: [`${define.path.srcDir}htdocs/${base_dir.css}**/*.styl`],
+    // dist: `assets/css/`,
+    // dest: define.path.dest,
+    // base_dir: base_dir.css,
+
     // autoprefixer_options: {
     //   browsers: ['last 2 versions', '> 2%'],
     // },
@@ -69,6 +88,12 @@ module.exports = {
 
   /* js @webpack */
   js: {
+    // src: define.path.src('{js,jsx,ts,tsx,vue}'),
+    // src: [`${define.path.srcDir}htdocs/${base_dir.js}**/*.{js,jsx,ts,tsx,vue}`],
+    // dist: `assets/js/`,
+    // dest: define.path.dest,
+    // base_dir: base_dir.js,
+
     // ex: https://github.com/mishoo/UglifyJS2#minify-options
     // minify_options: {},
     // ex: http://eslint.org/docs/rules/
@@ -90,6 +115,12 @@ module.exports = {
 
   /* img @imagemin */
   img: {
+    // src: define.path.src('{jpg,jpeg,png,gif,svg}'),
+    // src: [`${define.path.srcDir}htdocs/${base_dir.img}**/*.{jpg,jpeg,png,gif,svg}`],
+    // dist: `assets/img/`,
+    // dest: define.path.dest,
+    // base_dir: base_dir.img,
+
     // plugins: [
     //   imageminPngquant({
     //     quality: [0.5, 1.0]
@@ -117,6 +148,9 @@ module.exports = {
   /* copy */
   copy: { // other filetype
     // src: define.path.src('!(pug|styl|js|jsx|vue|tag|jpg|jpeg|png|gif|svg|d.ts|ts|tsx)')
+    // src: [`${define.path.srcDir}htdocs/${base_dir.copy}**/*.*`],
+    // dest: define.path.dest,
+    // base_dir: base_dir.copy,
   },
 
   /* delete */
