@@ -170,7 +170,7 @@ export default ((win, doc) => {
 
       _.isFunction(this.onBeforeScroll) && this.onBeforeScroll(this);
 
-      if (scrollPos.y === elemPos.y) {
+      if (scrollPos.y === (elemPos.y - this.diffOffsetY)) {
         callback();
         return;
       }
