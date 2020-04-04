@@ -99,6 +99,29 @@ module.exports = {
     // ex: http://eslint.org/docs/rules/
     // lint_options: {},
     // options: {
+    //   module: {
+    //     rules: [
+    //       {
+    //         test: /\.(js|jsx|json|vue)$/,
+    //         exclude: /node_modules/,
+    //         use: {
+    //           loader: 'babel-loader?cacheDirectory=true',
+    //           options: {
+    //             cwd: '../_src/',
+    //             presets: [
+    //               ['@babel/preset-env', {
+    //                 targets: '> 0.25%, not dead',
+    //                 useBuiltIns: 'usage',
+    //                 corejs: 3,
+    //                 // debug: true,
+    //               }],
+    //               '@babel/preset-react'
+    //             ]
+    //           }
+    //         }
+    //       }
+    //     ]
+    //   },
     //   plugins: [
     //     new webpack.DefinePlugin({
     //       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
