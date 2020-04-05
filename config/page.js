@@ -62,7 +62,7 @@ module.exports = {
     title: 'top title',
     description: 'top description',
     keywords: 'top keywords',
-    js: [...head.js, 'pages/top.js'],
+    // js: [...head.js, 'pages/top.js'],
     // og: Object.assign({}, head.og, {
     //   type: `website`,
     //   title: 'top title',
