@@ -1,3 +1,6 @@
+const data = require('./data')
+delete require.cache[require.resolve('./data')]
+
 const site_name = ``;
 const separator = ` | `;
 const title = `common title`;
@@ -51,6 +54,8 @@ const head = {
 
 module.exports = {
   ...head,
+
+  data,
 
   p: 'site-', // class_name prefix
 
