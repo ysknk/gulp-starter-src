@@ -2,7 +2,7 @@ font_face($name, $type, $weight, $style)
   $filedir = '../font/'
   $filename = $name + ($type ? '-' + $type : '')
   @font-face
-    font-family $filename
+    font-family $name
 
     src url($filedir + $filename + '.eot')
     src url($filedir + $filename + '.eot?#iefix') format('embedded-opentype'),
