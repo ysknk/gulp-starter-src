@@ -10,6 +10,8 @@ font_face($name, $type, $weight, $style)
       url($filedir + $filename + '.woff') format('woff'),
       url($filedir + $filename + '.ttf') format('truetype')
 
+    font-display swap
+
     if $weight
       font-weight $weight
     if $style
