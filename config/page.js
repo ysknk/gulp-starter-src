@@ -52,12 +52,14 @@ const head = {
   // }
 };
 
+const prefix = 'site-'; // class_name prefix
+
 module.exports = {
   ...head,
 
   data,
 
-  p: 'site-', // class_name prefix
+  p: prefix,
 
   page_name: 'common-page',
 
