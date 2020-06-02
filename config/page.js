@@ -49,10 +49,12 @@ const head = {
   // }
 };
 
+const prefix = 'site-'; // class_name prefix
+
 module.exports = {
   ...head,
 
-  p: 'site-', // class_name prefix
+  p: prefix,
 
   page_name: 'common-page',
 
