@@ -24,6 +24,7 @@ const head = {
   //   }
   // ],
 
+  // content_security_policy: "default-src 'self'; img-src https://*; child-src 'none';",
   x_ua_compatible: 'IE=edge',
   // robots: 'noindex,nofollow',
   format_detection: 'telephone=no',
