@@ -93,7 +93,7 @@ module.exports = {
   js: {
     // src: define.path.src('{js,jsx,ts,tsx,vue}'),
     // src: [`${define.path.srcDir}htdocs/${base_dir.js}**/*.{js,jsx,ts,tsx,vue}`],
-    // dist: `assets/css/`,
+    // dist: `assets/js/`,
     // dest: define.path.dest,
     // base_dir: base_dir.js,
 
