@@ -145,7 +145,7 @@ module.exports = {
   img: {
     // src: define.path.src('{jpg,jpeg,png,gif,svg}'),
     // src: [`${define.path.srcDir}htdocs/${base_dir.img}**/*.{jpg,jpeg,png,gif,svg}`],
-    // dist: `assets/css/`,
+    // dist: `assets/img/`,
     // dest: define.path.dest,
     // base_dir: base_dir.img,
 
