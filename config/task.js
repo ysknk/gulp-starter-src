@@ -1,6 +1,7 @@
 // options -> /_app/gulpfile.babel.js/task/config.js
 
-const START_PATH = `/`;
+const ROOT_PATH = ``;
+const START_PATH = `/${ROOT_PATH}`;
 const FILE_NAME = ``;// default index.html
 
 const ASSETS_PATH = `${START_PATH}assets/`
@@ -64,7 +65,7 @@ module.exports = {
   html: {
     // src: define.path.src('pug'),
     // src: [`${define.path.srcDir}htdocs/${base_dir.html}**/*.pug`],
-    // dest: define.path.dest,
+    // dest: `${define.path.dest}${ROOT_PATH}`,
     // base_dir: base_dir.html,
 
     path_type: 'absolute',// relative | absolute
@@ -79,7 +80,7 @@ module.exports = {
   css: {
     // src: define.path.src('styl'),
     // src: [`${define.path.srcDir}htdocs/${base_dir.css}**/*.styl`],
-    // dist: `assets/css/`,
+    // dist: `${ASSETS_PATH}css/`,
     // dest: define.path.dest,
     // base_dir: base_dir.css,
 
@@ -94,7 +95,7 @@ module.exports = {
   js: {
     // src: define.path.src('{js,jsx,ts,tsx,vue}'),
     // src: [`${define.path.srcDir}htdocs/${base_dir.js}**/*.{js,jsx,ts,tsx,vue}`],
-    // dist: `assets/js/`,
+    // dist: `${ASSETS_PATH}js/`,
     // dest: define.path.dest,
     // base_dir: base_dir.js,
 
@@ -144,7 +145,7 @@ module.exports = {
   img: {
     // src: define.path.src('{jpg,jpeg,png,gif,svg}'),
     // src: [`${define.path.srcDir}htdocs/${base_dir.img}**/*.{jpg,jpeg,png,gif,svg}`],
-    // dist: `assets/img/`,
+    // dist: `${ASSETS_PATH}img/`,
     // dest: define.path.dest,
     // base_dir: base_dir.img,
 
@@ -176,6 +177,7 @@ module.exports = {
   copy: { // other filetype
     // src: define.path.src('!(pug|styl|js|jsx|vue|tag|jpg|jpeg|png|gif|svg|d.ts|ts|tsx)'),
     // src: [`${define.path.srcDir}htdocs/${base_dir.copy}**/*.*`],
+    // dist: `${START_PATH}`,
     // dest: define.path.dest,
     // base_dir: base_dir.copy,
   },
