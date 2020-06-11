@@ -76,9 +76,11 @@ module.exports = {
   css: {
     // src: define.path.src('styl'),
     // src: [`${define.path.srcDir}htdocs/${base_dir.css}**/*.styl`],
-    // dist: `${ASSETS_PATH}css/`,
+    // dist: `assets/css/`,
     // dest: define.path.dest,
     // base_dir: base_dir.css,
+
+    // dist: `${ASSETS_PATH}css/`,
 
     // autoprefixer_options: {
     //   browsers: ['last 2 versions', '> 2%'],
@@ -91,9 +93,11 @@ module.exports = {
   js: {
     // src: define.path.src('{js,jsx,ts,tsx,vue}'),
     // src: [`${define.path.srcDir}htdocs/${base_dir.js}**/*.{js,jsx,ts,tsx,vue}`],
-    // dist: `${ASSETS_PATH}js/`,
+    // dist: `assets/css/`,
     // dest: define.path.dest,
     // base_dir: base_dir.js,
+
+    // dist: `${ASSETS_PATH}js/`,
 
     // ex: https://github.com/mishoo/UglifyJS2#minify-options
     // minify_options: {},
@@ -141,9 +145,11 @@ module.exports = {
   img: {
     // src: define.path.src('{jpg,jpeg,png,gif,svg}'),
     // src: [`${define.path.srcDir}htdocs/${base_dir.img}**/*.{jpg,jpeg,png,gif,svg}`],
-    // dist: `${ASSETS_PATH}img/`,
+    // dist: `assets/css/`,
     // dest: define.path.dest,
     // base_dir: base_dir.img,
+
+    // dist: `${ASSETS_PATH}img/`,
 
     // plugins: [
     //   imageminPngquant({
@@ -173,9 +179,10 @@ module.exports = {
   copy: { // other filetype
     // src: define.path.src('!(pug|styl|js|jsx|vue|tag|jpg|jpeg|png|gif|svg|d.ts|ts|tsx)')
     // src: [`${define.path.srcDir}htdocs/${base_dir.copy}**/*.*`],
-    // dist: `${START_PATH}`,
     // dest: define.path.dest,
     // base_dir: base_dir.copy,
+
+    // dist: `${START_PATH}`,
   },
 
   /* delete */
