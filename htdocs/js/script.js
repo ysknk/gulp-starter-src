@@ -58,13 +58,13 @@ import intersection from './_partials/shared_classes/intersection';
 
   // html class
   if (FN.device.isPc()) {
-    html.classList.add('device-type-pc');
+    html.classList.add('device-media-pc');
   }
   if (FN.device.isSp() && !FN.device.isTab()) {
-    html.classList.add('device-type-sp');
+    html.classList.add('device-media-sp');
   }
   if (FN.device.isTab()) {
-    html.classList.add('device-type-tab');
+    html.classList.add('device-media-tab');
   }
   if (FN.device.isTouch()) {
     html.classList.add('device-use-touch');
