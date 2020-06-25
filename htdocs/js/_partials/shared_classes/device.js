@@ -4,9 +4,9 @@ export default ((win, doc) => {
   const FN = win[NS];
 
   /**
-   * Ua
+   * Device
    */
-  return class Ua {
+  return class Device {
 
     /**
      * constructor
@@ -14,8 +14,8 @@ export default ((win, doc) => {
      * @param {object} opts_
      */
     constructor(opts_) {
-      if (!(this instanceof Ua)) {
-        return new Ua(opts_);
+      if (!(this instanceof Device)) {
+        return new Device(opts_);
       }
 
       _.isObject(opts_) && _.extend(this, opts_);
@@ -63,6 +63,24 @@ export default ((win, doc) => {
      */
     getDevice() {
       return FN.uaParser.getDevice();
+    }
+
+    /**
+     * isTouch
+     *
+     * @returns {boolean}
+     */
+    isTouch() {
+      if (navigator.msPointerEnabled) {
+        return true;
+      } else {
+        if ('ontouchstart' in win) {
+          return true;
+        }
+        if ('onmousedown' in win) {
+          return false;
+        }
+      }
     }
 
   };
