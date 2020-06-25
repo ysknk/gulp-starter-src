@@ -16,7 +16,7 @@ import anime from 'animejs';
 
 // import _ from 'lodash';//look for globals/variable
 
-import ua from './_partials/shared_classes/ua';
+import device from './_partials/shared_classes/device';
 import mediaQuery from './_partials/shared_classes/mediaQuery';
 import ajax from './_partials/shared_classes/ajax';
 import smoothScroll from './_partials/shared_classes/smoothScroll';
@@ -50,21 +50,26 @@ import intersection from './_partials/shared_classes/intersection';
   // moment.tz.setDefault('Asia/Tokyo');
   // FN.moment = moment;
 
-  // ua
-  FN.ua = new ua();
+  // device
+  FN.device = new device();
 
   const html = doc.querySelector('html');
   html.classList.remove('no-js');
 
   // html class
-  if (FN.ua.isPc()) {
-    html.classList.add('ua-pc');
+  if (FN.device.isPc()) {
+    html.classList.add('device-type-pc');
   }
-  if (FN.ua.isSp() && !FN.ua.isTab()) {
-    html.classList.add('ua-sp');
+  if (FN.device.isSp() && !FN.device.isTab()) {
+    html.classList.add('device-type-sp');
   }
-  if (FN.ua.isTab()) {
-    html.classList.add('ua-tab');
+  if (FN.device.isTab()) {
+    html.classList.add('device-type-tab');
+  }
+  if (FN.device.isTouch()) {
+    html.classList.add('device-use-touch');
+  } else {
+    html.classList.add('device-use-mouse');
   }
 
   // if (!detectUseStyle('position', 'sticky')) {
