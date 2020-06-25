@@ -128,7 +128,7 @@ link_color($link, $hover, $visited, $active)
   color $link
   &:visited
     color $visited
-  {$upc} &
+  {$dumouse} &
     &:hover
       color $hover
   &:hover
@@ -150,7 +150,7 @@ link_decoration($link, $hover, $visited, $active)
   text-decoration $link
   &:visited
     text-decoration $visited
-  {$upc} &
+  {$dumouse} &
     &:hover
       text-decoration $hover
   &:active,
@@ -173,7 +173,7 @@ link_style($color, $decoration, $hover_color, $hover_decoration)
   &:visited
     color $color
     text-decoration $decoration
-  {$upc} &
+  {$dumouse} &
     &:hover
       color $hover_color
       text-decoration $hover_decoration
@@ -192,7 +192,7 @@ rollover($type = 'opacity', $def = .7)
     &:active,
     &:focus
       text-decoration none
-    {$upc} &
+    {$dumouse} &
       &:hover
         opacity $def
         text-decoration none
@@ -204,7 +204,7 @@ rollover($type = 'opacity', $def = .7)
     &:active,
     &:focus
       text-decoration none
-    {$upc} &
+    {$dumouse} &
       &:hover
         text-decoration underline
 
@@ -217,7 +217,7 @@ rollover($type = 'opacity', $def = .7)
   //   &:focus
   //   &:hover
   //     text-decoration none
-  //   {$upc} &
+  //   {$dumouse} &
   //     &:hover
   //       background-color #fff
 
@@ -228,7 +228,7 @@ rollover($type = 'opacity', $def = .7)
     &:active,
     &:focus
       text-decoration underline
-    {$upc} &
+    {$dumouse} &
       &:hover
         text-decoration none
 
@@ -240,7 +240,7 @@ rollover($type = 'opacity', $def = .7)
     &:focus
       text-decoration none
       // border-bottom 1px solid FONT_COLOR_LINK_DEFAULT
-    {$upc} &
+    {$dumouse} &
       &:hover
         text-decoration none
 
