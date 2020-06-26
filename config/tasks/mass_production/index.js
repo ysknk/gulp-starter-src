@@ -57,7 +57,11 @@ class MassProduction extends TaskMaster {
 
     for (let item of items) {
       const extname = (item.extname || this.task.data.extension)
-      const destDir = (item.destDir || '');
+      const destDir = (item.destDir
+        ? item.destDir + '/'
+        : ''
+      );
+
       const dest = item.dest
         ? item.dest + destDir
         : this.task.data.dest + destDir;
@@ -70,6 +74,9 @@ class MassProduction extends TaskMaster {
             item.data
           );
           item.data.root_path = this.task.data.root_path;
+          if (item.destDir) {
+            console.log(`${dest}${item.filename + extname}`);
+          }
           return item.data;
         }))
 
