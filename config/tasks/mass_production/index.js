@@ -56,8 +56,14 @@ class MassProduction extends TaskMaster {
     const items = require(path.resolve(this.task.data.itemsfile));
 
     for (let item of items) {
+      const extname = (item.extname || this.task.data.extension)
+      const destDir = (item.destDir || '');
+      const dest = item.dest
+        ? item.dest + destDir
+        : this.task.data.dest + destDir;
+
       stream
-        .pipe($.rename(item.filename + (item.extname || this.task.data.extension)))
+        .pipe($.rename(item.filename + extname))
         .pipe($.data((file) => {
           item.data = _.merge({},
             this.task.data.meta,
@@ -69,7 +75,7 @@ class MassProduction extends TaskMaster {
 
         .pipe(plugin(this.task.data.options))
         .pipe(plugins.useful(this.task.data.convert))
-        .pipe(gulp.dest(item.dest || this.task.data.dest))
+        .pipe(gulp.dest(dest))
 
         .pipe($.size(this.sizeOptions()))
         .pipe(plugins.log())
