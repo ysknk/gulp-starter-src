@@ -217,7 +217,7 @@ module.exports = {
   /* mass_production */
   mass_production: {
     src: `${define.path.htdocs}html/_layouts/default.pug`,
-    dest: define.path.dest,
+    dest: `${define.path.dest}${ROOT_PATH}`,
 
     itemsfile: `${define.path.config}tasks/mass_production/src/items`,
 
