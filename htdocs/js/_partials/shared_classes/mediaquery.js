@@ -57,8 +57,10 @@ export default ((win, doc) => {
 
     /**
      * update
+     *
+     * @param {object} options
      */
-    update() {
+    update(options) {
       let width = this.getWidth();
       let beforePoint = this.getCurrentPoint() || undefined;
 
@@ -81,10 +83,23 @@ export default ((win, doc) => {
       let currentPoint = this.getCurrentPoint();
       if (!beforePoint && currentPoint ||
         beforePoint.config.name != currentPoint.config.name) {
-        this.html.classList.add(currentPoint.config.name);
-        this.setImgSrc(currentPoint);
-        _.isFunction(this.onChange) && this.onChange(this);
+        this.changePoint(currentPoint);
       }
+
+      if (options && options.force) {
+        this.changePoint(currentPoint);
+      }
+    }
+
+    /**
+     * changePoint
+     *
+     * @param {object} point
+     */
+    changePoint(point) {
+      this.html.classList.add(point.config.name);
+      this.setImgSrc(point);
+      _.isFunction(this.onChange) && this.onChange(this);
     }
 
     /**
