@@ -4,6 +4,7 @@ import reqAnimationFrame from './_partials/polyfills/requestAnimationFrame';
 import animationEnd from './_partials/polyfills/animationEnd';
 import closest from './_partials/polyfills/closest';
 import objectAssign from './_partials/polyfills/objectAssign';
+import arrayFind from './_partials/polyfills/arrayFind';
 import styles from './_partials/ponifills/styles';
 import detectUseStyle from './_partials/ponifills/detectUseStyle';
 
