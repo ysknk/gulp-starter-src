@@ -41,6 +41,8 @@ import intersection from './_partials/shared_classes/intersection';
 
   const FN = win[NS];
 
+  FN.detectUseStyle = detectUseStyle;
+
   FN.uaParser = new uaParserJs();
   FN.axios = axios;
   FN.anime = anime;
