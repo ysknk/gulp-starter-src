@@ -17,6 +17,8 @@ import anime from 'animejs';
 
 // import _ from 'lodash';//look for globals/variable
 
+import raf from './_partials/shared_classes/raf';
+
 import device from './_partials/shared_classes/device';
 import mediaQuery from './_partials/shared_classes/mediaQuery';
 import ajax from './_partials/shared_classes/ajax';
@@ -84,6 +86,10 @@ import intersection from './_partials/shared_classes/intersection';
 
   // ajax
   FN.ajax = new ajax();
+
+  // raf
+  // FN.raf = new raf();
+  // FN.raf.update();
 
   // scroll
   FN.scroll = new smoothScroll();
