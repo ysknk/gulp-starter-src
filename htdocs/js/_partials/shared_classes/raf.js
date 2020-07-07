@@ -24,6 +24,8 @@ export default ((win, doc) => {
       this.renders = {};
 
       this.animationFrame = 0;
+      this.animationTime = {};
+      this.animationTimeRatio = {};
 
       this.easingDefault = 'linear';
 
@@ -149,6 +151,21 @@ export default ((win, doc) => {
       const easeFunction = this.ease(t, b, c, d);
 
       return easeFunction[obj.ease || this.easingDefault]();
+    }
+
+    /**
+     * updateAnimationTimeRatio
+     *
+     * @param {string} key
+     */
+    updateAnimationTimeRatio(key) {
+      const lastTime = this.animationTime[key];
+      if (lastTime > 0) {
+        const FPS = (1000 / 60); // 60fps
+        const dTime = new Date().getTime() - lastTime;
+        this.animationTimeRatio[key] = dTime / FPS;
+      }
+      this.animationTime[key] = new Date().getTime();
     }
 
     /**
