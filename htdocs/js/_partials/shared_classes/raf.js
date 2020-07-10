@@ -19,8 +19,6 @@ export default ((win, doc) => {
         return new RAF(opts_);
       }
 
-      _.isObject(opts_) && _.extend(this, opts_);
-
       this.renders = {};
 
       this.animationFrame = 0;
@@ -28,6 +26,8 @@ export default ((win, doc) => {
       this.animationTimeRatio = {};
 
       this.easingDefault = 'linear';
+
+      _.isObject(opts_) && _.extend(this, opts_);
 
       // this.initialize();
     }
