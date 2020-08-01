@@ -64,6 +64,8 @@ export default ((win, doc) => {
         `pointer-events: none;`
       ].join(``);
 
+      this.key = `animationFrame`;
+
       this.animationFrame = false;
 
       this.isEventInitialize = false;
@@ -136,22 +138,22 @@ export default ((win, doc) => {
         ? this.cursor.y = this.mouse.y
         : this.cursor.y += (this.mouse.y - this.cursor.y) * this.cursorRange;
 
-      FN.anime({
-        targets: elem,
-        translateX: this.cursor.x,
-        translateY: this.cursor.y,
-        translateZ: this.transformZ,
-        duration: this.cursorDuration
-      });
-      // FN.gsap.set(elem, {
-      //   x: this.cursor.x,
-      //   y: this.cursor.y,
-      //   z: this.transformZ,
-      //   duration: this.cursorDuration,
-      //   force3D: true
+      // FN.anime({
+      //   targets: elem,
+      //   translateX: this.cursor.x,
+      //   translateY: this.cursor.y,
+      //   translateZ: this.transformZ,
+      //   duration: this.cursorDuration
       // });
+      FN.gsap.set(elem, {
+        x: this.cursor.x,
+        y: this.cursor.y,
+        z: this.transformZ,
+        duration: this.cursorDuration,
+        force3D: true
+      });
 
-      this.requestAnimation(`animationFrame`, `start`);
+      this.requestAnimation(this.key, `start`);
     }
 
     /**
@@ -161,7 +163,8 @@ export default ((win, doc) => {
      * @param {function} func
      */
     requestAnimation(animation, func) {
-      this[animation] = window.requestAnimationFrame(() => {this[func]()});
+      // this[animation] = window.requestAnimationFrame(() => {this[func]()});
+      FN.raf.add(animation, this[func].bind(this));
     }
 
     /**
@@ -170,8 +173,9 @@ export default ((win, doc) => {
      * @param {number} animation
      */
     cancelAnimation(animation) {
-      window.cancelAnimationFrame(this[animation]);
-      this[animation] = 0;
+      // window.cancelAnimationFrame(this[animation]);
+      // this[animation] = 0;
+      FN.raf.remove(animation);
     }
 
     /**
@@ -210,7 +214,7 @@ export default ((win, doc) => {
      */
     documentIn() {
       if (!this.isMouseOver && !this.animationFrame) {
-        this.requestAnimation(`animationFrame`, `start`);
+        this.requestAnimation(this.key, `start`);
       }
       this.isMouseOver = true;
     }
@@ -226,7 +230,7 @@ export default ((win, doc) => {
       _.forEach(this.targetElems, (targetElem, name) => {
         this.onMouseLeave(e, elem, name);
       });
-      this.cancelAnimation(`animationFrame`);
+      this.cancelAnimation(this.key);
       this.isMouseOver = false;
     }
 
