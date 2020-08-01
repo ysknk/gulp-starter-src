@@ -157,11 +157,11 @@ export default ((win, doc) => {
     }
 
     /**
-     * setPostion
+     * setPosition
      *
      * @param {object} pos
      */
-    setPostion(pos) {
+    setPosition(pos) {
       let elem = this.getElem(`cursorElem`);
       this.mouse.x = pos.x;
       this.mouse.y = pos.y;
