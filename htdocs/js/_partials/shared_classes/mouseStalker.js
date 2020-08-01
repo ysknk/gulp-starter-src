@@ -165,9 +165,12 @@ export default ((win, doc) => {
       let elem = this.getElem(`cursorElem`);
       this.mouse.x = pos.x;
       this.mouse.y = pos.y;
+      this.cursor.x = this.mouse.x
+      this.cursor.y = this.mouse.y
+
       FN.gsap.set(elem, {
-        x: this.mouse.x,
-        y: this.mouse.y,
+        x: this.cursor.x,
+        y: this.cursor.y,
         z: this.transformZ,
         duration: 0,
         force3D: true
