@@ -157,6 +157,24 @@ export default ((win, doc) => {
     }
 
     /**
+     * setPostion
+     *
+     * @param {object} pos
+     */
+    setPostion(pos) {
+      let elem = this.getElem(`cursorElem`);
+      this.mouse.x = pos.x;
+      this.mouse.y = pos.y;
+      FN.gsap.set(elem, {
+        x: this.mouse.x,
+        y: this.mouse.y,
+        z: this.transformZ,
+        duration: 0,
+        force3D: true
+      });
+    }
+
+    /**
      * requestAnimation
      *
      * @param {number} animation
