@@ -165,8 +165,8 @@ export default ((win, doc) => {
       let elem = this.getElem(`cursorElem`);
       this.mouse.x = pos.x;
       this.mouse.y = pos.y;
-      this.cursor.x = this.mouse.x
-      this.cursor.y = this.mouse.y
+      this.cursor.x = this.mouse.x;
+      this.cursor.y = this.mouse.y;
 
       FN.gsap.set(elem, {
         x: this.cursor.x,
@@ -213,13 +213,13 @@ export default ((win, doc) => {
       this.mouse.y = e.clientY;
 
       _.forEach(this.targetElems, (targetElem, name) => {
-        targetElem = targetElem ?
-          e.target.closest(targetElem) : doc;
-
         if (!this.isMouseOver) {
           this.onMouseLeave(e, elem, name);
           return;
         }
+
+        targetElem = targetElem ?
+          e.target.closest(targetElem) : doc;
 
         if (e.target === doc || !targetElem) {
           this.onMouseLeave(e, elem, name);
