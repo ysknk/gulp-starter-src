@@ -23,7 +23,8 @@ export default ((win, doc) => {
         url: 'data-share-url',
         title: 'data-share-title',
         description: 'data-share-description',
-        target: 'data-share-target'
+        target: 'data-share-target',
+        hashtags: 'data-share-hashtags'
       };
       this.width = 650;
       this.height = 470;
@@ -56,17 +57,17 @@ export default ((win, doc) => {
      * @param {object} elem
      */
     open(elem) {
-      let og = this.getMeta(elem);
-      let attr = elem.getAttribute(this.dataAttr.share);
-      let target = elem.getAttribute(this.dataAttr.target);
+      const og = this.getMeta(elem);
+      const attr = elem.getAttribute(this.dataAttr.share);
+      const target = elem.getAttribute(this.dataAttr.target);
 
-      let windowName = `${attr}_window`;
+      const windowName = `${attr}_window`;
 
-      let left = Number((win.screen.width - this.width) / 2);
-      let top = Number((win.screen.height - this.height) / 2);
+      const left = Number((win.screen.width - this.width) / 2);
+      const top = Number((win.screen.height - this.height) / 2);
 
-      let separator = ',';
-      let option = [
+      const separator = ',';
+      const option = [
         `width=${this.width}`,
         `height=${this.height}`,
         'personalbar=0',
@@ -81,7 +82,7 @@ export default ((win, doc) => {
 
       switch (attr) {
         case 'twitter':
-          url = `${this.twitterShareUrl}url=${og.enc.url}&text=${og.enc.title}`;
+          url = `${this.twitterShareUrl}url=${og.enc.url}&text=${og.enc.title}&hashtags=${og.enc.hashtags}`;
           break;
         case 'facebook':
           url = `${this.facebookShareUrl}u=${og.enc.url}`;
@@ -124,16 +125,19 @@ export default ((win, doc) => {
       let url = this.getMetaOg(elem, 'url');
       let title = this.getMetaOg(elem, 'title');
       let description = this.getMetaOg(elem, 'description');
+      let hashtags = this.getMetaOg(elem, 'hashtags');
 
       return {
         url,
         title,
         description,
+        hashtags,
 
         enc: {
           url: encodeURIComponent(url),
           title: encodeURIComponent(title),
-          description: encodeURIComponent(description)
+          description: encodeURIComponent(description),
+          hashtags: encodeURIComponent(hashtags)
         }
       };
     }
