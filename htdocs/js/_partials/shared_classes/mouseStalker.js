@@ -216,8 +216,6 @@ export default ((win, doc) => {
       this.mouse.x = e.clientX;
       this.mouse.y = e.clientY;
 
-      if (!this.isMouseOver) { return; }
-
       if (this.currentSelector) {
         const currentElem = e.target.closest(this.currentSelector);
 
@@ -278,6 +276,7 @@ export default ((win, doc) => {
      * update
      */
     update() {
+      if (!this.isMouseOver) return;
       if (!this.isMouseSet) return;
       const elem = doc.elementFromPoint(this.mouse.x, this.mouse.y);
 
