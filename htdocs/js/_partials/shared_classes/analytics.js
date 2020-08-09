@@ -19,7 +19,7 @@ export default ((win, doc) => {
       }
 
       this.trackEventDefault = {
-        event: 'trackEventClick',
+        // event: 'trackEventClick',
         // eventCategory: '',
         // eventAction: '',
         // eventLabel: ''
