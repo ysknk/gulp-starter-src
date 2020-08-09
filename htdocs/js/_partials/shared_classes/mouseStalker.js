@@ -85,10 +85,7 @@ export default ((win, doc) => {
      * initialize
      */
     initialize() {
-      let elem = this.getElem(`cursorElem`);
-      _.forEach(this.targetElems, (targetElem, name) => {
-        this.onMouseLeave(``, elem, name);
-      });
+      this.clearAll();
       this.setInitializeStyle();
 
       if (!this.isEventInitialize) return;
@@ -264,9 +261,16 @@ export default ((win, doc) => {
      */
     documentOut(e) {
       if (!e.target) return;
+      this.clearAll();
+    }
+
+    /**
+     * clearAll
+     */
+    clearAll() {
       let elem = this.getElem(`cursorElem`);
       _.forEach(this.targetElems, (targetElem, name) => {
-        this.onMouseLeave(e, elem, name);
+        this.onMouseLeave(``, elem, name);
       });
       this.cancelAnimation(this.key);
       this.isMouseOver = false;
