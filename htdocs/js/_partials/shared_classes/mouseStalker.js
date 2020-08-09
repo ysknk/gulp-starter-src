@@ -70,6 +70,8 @@ export default ((win, doc) => {
 
       this.animationFrame = false;
 
+      this.isUpdate = true;
+
       this.isEventInitialize = false;
       this.throttleTimeScroll = this.throttleTime;
       this.debounceTimeResize = this.throttleTime;
@@ -225,6 +227,8 @@ export default ((win, doc) => {
         }
       }
 
+      if (!this.isUpdate) return;
+
       _.forEach(this.targetElems, (targetElem, name) => {
         if (!this.isMouseOver) {
           this.onMouseLeave(e, elem, name);
@@ -346,6 +350,15 @@ export default ((win, doc) => {
     onMouseLeave(e, elem, name) {
       if (!elem) return;
       elem.classList.remove(name);
+    }
+
+    /**
+     * setUpdate
+     *
+     * @param {boolean} bool
+     */
+    setUpdate(bool) {
+      this.isUpdate = bool;
     }
 
   };
