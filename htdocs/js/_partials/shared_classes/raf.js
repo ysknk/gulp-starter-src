@@ -51,6 +51,16 @@ export default ((win, doc) => {
     }
 
     /**
+     * includes
+     *
+     * @param {string} key
+     * @returns {boolean}
+     */
+    includes(key) {
+      return this.renders[key];
+    }
+
+    /**
      * remove
      *
      * @param {string} key
@@ -67,6 +77,7 @@ export default ((win, doc) => {
      */
     update() {
       this.animationFrame = win.requestAnimationFrame(this.update.bind(this));
+      // console.log(this.renders)
       _.forEach(this.renders, (render) => {
         if (!render) { return; }
         render();
