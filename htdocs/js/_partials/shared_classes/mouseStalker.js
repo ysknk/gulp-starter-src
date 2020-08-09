@@ -218,9 +218,7 @@ export default ((win, doc) => {
 
       if (this.currentSelector) {
         const currentElem = e.target.closest(this.currentSelector);
-        if (!this.isMouseOver) {
-          this.onMouseLeave(e, elem, name);
-        } else if (currentElem) {
+        if (currentElem) {
           this.onMouseEnter(e, elem, this.currentSelector, this.currentName);
           this.isMouseSet = true;
           return;
