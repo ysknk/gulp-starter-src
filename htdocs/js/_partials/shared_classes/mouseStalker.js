@@ -65,6 +65,8 @@ export default ((win, doc) => {
       ].join(``);
 
       this.key = `animationFrame`;
+      this.currentSelector = null;
+      this.currentName = '';
 
       this.animationFrame = false;
 
@@ -212,19 +214,31 @@ export default ((win, doc) => {
       this.mouse.x = e.clientX;
       this.mouse.y = e.clientY;
 
+      if (this.currentSelector) {
+        const currentElem = e.target.closest(this.currentSelector);
+        if (!this.isMouseOver) {
+          this.onMouseLeave(e, elem, name);
+        } else if (currentElem) {
+          this.onMouseEnter(e, elem, this.currentSelector, this.currentName);
+          this.isMouseSet = true;
+          return;
+        }
+      }
+
       _.forEach(this.targetElems, (targetElem, name) => {
         if (!this.isMouseOver) {
           this.onMouseLeave(e, elem, name);
           return;
         }
 
-        targetElem = targetElem ?
-          e.target.closest(targetElem) : doc;
+        const selector = targetElem;
+        targetElem = selector ?
+          e.target.closest(selector) : doc;
 
         if (e.target === doc || !targetElem) {
           this.onMouseLeave(e, elem, name);
         } else {
-          this.onMouseEnter(e, elem, name);
+          this.onMouseEnter(e, elem, selector, name);
           this.isMouseSet = true;
         }
       });
@@ -312,11 +326,14 @@ export default ((win, doc) => {
      *
      * @param {object} e event
      * @param {object} elem
+     * @param {string} target
      * @param {string} name
      */
-    onMouseEnter(e, elem, name) {
+    onMouseEnter(e, elem, target, name) {
       if (!elem) return;
       elem.classList.add(name);
+      this.currentSelector = target;
+      this.currentName = name;
     }
 
     /**
