@@ -216,8 +216,11 @@ export default ((win, doc) => {
       this.mouse.x = e.clientX;
       this.mouse.y = e.clientY;
 
+      if (!this.isMouseOver) { return; }
+
       if (this.currentSelector) {
         const currentElem = e.target.closest(this.currentSelector);
+
         if (currentElem) {
           this.onMouseEnter(e, elem, this.currentSelector, this.currentName);
           this.isMouseSet = true;
