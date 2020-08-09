@@ -57,7 +57,7 @@ export default ((win, doc) => {
      * @returns {boolean}
      */
     includes(key) {
-      return this.renders[key];
+      return !!this.renders[key];
     }
 
     /**
