@@ -19,11 +19,15 @@ export default ((win, doc) => {
       }
 
       this.trackEventDefault = {
-        // event: 'trackEventClick',
+        event: 'trackEventClick',
         // eventCategory: '',
         // eventAction: '',
         // eventLabel: ''
       };
+
+      this.baseSelector = 'body';
+      this.dataAttr = 'data-analytics';
+      this.isClickEvent = true;
 
       this.debug = false;
 
@@ -35,7 +39,18 @@ export default ((win, doc) => {
     /**
      * initialize
      */
-    // initialize() {}
+    initialize() {
+      if (!this.isClickEvent) { return; }
+      doc.addEventListener('click', (e) => {
+        if (!e.target || !e.target.closest) return;
+        let elem = e.target.closest(`${this.baseSelector} [${this.dataAttr}]`);
+        if (e.target === doc || !elem) return;
+
+        const data = elem.getAttribute(this.dataAttr);
+        const obj = data ? JSON.parse(data) : {};
+        this.sendEvent(obj);
+      }, false);
+    }
 
     /**
      * sendEvent
