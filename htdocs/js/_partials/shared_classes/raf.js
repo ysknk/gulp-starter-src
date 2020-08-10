@@ -21,9 +21,12 @@ export default ((win, doc) => {
 
       this.renders = {};
 
-      this.animationFrame = 0;
+      this.animationsFrame = 0;
       this.animationTime = {};
       this.animationTimeRatio = {};
+
+      this.animationFrame = {};
+      this.animationKeyDefault = 'key';
 
       this.easingDefault = 'linear';
 
@@ -76,7 +79,7 @@ export default ((win, doc) => {
      * update
      */
     update() {
-      this.animationFrame = win.requestAnimationFrame(this.update.bind(this));
+      this.animationsFrame = win.requestAnimationFrame(this.update.bind(this));
       // console.log(this.renders)
       _.forEach(this.renders, (render) => {
         if (!render) { return; }
@@ -88,8 +91,8 @@ export default ((win, doc) => {
      * cancel
      */
     cancel() {
-      win.cancelAnimationFrame(this.animationFrame);
-      this.animationFrame = 0;
+      win.cancelAnimationFrame(this.animationsFrame);
+      this.animationsFrame = 0;
     }
 
     /**
@@ -99,6 +102,7 @@ export default ((win, doc) => {
      * @param {object} obj
      *
      * raf.animation(elem, {
+     *   key: 'key',
      *   ease: 'linear',
      *   start: 0,
      *   end: 1,
@@ -111,8 +115,9 @@ export default ((win, doc) => {
      */
     animation(elem, obj) {
       const startTime =  new Date().getTime();
+      const key = obj.key || this.animationKeyDefault;
 
-      let animationFrame = false;
+      this.animationFrame[key] = false;
       const proc = (elem, obj) => {
         let nowTime =  new Date().getTime();
         let time = nowTime - obj.startTime;
@@ -122,7 +127,7 @@ export default ((win, doc) => {
         const callback = () => {
           obj.step && obj.step(elem, obj, value);
           obj.complete && obj.complete(elem, obj, value);
-          win.cancelAnimationFrame(animationFrame);
+          win.cancelAnimationFrame(this.animationFrame[key]);
         };
 
         if (time < 0) {
@@ -138,13 +143,24 @@ export default ((win, doc) => {
         }
 
         obj.step && obj.step(elem, obj, value);
-        animationFrame = win.requestAnimationFrame(proc.bind(this, elem, obj));
+        this.animationFrame[key] = win.requestAnimationFrame(proc.bind(this, elem, obj));
         return value;
       };
 
       obj.startTime = startTime;
       obj.step = obj.step ? obj.step : () => {};
       proc(elem, obj);
+    }
+
+    /**
+     * cancelAnimation
+     *
+     * @param {string} key
+     */
+    cancelAnimation(key) {
+      key = key || this.animationKeyDefault;
+      win.cancelAnimationFrame(this.animationFrame[key]);
+      this.animationFrame[key] = false;
     }
 
     /**
