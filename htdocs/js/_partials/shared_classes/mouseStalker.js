@@ -208,6 +208,7 @@ export default ((win, doc) => {
     procedure(e) {
       e = e || win.event;
       if (!e.target) return;
+      if (!this.isMouseOver) { return; }
 
       let elem = this.getElem(`cursorElem`);
       this.mouse.x = e.clientX;
