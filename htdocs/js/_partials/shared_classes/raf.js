@@ -172,7 +172,7 @@ export default ((win, doc) => {
     getOnTimeValue(time, obj) {
       let t = time;
       const b = obj.start;
-      const c = obj.end;
+      const c = obj.end - obj.start;
       const d = obj.duration
 
       const easeFunction = this.ease(t, b, c, d);
@@ -211,7 +211,7 @@ export default ((win, doc) => {
         },
         easeOutQuad: () => {
           t /= d
-          return -(c - b) * t * (t - 2) + b;
+          return -c * t * (t - 2) + b;
         },
         easeInOutQuad: () => {
           t /= d/2;
