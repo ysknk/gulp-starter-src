@@ -511,13 +511,13 @@ export default ((win, doc) => {
           const arrayEmptyChecked = this.checkArrayEmpty(elem);
           if (options.isRequire && !arrayEmptyChecked) {
             result.status = false;
-            result.message = this.replaceMessage(message.require.checkbox, options)
+            result.message = this.replaceMessage(message.require.checkbox, options);
             return result;
           }
           const arrayIntegrityChecked = this.checkArrayIntegrity(elem, options);
           if (options.isIntegrity && !arrayIntegrityChecked) {
             result.status = false;
-            result.message = this.replaceMessage(message.integrity.checkbox, options)
+            result.message = this.replaceMessage(message.integrity.checkbox, options);
             return result;
           }
           break;
@@ -526,13 +526,13 @@ export default ((win, doc) => {
           const arrayEmptyChecked = this.checkArrayEmpty(elem);
           if (options.isRequire && !arrayEmptyChecked) {
             result.status = false;
-            result.message = this.replaceMessage(message.require.radio, options)
+            result.message = this.replaceMessage(message.require.radio, options);
             return result;
           }
           const arrayIntegrityChecked = this.checkArrayIntegrity(elem, options);
           if (options.isIntegrity && !arrayIntegrityChecked) {
             result.status = false;
-            result.message = this.replaceMessage(message.integrity.radio, options)
+            result.message = this.replaceMessage(message.integrity.radio, options);
             return result;
           }
           break;
@@ -545,7 +545,7 @@ export default ((win, doc) => {
           }
           if (options.isIntegrity && !this.checkValuesMatch(elem.value, options)) {
             result.status = false;
-            result.message = this.replaceMessage(message.integrity.select, options)
+            result.message = this.replaceMessage(message.integrity.select, options);
             return result;
           }
           break;
