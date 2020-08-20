@@ -14,6 +14,29 @@ export default ((win, doc) => {
    *   <h3 class="site-title">title2-1</h3>
    *   <h4 class="site-title">title2-1-1</h4>
    * </div>
+   * <style>
+   *   .site-toc ol {
+   *     padding-left: 1em;
+   *   }
+   *   .site-toc dd > ol {
+   *     padding-left: 0;
+   *   }
+   *   .site-toc dd ol {
+   *     counter-reset: level;
+   *     list-style: none;
+   *   }
+   *   .site-toc dd li {
+   *     counter-increment: level;
+   *   }
+   *   .site-toc dd li .site-toc__label {
+   *     display: flex;
+   *   }
+   *   .site-toc dd li .site-toc__label::before {
+   *     content: counters(level, "-") ". ";
+   *     flex: 0 0 auto;
+   *     margin-right: 0.5em;
+   *   }
+   * </style>
    */
   return class TOC {
 
