@@ -5,6 +5,10 @@ export default ((win, doc) => {
 
   /**
    * BarbaPage
+   * <div id="wrapper" data-barba="wrapper" data-page=`${namespace}`>
+   *   <div data-barba="container" data-barba-namespace=`${namespace}`>
+   *   </div>
+   * </div>
    */
   return class BarbaPage {
     /**
