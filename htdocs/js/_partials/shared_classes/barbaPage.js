@@ -3,15 +3,18 @@ export default ((win, doc) => {
 
   const FN = win[NS];
 
-  return class barbaPage {
+  /**
+   * BarbaPage
+   */
+  return class BarbaPage {
     /**
      * constructor
      *
      * @param {object} opts_
      */
     constructor(opts_) {
-      if (!(this instanceof barbaPage)) {
-        return new barbaPage(opts_);
+      if (!(this instanceof BarbaPage)) {
+        return new BarbaPage(opts_);
       }
 
       this.debug = false;
