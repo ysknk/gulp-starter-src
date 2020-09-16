@@ -59,6 +59,9 @@ export default ((win, doc) => {
       this.clearAll();
     }
 
+    /**
+     * clearAll
+     */
     clearAll() {
       const items = this.getFormatItems();
       _.forEach(items, (item) => {
@@ -67,6 +70,9 @@ export default ((win, doc) => {
       });
     }
 
+    /**
+     * isStorageTime
+     */
     isStorageTime() {
       if (!window.localStorage) {
         return false;
@@ -74,6 +80,9 @@ export default ((win, doc) => {
       return window.localStorage.getItem(this.storageName);
     }
 
+    /**
+     * setStorageTime
+     */
     setStorageTime() {
       if (!window.localStorage) {
         return false;
@@ -81,6 +90,9 @@ export default ((win, doc) => {
       window.localStorage[this.storageName] = new Date().getTime();
     }
 
+    /**
+     * removeStorage
+     */
     removeStorage() {
       if (!window.localStorage) {
         return false;
@@ -88,22 +100,35 @@ export default ((win, doc) => {
       window.localStorage.removeItem(this.storageName);
     }
 
+    /**
+     * checkComplete
+     */
     checkComplete() {
       if (this.isDone()) {
         this.onComplete();
       }
     }
 
+    /**
+     * isDone
+     *
+     * @returns {boolean}
+     */
     isDone() {
       return this.isStorageTime() ? true : false;
     }
 
+    /**
+     * onComplete
+     */
     onComplete() {
       doc.querySelector('html').classList.add(this.tutorialCompleteClassName);
     }
 
     /**
      * start
+     *
+     * @param {object} options
      */
     start(options) {
       const endAll = () => {
@@ -156,6 +181,9 @@ export default ((win, doc) => {
       });
     }
 
+    /**
+     * endAll
+     */
     endAll() {
       const items = this.getFormatItems();
       _.forEach(items, (item) => {
@@ -163,6 +191,11 @@ export default ((win, doc) => {
       });
     }
 
+    /**
+     * getFormatItems
+     *
+     * @returns {object}
+     */
     getFormatItems () {
       if (this.formatItems && this.formatItems.length > 0) {
         return this.formatItems;
@@ -179,6 +212,11 @@ export default ((win, doc) => {
       return this.formatItems;
     }
 
+    /**
+     * setItems
+     *
+     * @param {object} items
+     */
     setItems(items) {
       this.items = items;
     }
