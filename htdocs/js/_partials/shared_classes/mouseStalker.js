@@ -5,6 +5,18 @@ export default ((win, doc) => {
 
   /**
    * MouseStalker
+   * <div class="js-mousestalker">
+   *   <span class="js-mousestalker__cursor">
+   *     <span class="site-mousestalker sitemousestalker--link"></span>
+   *   </span>
+   * </div>
+   * FN.mouseStalker = new mouseStalker({
+   *   cursorElemSelector: '.js-mousestalker-cursor',
+   *   targetElems: {
+   *     'is-link': '.is-cursor-link',
+   *   }
+   * });
+   * FN.mouseStalker.initialize();
    */
   return class MouseStalker {
 
