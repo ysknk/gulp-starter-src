@@ -11,9 +11,9 @@ export default ((win, doc) => {
    *   </span>
    * </div>
    * FN.mouseStalker = new mouseStalker({
-   *   cursorElemSelector: '.js-mousestalker-cursor',
+   *   cursorElemSelector: '.js-mousestalker__cursor',
    *   targetElems: {
-   *     'is-link': '.is-cursor-link',
+   *     'is-link': 'a',
    *   }
    * });
    * FN.mouseStalker.initialize();
