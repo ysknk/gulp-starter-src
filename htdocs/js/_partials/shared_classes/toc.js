@@ -121,6 +121,7 @@ export default ((win, doc) => {
         ? doc.querySelector(this.contentElemSelector)
         : elem.parentNode;
       const titles = content.querySelectorAll(this.titleElemSelector);
+      if (!titles.length) { return; }
 
       let list = '';
       let prev = {};
