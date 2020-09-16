@@ -6,13 +6,15 @@ export default ((win, doc) => {
    * クラス名をキーにして、目次を生成する
    * 上部要素から順にタイトルを確認、一つ前のタイトルのh*タグと比べて、
    * 数字が大きいか小さいかで入れ子を判断する
-   * <div class="site-toc"></div>
-   * <div>
-   *   <h2 class="site-title">title1</h2>
-   *   <h3 class="site-title">title1-1</h3>
-   *   <h2 class="site-title">title2</h2>
-   *   <h3 class="site-title">title2-1</h3>
-   *   <h4 class="site-title">title2-1-1</h4>
+   * <div class="site-content"></div>
+   *   <div class="site-toc"></div>
+   *   <div>
+   *     <h2 class="site-title">title1</h2>
+   *     <h3 class="site-title">title1-1</h3>
+   *     <h2 class="site-title">title2</h2>
+   *     <h3 class="site-title">title2-1</h3>
+   *     <h4 class="site-title">title2-1-1</h4>
+   *   </div>
    * </div>
    * <style>
    *   .site-toc ol {
@@ -53,16 +55,19 @@ export default ((win, doc) => {
       this.elemName = `${PREFIX}toc`;
       this.elemSelector = `.${this.elemName}`;
       this.titleElemSelector = `.${PREFIX}title`;
+      this.contentElemSelector = `.${PREFIX}content`;
 
       this.minLevel = 2;
       this.maxLevel = 6;
+
+      this.orderType = 'ol';
 
       this.template = {
         base: `
           <dl class="${this.elemName}__inner">
             <dt class="${this.elemName}__title">\u76EE\u6B21</dt>
             <dd class="${this.elemName}__list">
-              <ol></ol>
+              <${this.orderType}></${this.orderType}>
             </dd>
           </dl>
         `,
@@ -112,7 +117,9 @@ export default ((win, doc) => {
      * @param {object} elem toc element
      */
     create(elem) {
-      const content = elem.parentNode;
+      const content = this.contentElemSelector
+        ? doc.querySelector(this.contentElemSelector)
+        : elem.parentNode;
       const titles = content.querySelectorAll(this.titleElemSelector);
 
       let list = '';
@@ -121,15 +128,15 @@ export default ((win, doc) => {
 
       elem.innerHTML = this.template.base;
 
-      const baseOrder = elem.querySelector('ol');
+      const baseOrder = elem.querySelector(this.orderType);
 
       _.forEach(titles, (title) => {
         if (!title.innerHTML || !this.getHeaderLevel(title)) return;
 
         const createList = doc.createElement('li');
-        const createOrder = doc.createElement('ol');
+        const createOrder = doc.createElement(this.orderType);
 
-        let ol = prev.ol || baseOrder;
+        let order = prev.order || baseOrder;
         let li = '';
 
         const level = parseInt(this.getHeaderLevel(title)[1], 10);
@@ -158,16 +165,16 @@ export default ((win, doc) => {
             } else if (level > prev.level) {
               result = prev.id + '-' + (counter[level] - 1);
 
-              const list = ol.querySelectorAll('li');
-              ol = list[list.length - 1].appendChild(createOrder);
+              const list = order.querySelectorAll('li');
+              order = list[list.length - 1].appendChild(createOrder);
               if (level - prev.level >= 2) {
                 for (let j = 0; level - prev.level - 1 > j; j++) {
                   result += '-' + (counter[level] - 1 || 1);
 
                   const createList = doc.createElement('li');
-                  const createOrder = doc.createElement('ol');
-                  li = ol.appendChild(createList);
-                  ol = li.appendChild(createOrder);
+                  const createOrder = doc.createElement(this.orderType);
+                  li = order.appendChild(createList);
+                  order = li.appendChild(createOrder);
                 }
               }
               return result;
@@ -176,16 +183,16 @@ export default ((win, doc) => {
               if (prev.level - level >= 2) {
                 for (let j = 0; prev.level - level - 1 > j; j++) {
                   prev.id = prev.id.replace(/\-(\d+)$/i, '');
-                  ol = ol.parentNode.parentNode;
+                  order = order.parentNode.parentNode;
                 }
               }
-              ol = ol.parentNode.parentNode;
+              order = order.parentNode.parentNode;
               result = prev.id.replace(/(\d+)-(\d+)$/i, counter[level] - 1);
               return result;
             }
           }
 
-          ol = baseOrder;
+          order = baseOrder;
           list = prev && prev.list
             ? prev.list.replace(/{{nextOrder}}/ig, '') || prev.list
             : '';
@@ -194,10 +201,10 @@ export default ((win, doc) => {
 
         this.setTitleAttribute(title, id, level);
 
-        li = ol.appendChild(createList);
+        li = order.appendChild(createList);
         li.innerHTML = this.template.list.replace(/{{title}}/ig, title.innerHTML || '').replace(/{{id}}/ig, title.id);
 
-        prev = {id, level, ol, li};
+        prev = {id, level, order, li};
       });
     }
 
