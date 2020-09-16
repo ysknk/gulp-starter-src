@@ -67,101 +67,6 @@
         cursor default
         opacity 1 !important
 
-    input,
-    textarea
-      padding 0
-      background #fff
-      appearance none
-      line-height inherit
-      border none
-      font-size inherit
-      font-family $font_family
-      outline none
-      &:-ms-input-placeholder
-        relative top -.1em
-      &::-moz-focus-inner
-        border none
-      &:required
-      &:invalid
-        box-shadow none
-
-    button
-      padding 0
-      background none
-      appearance none
-      line-height inherit
-      border none
-      font-size inherit
-      font-family $font_family
-      outline none
-      &::-moz-focus-inner
-        border none
-
-    input
-      &[type="text"],
-      &[type="search"],
-      &[type="datetime"],
-      &[type="datetime-local"],
-      &[type="date"],
-      &[type="week"],
-      &[type="month"],
-      &[type="time"],
-      &[type="color"],
-      &[type="password"],
-      &[type="url"],
-      &[type="email"],
-      &[type="number"]
-        min-height 2em
-
-      &[type="date"]
-        appearance none
-        &::-webkit-outer-spin-button,
-        &::-webkit-inner-spin-button,
-        &::-webkit-clear-button
-          appearance none
-          margin 0
-        &::-webkit-calendar-picker-indicator
-          position relative
-          padding .2em
-          background none
-          font-size .5em
-
-      &[type="number"]
-        &::-webkit-outer-spin-button,
-        &::-webkit-inner-spin-button
-          -webkit-appearance none
-          margin 0
-      &[type="number"]
-        -moz-appearance textfield
-
-    select
-      min-height 2em
-      appearance none
-      border-radius 0
-      background #fff url($spacer) no-repeat
-      background-position right center
-      background-size .5em
-      padding-right 1.5em
-      line-height inherit
-      font-size inherit
-      font-family $font_family
-      &:focus
-        outline none
-      &::-ms-expand
-        display none
-
-    input
-      appearance none
-      border-radius 0
-      &:focus
-        outline none
-
-    select,
-    input[type="submit"],
-    button,
-    label
-      cursor pointer
-
     img,
     svg
       max-width 100%
@@ -171,6 +76,102 @@
 
     picture
       max-width 100%
+
+    if $init_type == 'reset'
+      input,
+      textarea
+        padding 0
+        background #fff
+        appearance none
+        line-height inherit
+        border none
+        font-size inherit
+        font-family $font_family
+        outline none
+        &:-ms-input-placeholder
+          relative top -.1em
+        &::-moz-focus-inner
+          border none
+        &:required
+        &:invalid
+          box-shadow none
+
+      button
+        padding 0
+        background none
+        appearance none
+        line-height inherit
+        border none
+        font-size inherit
+        font-family $font_family
+        outline none
+        &::-moz-focus-inner
+          border none
+
+      input
+        &[type="text"],
+        &[type="search"],
+        &[type="datetime"],
+        &[type="datetime-local"],
+        &[type="date"],
+        &[type="week"],
+        &[type="month"],
+        &[type="time"],
+        &[type="color"],
+        &[type="password"],
+        &[type="url"],
+        &[type="email"],
+        &[type="number"]
+          min-height 2em
+
+        &[type="date"]
+          appearance none
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button,
+          &::-webkit-clear-button
+            appearance none
+            margin 0
+          &::-webkit-calendar-picker-indicator
+            position relative
+            padding .2em
+            background none
+            font-size .5em
+
+        &[type="number"]
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button
+            -webkit-appearance none
+            margin 0
+        &[type="number"]
+          -moz-appearance textfield
+
+      select
+        min-height 2em
+        appearance none
+        border-radius 0
+        background #fff url($spacer) no-repeat
+        background-position right center
+        background-size .5em
+        padding-right 1.5em
+        line-height inherit
+        font-size inherit
+        font-family $font_family
+        &:focus
+          outline none
+        &::-ms-expand
+          display none
+
+      input
+        appearance none
+        border-radius 0
+        &:focus
+          outline none
+
+      select,
+      input[type="submit"],
+      button,
+      label
+        cursor pointer
 
 // responsive fontsize
 font_size_responsive('.' + $p + 'base' + ' .' + $p + 'wrapper')
