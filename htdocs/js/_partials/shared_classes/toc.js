@@ -120,6 +120,8 @@ export default ((win, doc) => {
       const content = this.contentElemSelector
         ? doc.querySelector(this.contentElemSelector)
         : elem.parentNode;
+      if (!content) { return; }
+
       const titles = content.querySelectorAll(this.titleElemSelector);
       if (!titles.length) { return; }
 
