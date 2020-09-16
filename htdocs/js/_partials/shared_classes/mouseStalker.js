@@ -141,6 +141,8 @@ export default ((win, doc) => {
      */
     start() {
       let elem = this.getElem(`cursorElem`);
+      if (!elem) { return; }
+
       let threshold = 1;
 
       this.mouse.x - this.cursor.x < threshold && this.mouse.x - this.cursor.x > - threshold
