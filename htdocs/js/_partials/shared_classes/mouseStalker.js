@@ -106,9 +106,9 @@ export default ((win, doc) => {
         this.procedure(e);
       }, this.throttleTime), false);
 
-      doc.body.addEventListener('mouseover', (e) => {
+      doc.body.addEventListener('mouseover', _.throttle((e) => {
         this.documentIn();
-      }, false);
+      }, this.throttleTime), false);
 
       doc.body.addEventListener('mouseleave', (e) => {
         this.documentOut(e);
