@@ -4,9 +4,9 @@ export default ((win, doc) => {
   const FN = win[NS];
 
   /**
-   * more
+   * More
    */
-  return class more {
+  return class More {
 
     /**
      * constructor
@@ -14,8 +14,8 @@ export default ((win, doc) => {
      * @param {object} opts_
      */
     constructor(opts_) {
-      if (!(this instanceof more)) {
-        return new more(opts_);
+      if (!(this instanceof More)) {
+        return new More(opts_);
       }
 
       this.dataAttr = {
@@ -59,7 +59,7 @@ export default ((win, doc) => {
 
       doc.addEventListener('click', (e) => {
         if (!e.target || !e.target.closest) return;
-        let elem = e.target.closest([// delegate
+        const elem = e.target.closest([// delegate
           `[${this.dataAttr.elems}]`
         ].join(' '));
         if (e.target === doc || !elem) return;
@@ -82,7 +82,7 @@ export default ((win, doc) => {
      * gotoTop
      */
     gotoTop() {
-      let elem = this.getWrapElem();
+      const elem = this.getWrapElem();
       if (!elem) return;
       FN.scroll.goto(elem);
     }
@@ -93,10 +93,10 @@ export default ((win, doc) => {
     listInitialize() {
       this.setIsInit(true);
 
-      let baseElem = this.getElem();
+      const baseElem = this.getElem();
       if (!baseElem) return;
 
-      let text = this.getLabel(this.dataAttr.labelShow)
+      const text = this.getLabel(this.dataAttr.labelShow)
         || this.defaultLabel;
       if (text) {
         baseElem.classList.remove(this.hideClassName);
@@ -114,7 +114,7 @@ export default ((win, doc) => {
      * initAllItem
      */
     initAllItem() {
-      let elems = this.getItemElems();
+      const elems = this.getItemElems();
       _.forEach(elems, (elem) => {
         this.initItem(elem);
       });
@@ -146,13 +146,13 @@ export default ((win, doc) => {
      * @param {number} page
      */
     showItems(page) {
-      let buttonElem = this.getElem();
+      const buttonElem = this.getElem();
       if (!buttonElem) return;
 
-      let isInit = this.getIsInit();
+      const isInit = this.getIsInit();
 
-      let elems = this.getItemElems();
-      var count = this.getCalculateCount(page);
+      const elems = this.getItemElems();
+      const count = this.getCalculateCount(page);
 
       if (this.getInitCount() >= elems.length) {
         this.onError(() => {
@@ -164,14 +164,14 @@ export default ((win, doc) => {
 
       // initcount と countが合わない場合
       if (!isInit && this.getInitCount() != this.getCount()) {
-        let diffcount = (this.getInitCount() - this.getCount()) + this.getInitCount();
+        const diffcount = (this.getInitCount() - this.getCount()) + this.getInitCount();
         count.start = count.start - this.getInitCount() + diffcount;
         count.limit = count.limit - this.getInitCount() + diffcount;
       }
 
-      for(var i = count.start; count.limit > i; i++) {
-        let elem = elems[i];
-        let nextElem = elems[i + 1];
+      for(let i = count.start; count.limit > i; i++) {
+        const elem = elems[i];
+        const nextElem = elems[i + 1];
 
         if (!elem) {
           this.onListEnd();
@@ -201,7 +201,7 @@ export default ((win, doc) => {
      * @returns {number}
      */
     getCountNumber() {
-      var count = this.getCount()
+      let count = this.getCount()
 
       if (this.getIsInit()) {
         this.setIsInit(false);
@@ -217,8 +217,8 @@ export default ((win, doc) => {
      * @returns {number}
      */
     getCount() {
-      let buttonElem = this.getElem();
-      let elemCount = buttonElem
+      const buttonElem = this.getElem();
+      const elemCount = buttonElem
         && buttonElem.getAttribute(this.dataAttr.count);
       return elemCount || this.count;
     }
@@ -229,8 +229,8 @@ export default ((win, doc) => {
      * @returns {number}
      */
     getInitCount() {
-      let buttonElem = this.getElem();
-      let elemCount = buttonElem
+      const buttonElem = this.getElem();
+      const elemCount = buttonElem
         && buttonElem.getAttribute(this.dataAttr.initcount);
       return elemCount || this.initcount;
     }
@@ -242,8 +242,8 @@ export default ((win, doc) => {
      * @returns {object}
      */
     getCalculateCount(page) {
-      let count = this.getCountNumber();
-      let nowPage = page || this.getPage();
+      const count = this.getCountNumber();
+      const nowPage = page || this.getPage();
       return {
         start: (nowPage - 1) * count,
         limit: nowPage * count
@@ -254,9 +254,9 @@ export default ((win, doc) => {
      * removeButton
      */
     removeButton() {
-      let buttonElem = this.getElem();
+      const buttonElem = this.getElem();
       if (!buttonElem) return;
-      buttonElem.parentNode.parentNode.removeChild(buttonElem.parentNode);
+      buttonElem.parentNode.removeChild(buttonElem);
     }
 
     /**
@@ -266,7 +266,7 @@ export default ((win, doc) => {
      * @param {string} data
      */
     changeButtonLabel(label, data) {
-      let elem = this.getLabelElem(data);
+      const elem = this.getLabelElem(data);
       if (!elem) return;
       elem.innerHTML = label;
     }
