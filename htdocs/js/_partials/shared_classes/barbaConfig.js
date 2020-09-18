@@ -85,6 +85,10 @@ export default ((win, doc) => {
               beforeEnter(data) {
                 barbaThis.replaceHeadTags(data.next)
 
+                window.scrollTop = 0;
+                document.body.scrollTop = 0;
+                history.scrollRestoration = 'manual';
+
                 const page = that.getPageName(data.next.namespace);
                 if (!page) { return; }
                 page.initialize(data);
