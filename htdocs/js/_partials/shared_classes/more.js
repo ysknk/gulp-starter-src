@@ -5,6 +5,13 @@ export default ((win, doc) => {
 
   /**
    * More
+   * <div id="items">
+   *   <ul>
+   *     <li>1</li>
+   *     <li>2</li>
+   *   </ul>
+   *   <a href="javascript:void(0)" data-more-elems="#items li">more</a>
+   * </div>
    */
   return class More {
 
