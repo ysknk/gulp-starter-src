@@ -103,7 +103,7 @@ export default ((win, doc) => {
         this.mouse.y - this.cursor.y < this.animationEdge && this.mouse.y - this.cursor.y > - this.animationEdge
           ? this.cursor.y = this.mouse.y
           : this.cursor.y += (this.mouse.y - this.cursor.y) * this.cursorRange;
-      }
+      };
 
       if (!this.isCursorDelay) {
         this.throttleTime = 0;
@@ -112,7 +112,7 @@ export default ((win, doc) => {
         this.setJudgePosition = () => {
           this.cursor.x = this.mouse.x;
           this.cursor.y = this.mouse.y;
-        }
+        };
       }
 
       // this.initialize();
