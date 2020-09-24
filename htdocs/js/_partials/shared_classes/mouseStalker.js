@@ -43,7 +43,7 @@ export default ((win, doc) => {
       this.cursorRange = 0.15;
       this.cursorDuration = 0.002;
 
-      this.isDuplicate = false;
+      this.canDuplicate = false;
 
       this.isMouseOver = false;
       this.isMouseSet = false;
@@ -230,7 +230,7 @@ export default ((win, doc) => {
       this.mouse.x = e.clientX;
       this.mouse.y = e.clientY;
 
-      if (this.isDuplicate && this.currentSelector) {
+      if (this.canDuplicate && this.currentSelector) {
         const currentElem = e.target.closest(this.currentSelector);
 
         if (currentElem) {
