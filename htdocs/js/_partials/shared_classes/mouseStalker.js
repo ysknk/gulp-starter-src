@@ -43,7 +43,7 @@ export default ((win, doc) => {
       this.cursorRange = 0.15;
       this.cursorDuration = 0.002;
 
-      this.animationEdge = 1;
+      this.moveEdge = 1;
 
       this.canDuplicate = false;
       this.isCursorDelay = true;
@@ -96,11 +96,11 @@ export default ((win, doc) => {
       _.isObject(opts_) && _.extend(this, opts_);
 
       this.setJudgePosition = () => {
-        this.mouse.x - this.cursor.x < this.animationEdge && this.mouse.x - this.cursor.x > - this.animationEdge
+        this.mouse.x - this.cursor.x < this.moveEdge && this.mouse.x - this.cursor.x > - this.moveEdge
           ? this.cursor.x = this.mouse.x
           : this.cursor.x += (this.mouse.x - this.cursor.x) * this.cursorRange;
 
-        this.mouse.y - this.cursor.y < this.animationEdge && this.mouse.y - this.cursor.y > - this.animationEdge
+        this.mouse.y - this.cursor.y < this.moveEdge && this.mouse.y - this.cursor.y > - this.moveEdge
           ? this.cursor.y = this.mouse.y
           : this.cursor.y += (this.mouse.y - this.cursor.y) * this.cursorRange;
       };
