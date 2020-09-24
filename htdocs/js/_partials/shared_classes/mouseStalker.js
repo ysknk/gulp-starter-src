@@ -43,7 +43,10 @@ export default ((win, doc) => {
       this.cursorRange = 0.15;
       this.cursorDuration = 0.002;
 
+      this.animationEdge = 1;
+
       this.canDuplicate = false;
+      this.isCursorDelay = true;
 
       this.isMouseOver = false;
       this.isMouseSet = false;
@@ -91,6 +94,26 @@ export default ((win, doc) => {
       this.debounceTimeResize = this.throttleTime;
 
       _.isObject(opts_) && _.extend(this, opts_);
+
+      this.setJudgePosition = () => {
+        this.mouse.x - this.cursor.x < this.animationEdge && this.mouse.x - this.cursor.x > - this.animationEdge
+          ? this.cursor.x = this.mouse.x
+          : this.cursor.x += (this.mouse.x - this.cursor.x) * this.cursorRange;
+
+        this.mouse.y - this.cursor.y < this.animationEdge && this.mouse.y - this.cursor.y > - this.animationEdge
+          ? this.cursor.y = this.mouse.y
+          : this.cursor.y += (this.mouse.y - this.cursor.y) * this.cursorRange;
+      }
+
+      if (!this.isCursorDelay) {
+        this.throttleTime = 0;
+        this.cursorRange = 1;
+        this.cursorDuration = 0;
+        this.setJudgePosition = () => {
+          this.cursor.x = this.mouse.x;
+          this.cursor.y = this.mouse.y;
+        }
+      }
 
       // this.initialize();
     }
@@ -145,15 +168,7 @@ export default ((win, doc) => {
       let elem = this.getElem(`cursorElem`);
       if (!elem) { return; }
 
-      let threshold = 1;
-
-      this.mouse.x - this.cursor.x < threshold && this.mouse.x - this.cursor.x > - threshold
-        ? this.cursor.x = this.mouse.x
-        : this.cursor.x += (this.mouse.x - this.cursor.x) * this.cursorRange;
-
-      this.mouse.y - this.cursor.y < threshold && this.mouse.y - this.cursor.y > - threshold
-        ? this.cursor.y = this.mouse.y
-        : this.cursor.y += (this.mouse.y - this.cursor.y) * this.cursorRange;
+      this.setJudgePosition();
 
       // FN.anime({
       //   targets: elem,
