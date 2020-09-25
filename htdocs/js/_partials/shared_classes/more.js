@@ -45,6 +45,8 @@ export default ((win, doc) => {
 
       this.isLoading = false;
 
+      this.cacheItemElems = false;
+
       this.defaultLabel = `もっと見る`;
 
       this.initcount = 5;
@@ -329,7 +331,7 @@ export default ((win, doc) => {
         let elem = this.getElem();
         this.itemElemsSelector = elem.getAttribute(this.dataAttr.elems);
       }
-      if (!this.itemElems) {
+      if (!this.cacheItemElems || !this.itemElems) {
         this.itemElems = doc.querySelectorAll(this.itemElemsSelector);
       }
       return this.itemElems;
