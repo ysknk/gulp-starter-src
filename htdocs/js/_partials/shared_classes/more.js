@@ -210,7 +210,7 @@ export default ((win, doc) => {
      * @returns {number}
      */
     getCountNumber() {
-      let count = this.getCount()
+      let count = this.getCount();
 
       if (this.getIsInit()) {
         this.setIsInit(false);
@@ -370,8 +370,7 @@ export default ((win, doc) => {
      */
     isShow() {
       let elem = this.getElem();
-      return elem.classList.contains(this.hideClassName)
-        ? false : true;
+      return !elem.classList.contains(this.hideClassName);
     }
 
     /**
