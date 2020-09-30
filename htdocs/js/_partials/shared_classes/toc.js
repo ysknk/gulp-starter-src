@@ -205,7 +205,7 @@ export default ((win, doc) => {
         this.setTitleAttribute(title, id, level);
 
         li = order.appendChild(createList);
-        li.innerHTML = this.template.list.replace(/{{title}}/ig, title.innerHTML || '').replace(/{{id}}/ig, title.id);
+        li.innerHTML = this.template.list.replace(/{{title}}/ig, title.innerText || '').replace(/{{id}}/ig, title.id);
 
         prev = {id, level, order, li};
       });
