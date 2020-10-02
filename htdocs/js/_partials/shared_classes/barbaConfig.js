@@ -83,11 +83,14 @@ export default ((win, doc) => {
                 // const done = this.async();
                 // leaveFunction(done, data);
               },
+              enter(data) {
+                if ('scrollRestoration' in history) {
+                  history.scrollRestoration = 'manual';
+                }
+                window.scrollTo(0, 0);
+              },
               beforeEnter(data) {
                 barbaThis.replaceHeadTags(data.next)
-
-                window.scrollTo(0, 0);
-                history.scrollRestoration = 'manual';
 
                 const page = that.getPageName(data.next.namespace);
                 if (!page) { return; }
