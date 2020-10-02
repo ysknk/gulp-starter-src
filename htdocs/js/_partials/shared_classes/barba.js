@@ -43,6 +43,8 @@ export default ((win, doc) => {
         }
       };
 
+      this.gtagID = ``;
+
       this.isCancelLinkToSamePage = true;
       this.linkElemSelector = `a[href]`;
 
@@ -94,6 +96,21 @@ export default ((win, doc) => {
         if (e.target === doc || !elem) return;
         cancelEvent(elem, e);
       }, false);
+    }
+
+    /**
+     * sendAnalytics
+     */
+    sendAnalytics() {
+      if (!this.gtagID) return;
+
+      const gtag = window.gtag;// || [];
+      if (!gtag) return;
+      const data = {
+        'page_title' : doc.title,
+        'page_path': location.pathname
+      };
+      gtag('config', this.gtagID, data);
     }
 
     /**
