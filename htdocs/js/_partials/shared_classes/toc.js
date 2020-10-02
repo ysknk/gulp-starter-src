@@ -120,10 +120,17 @@ export default ((win, doc) => {
       const content = this.contentElemSelector
         ? doc.querySelector(this.contentElemSelector)
         : elem.parentNode;
-      if (!content) { return; }
+      if (!content) {
+        this.setEmpty(elem);
+        return;
+      }
 
       const titles = content.querySelectorAll(this.titleElemSelector);
-      if (!titles.length) { return; }
+
+      if (!titles.length) {
+        this.setEmpty(elem);
+        return;
+      }
 
       let list = '';
       let prev = {};
@@ -209,6 +216,15 @@ export default ((win, doc) => {
 
         prev = {id, level, order, li};
       });
+    }
+
+    /**
+     * setEmpty
+     *
+     * @param {object} elem toc element
+     */
+    setEmpty(elem) {
+      elem.parentNode.removeChild(elem);
     }
 
     /**
