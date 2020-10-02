@@ -90,7 +90,7 @@ export default ((win, doc) => {
                 window.scrollTo(0, 0);
               },
               beforeEnter(data) {
-                barbaThis.replaceHeadTags(data.next)
+                barbaThis.replaceHeadTags(data.next);
 
                 const page = that.getPageName(data.next.namespace);
                 if (!page) { return; }
