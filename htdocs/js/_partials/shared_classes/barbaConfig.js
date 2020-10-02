@@ -44,6 +44,7 @@ export default ((win, doc) => {
     barbaInitialize() {
       const that = this;
       FN.barba = new barba({
+        gtagID: ``,
         options: (barbaThis) => {
           return {
             transitions: [{
@@ -85,12 +86,13 @@ export default ((win, doc) => {
               beforeEnter(data) {
                 barbaThis.replaceHeadTags(data.next)
 
-                window.scrollTop = 0;
-                document.body.scrollTop = 0;
+                window.scrollTo(0, 0);
                 history.scrollRestoration = 'manual';
 
                 const page = that.getPageName(data.next.namespace);
                 if (!page) { return; }
+                barbaThis.sendAnalytics();
+
                 page.initialize(data);
                 page.created(data);
               },
