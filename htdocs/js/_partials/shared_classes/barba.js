@@ -107,10 +107,15 @@ export default ((win, doc) => {
       const gtag = window.gtag;// || [];
       if (!gtag) return;
       const data = {
-        'page_title' : doc.title,
-        'page_path': location.pathname
+        page_title: doc.title,
+        page_location: location.href,
+        page_path: location.pathname,
+        // send_to: this.gtagID
       };
-      gtag('config', this.gtagID, data);
+      if (this.gtagID) {
+        data.send_to = this.gtagID;
+      }
+      gtag('event', 'page_view', data);
     }
 
     /**
