@@ -69,8 +69,8 @@ export default ((win, doc) => {
      * @param {object} data
      */
     update(elem, data = this.getData()) {
-      if (!this.isConditions(elem)) { return; }
       if (elem.classList.contains(this.setClassName)) { return; }
+      if (!this.isConditions(elem)) { return; }
 
       const target = this.getTargetData(elem);
       const thresholdDiff = data.window.height * this.threshold;
