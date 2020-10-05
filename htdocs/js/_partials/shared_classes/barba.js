@@ -102,7 +102,7 @@ export default ((win, doc) => {
      * sendAnalytics
      */
     sendAnalytics() {
-      if (!this.gtagID) return;
+      if (!this.gtag) return;
 
       const gtag = window.gtag;// || [];
       if (!gtag) return;
