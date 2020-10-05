@@ -98,8 +98,9 @@ export default ((win, doc) => {
      * @returns {object}
      */
     getData() {
+      const baseElem = doc.querySelector(this.baseElem);
       return {
-        elems: doc.querySelectorAll(`[${this.dataAttr}]`),
+        elems: baseElem.querySelectorAll(`[${this.dataAttr}]`),
         window: this.getWindowData(),
         bodyHeight: parseInt(doc.body.getBoundingClientRect().height)
       };
