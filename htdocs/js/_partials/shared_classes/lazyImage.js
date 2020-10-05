@@ -58,7 +58,6 @@ export default ((win, doc) => {
     updateAll() {
       const data = this.getData();
       _.forEach(data.elems, (elem) => {
-        if (!this.isConditionsAll(elem)) { return; }
         this.update(elem, data);
       });
     }
@@ -173,16 +172,11 @@ export default ((win, doc) => {
     /**
      * setConditions
      *
-     * @param {function} all
-     * @param {function} one
+     * @param {function} func
      */
-    setConditions(all, one) {
-      if (all && _.isFunction(all)) {
-        this.isConditionsAll = all;
-      }
-
-      if (one && _.isFunction(one)) {
-        this.isConditions = one;
+    setConditions(func) {
+      if (func && _.isFunction(func)) {
+        this.isConditions = func;
       }
     }
 
@@ -190,9 +184,6 @@ export default ((win, doc) => {
      * initializeConditions
      */
     initializeConditions() {
-      this.isConditionsAll = (elem) => {
-        return true;
-      };
       this.isConditions = (elem) => {
         return true;
       };
