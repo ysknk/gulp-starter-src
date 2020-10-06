@@ -19,7 +19,10 @@ export default ((win, doc) => {
       }
 
       this.baseElem = 'body';
-      this.dataAttr = `data-lazy-image`;
+      this.dataAttr = {
+        image: `data-lazy-image`,
+        background: `data-lazy-background`
+      };
 
       this.setClassName = 'set-src';
       this.threshold = .3;// 0 - 1.0 -> screen top - bottom
@@ -57,6 +60,7 @@ export default ((win, doc) => {
      */
     updateAll() {
       const data = this.getData();
+      if (!data || !data.elems) { return; }
       _.forEach(data.elems, (elem) => {
         this.update(elem, data);
       });
@@ -69,6 +73,7 @@ export default ((win, doc) => {
      * @param {object} data
      */
     update(elem, data = this.getData()) {
+      if (!data) { return; }
       if (elem.classList.contains(this.setClassName)) { return; }
       if (!this.isConditions(elem)) { return; }
 
@@ -98,8 +103,14 @@ export default ((win, doc) => {
      */
     getData() {
       const baseElem = doc.querySelector(this.baseElem);
+      if (!baseElem) { return; }
+      const elems =  baseElem.querySelectorAll([
+        `[${this.dataAttr.image}]`,
+        `[${this.dataAttr.background}]`
+      ].join(','));
+
       return {
-        elems: baseElem.querySelectorAll(`[${this.dataAttr}]`),
+        elems,
         window: this.getWindowData(),
         bodyHeight: parseInt(doc.body.getBoundingClientRect().height)
       };
@@ -112,9 +123,14 @@ export default ((win, doc) => {
      */
     set(elem) {
       if (elem.classList.contains(this.setClassName)) { return; }
-      elem.src = elem.getAttribute(this.dataAttr);
+      if (elem.getAttribute(this.dataAttr.image)) {
+        elem.src = elem.getAttribute(this.dataAttr.image);
+      }
+      if (elem.getAttribute(this.dataAttr.background)) {
+        elem.style.backgroundImage = `url(${elem.getAttribute(this.dataAttr.background)})`;
+      }
       elem.classList.add(this.setClassName);
-      elem.removeAttribute(this.dataAttr);
+      elem.removeAttribute(this.dataAttr.image);
     }
 
     /**
