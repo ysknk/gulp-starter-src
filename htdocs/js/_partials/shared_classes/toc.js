@@ -91,13 +91,17 @@ export default ((win, doc) => {
     /**
      * procedure
      */
-    procedure() {
-      const tocs = doc.querySelectorAll(this.elemSelector);
+    procedure(container) {
+      if (!container) {
+        container = doc;
+      }
+
+      const tocs = container.querySelectorAll(this.elemSelector);
       if (!tocs.length) return;
 
       _.forEach(tocs, (toc) => {
         this.clear(toc);
-        this.create(toc);
+        this.create(toc, container);
       });
     }
 
@@ -115,10 +119,11 @@ export default ((win, doc) => {
      * create
      *
      * @param {object} elem toc element
+     * @param {object} container toc parent element
      */
-    create(elem) {
+    create(elem, container) {
       const content = this.contentElemSelector
-        ? doc.querySelector(this.contentElemSelector)
+        ? container.querySelector(this.contentElemSelector)
         : elem.parentNode;
       if (!content) {
         this.setEmpty(elem);
