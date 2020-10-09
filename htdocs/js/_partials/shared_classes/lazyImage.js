@@ -130,7 +130,13 @@ export default ((win, doc) => {
         elem.style.backgroundImage = `url(${elem.getAttribute(this.dataAttr.background)})`;
       }
       elem.classList.add(this.setClassName);
-      elem.removeAttribute(this.dataAttr.image);
+
+      if (elem.getAttribute(this.dataAttr.image)) {
+        elem.removeAttribute(this.dataAttr.image);
+      }
+      if (elem.getAttribute(this.dataAttr.background)) {
+        elem.removeAttribute(this.dataAttr.background);
+      }
     }
 
     /**
