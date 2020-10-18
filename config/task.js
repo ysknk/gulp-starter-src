@@ -13,7 +13,7 @@ let meta = require(`./page.js`);
 //   css: `css/`,
 //   js: `js/`,
 //   img: `img/`,
-//   copy: `copy/`,
+//   static: `static/`,
 // };
 
 module.exports = {
@@ -178,12 +178,12 @@ module.exports = {
     // }
   },
 
-  /* copy */
-  copy: { // other filetype
+  /* static */
+  static: { // other filetype
     // src: define.path.src('!(pug|styl|js|jsx|vue|tag|jpg|jpeg|png|gif|svg|d.ts|ts|tsx)'),
-    // src: [`${define.path.srcDir}htdocs/${base_dir.copy}**/*.*`],
+    // src: [`${define.path.srcDir}htdocs/${base_dir.static}**/*.*`],
     // dest: define.path.dest,
-    // base_dir: base_dir.copy,
+    // base_dir: base_dir.static,
 
     // dist: `${START_PATH}`,
   },
