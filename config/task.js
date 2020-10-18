@@ -103,10 +103,12 @@ module.exports = {
 
     // dist: `${ASSETS_PATH}js/`,
 
-    // ex: https://github.com/mishoo/UglifyJS2#minify-options
+    // ex: https://webpack.js.org/plugins/terser-webpack-plugin/
     // minify_options: {},
+
     // ex: http://eslint.org/docs/rules/
     // lint_options: {},
+
     // options: {
     //   module: {
     //     rules: [
@@ -138,9 +140,6 @@ module.exports = {
     //         p: JSON.stringify(meta.p)
     //       }
     //     }),
-    //     new licenseInfoWebpackPlugin({
-    //       glob: '{LICENSE,license,License}*'
-    //     })
     //   ]
     // },
   },
