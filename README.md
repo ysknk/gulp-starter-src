@@ -1,11 +1,6 @@
 Gulp Starter Src
 ====
 
-## pug
-
-Include and export should be described with absolute path with extension.
-* use inheritance.
-
 ## Mock API Server
 
 ```Shell
