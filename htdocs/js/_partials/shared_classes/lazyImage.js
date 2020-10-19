@@ -1,3 +1,5 @@
+import { getWindowRect, getElemRect } from '../utilities/'
+
 export default ((win, doc) => {
   'use strict';
 
@@ -5,6 +7,8 @@ export default ((win, doc) => {
 
   /**
    * LazyImage
+   * <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-lazy-image="/assets/img/img.gif" alt="">
+   * <div data-lazy-background="/assets/img/img.gif" style="background: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==) no-repeat center center; background-size: cover;">
    */
   return class LazyImage {
 
@@ -77,7 +81,7 @@ export default ((win, doc) => {
       if (elem.classList.contains(this.setClassName)) { return; }
       if (!this.isConditions(elem)) { return; }
 
-      const target = this.getTargetData(elem);
+      const target = getElemRect(elem);
       const thresholdDiff = data.window.height * this.threshold;
 
       // thresholdDiff分の余白がない場合
@@ -111,7 +115,7 @@ export default ((win, doc) => {
 
       return {
         elems,
-        window: this.getWindowData(),
+        window: getWindowRect(),
         bodyHeight: parseInt(doc.body.getBoundingClientRect().height)
       };
     }
@@ -137,58 +141,6 @@ export default ((win, doc) => {
       if (elem.getAttribute(this.dataAttr.background)) {
         elem.removeAttribute(this.dataAttr.background);
       }
-    }
-
-    /**
-     * getTargetData
-     *
-     * @param {object} elem target
-     * @returns {object}
-     */
-    getTargetData(elem) {
-      const rect = elem.getBoundingClientRect();
-      const top = this.getOffsetPos(elem).y
-        || rect.y + this.getWindowData().top
-        || 0;
-      const height = rect.height;
-
-      return {
-        top,
-        height,
-        bottom: (top + height)
-      };
-    }
-
-    /**
-     * getWindowData
-     *
-     * @returns {object}
-     */
-    getWindowData() {
-      const top = win.pageYOffset;
-      const height = win.innerHeight;
-
-      return {
-        top,
-        height,
-        bottom: (top + height)
-      };
-    }
-
-    /**
-     * getOffsetPos
-     *
-     * @param {object} elem element
-     * @returns {object} position x, y
-     */
-    getOffsetPos(elem) {
-      let pos = {x: 0, y: 0};
-      while(elem) {
-        pos.y += elem.offsetTop || 0;
-        pos.x += elem.offsetLeft || 0;
-        elem = elem.offsetParent;
-      }
-      return pos;
     }
 
     /**
