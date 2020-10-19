@@ -1,3 +1,5 @@
+import { parseJSON, getWindowRect, getElemRect } from '../utilities/'
+
 export default ((win, doc) => {
   'use strict';
 
@@ -43,29 +45,28 @@ export default ((win, doc) => {
      * update
      */
     update() {
-      let elems = doc.querySelectorAll(`[${this.dataAttr}]`);
-      let windowData = this.getWindowData();
+      const elems = doc.querySelectorAll(`[${this.dataAttr}]`);
+      const windowRect = getWindowRect();
 
-      _.forEach(elems, (elem, i) => {
-        let data = this.getParseData(elem);
-        data = _.merge({}, this.options, data);
+      _.forEach(elems, (elem) => {
+        const data = this.getMergeData(elem);
+        const targetRect = getElemRect(elem);
 
-        let targetData = this.getTargetData(elem);
+        const topLimit = targetRect.bottom >= windowRect.top;
+        const bottomLimit = windowRect.bottom >= targetRect.top;
 
         let power = 0;
         let perPower = 0;
         let isSetTransform = false;
 
         // 画面内
-        if (targetData.bottom >= windowData.top &&
-            windowData.bottom >= targetData.top) {
+        if (topLimit && bottomLimit) {
+          const windowMiddle = windowRect.top + (windowRect.height / 2);
+          const targetMiddle = targetRect.top + (targetRect.height / 2);
+          const range = (windowRect.height * data.range);
 
-          let windowMiddle = windowData.top + (windowData.height / 2);
-          let targetMiddle = targetData.top + (targetData.height / 2);
-          let range = (windowData.height * data.range);
-
-          let bottomRange = (windowMiddle + range);
-          let topRange = (windowMiddle - range);
+          const bottomRange = (windowMiddle + range);
+          const topRange = (windowMiddle - range);
 
           // 中央よりも上？下？
           if (bottomRange >= targetMiddle && topRange <= targetMiddle) {
@@ -74,29 +75,32 @@ export default ((win, doc) => {
             } else if (windowMiddle <= targetMiddle){
               power = (targetMiddle - windowMiddle);
             }
-            perPower = ((power / range) * 100) * data.rate;
+            perPower = ((power / range) * 100) * data.power;
             isSetTransform = true;
           }
-        // 上部限界
-        } else if (targetData.bottom >= windowData.top) {
-          perPower = 100 * data.rate;
+
+        } else if (topLimit) {
+          perPower = 100 * data.power;
           isSetTransform = true;
-        // 下部限界
-        } else if (windowData.bottom >= targetData.top) {
-          perPower = -(100 * data.rate);
+
+        } else if (bottomLimit) {
+          perPower = -(100 * data.power);
           isSetTransform = true;
         }
 
         if (isSetTransform) {
           perPower = data.dir ? perPower : -perPower;
+          const translate = `translate${data.move.toUpperCase()}(${perPower}%)`;
           if (data.prop) {
             if (data.prop === `opacity`) {
               elem.style[data.prop] = `${perPower / 100}`;
+            } else if (data.prop.match(/[x|y|z]/i)){
+              elem.style.transform = translate;
             } else {
               elem.style[data.prop] = `${perPower}%`;
             }
           } else {
-            elem.style.transform = `translate${data.move.toUpperCase()}(${perPower}%)`;
+            elem.style.transform = translate;
           }
         }
 
@@ -104,78 +108,15 @@ export default ((win, doc) => {
     }
 
     /**
-     * getParseData
+     * getMergeData
      *
      * @param {object} elem
      * @returns {object}
      */
-    getParseData(elem) {
-      let data = elem.getAttribute(this.dataAttr) || '';
-      let parseData = null;
-
-      if (!data) return;
-
-      try {
-        parseData = JSON.parse(data);
-      } catch(e) {
-        if (console.warn) {
-          console.warn(e);
-        } else {
-          console.log(e);
-        }
-      }
-      return parseData;
-    }
-
-    /**
-     * getTargetData
-     *
-     * @param {object} elem target
-     * @returns {object}
-     */
-    getTargetData(elem) {
-      let top = this.getOffsetPos(elem).y
-                || elem.getBoundingClientRect().y + this.getWindowData().top
-                || 0;
-      let height = elem.getBoundingClientRect().height;
-
-      return {
-        top,
-        height,
-        bottom: (top + height)
-      };
-    }
-
-    /**
-     * getWindowData
-     *
-     * @returns {object}
-     */
-    getWindowData() {
-      let top = win.pageYOffset;
-      let height = win.innerHeight;
-
-      return {
-        top,
-        height,
-        bottom: (top + height)
-      };
-    }
-
-    /**
-     * getOffsetPos
-     *
-     * @param {object} elem element
-     * @returns {object} position x, y
-     */
-    getOffsetPos(elem) {
-      let pos = {x: 0, y: 0};
-      while(elem){
-        pos.y += elem.offsetTop || 0;
-        pos.x += elem.offsetLeft || 0;
-        elem = elem.offsetParent;
-      }
-      return pos;
+    getMergeData(elem) {
+      const attr = elem.getAttribute(this.dataAttr) || '';
+      let data = parseJSON(attr);
+      return data = _.merge({}, this.options, data)
     }
 
   };
