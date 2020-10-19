@@ -1,3 +1,5 @@
+import { parseJSON } from '../utilities/'
+
 export default ((win, doc) => {
   'use strict';
 
@@ -109,22 +111,22 @@ export default ((win, doc) => {
      * initialize
      */
     initialize() {
-      let open = [
+      const open = [
         this.baseElem,
         `[${this.dataAttr.open}]`
       ].join(' ');
 
-      let close = [
+      const close = [
         this.baseElem,
         `[${this.dataAttr.close}]`
       ].join(' ');
 
       doc.addEventListener('click', (e) => {
         if (!e.target || !e.target.closest) return;
-        let openElem = e.target.closest(open);// delegate
-        let closeElem = e.target.closest(close);// delegate
+        const openElem = e.target.closest(open);// delegate
+        const closeElem = e.target.closest(close);// delegate
 
-        let isElemUndefined = (!openElem && !closeElem);
+        const isElemUndefined = (!openElem && !closeElem);
 
         if (e.target === doc || isElemUndefined) return;
 
@@ -152,10 +154,10 @@ export default ((win, doc) => {
         return;
       }
 
-      let template = this.getTemplateElem(elem, opts);
-      let modal = this.getModal(template);
-      let html = _.template(template.innerHTML);
-      let parseData = this.getParseData(elem, opts);
+      const template = this.getTemplateElem(elem, opts);
+      const modal = this.getModal(template);
+      const html = _.template(template.innerHTML);
+      const parseData = this.getParseData(elem, opts);
 
       modal.classList.add(this.state.open);
       elem.classList.add(this.state.open);
@@ -215,7 +217,7 @@ export default ((win, doc) => {
      * @returns {object}
      */
     getTemplateElem(elem, opts) {
-      let template = opts && opts.template
+      const template = opts && opts.template
         ? opts.template
         : elem.getAttribute(this.dataAttr.template);
       return doc.querySelector(template);
@@ -229,7 +231,7 @@ export default ((win, doc) => {
      * @returns {object}
      */
     getParseData(elem, opts) {
-      let data = elem.getAttribute(this.dataAttr.open) || '';
+      const data = elem.getAttribute(this.dataAttr.open) || '';
       let parseData = null;
 
       if (opts && opts.data) {
@@ -239,15 +241,7 @@ export default ((win, doc) => {
       }
 
       if (!parseData) {
-        try {
-          parseData = JSON.parse(data);
-        }catch(e) {
-          if (console.warn) {
-            console.warn(e);
-          } else {
-            console.log(e);
-          }
-        }
+        parseData = parseJSON(data);
       }
 
       return this.getPager(elem, parseData);
@@ -260,7 +254,7 @@ export default ((win, doc) => {
      * @param {object} opts options
      */
     showContent(html, opts) {
-      let content = doc.getElementById(this.name.content);
+      const content = doc.getElementById(this.name.content);
 
       FN.anime.remove(content);
       content.innerHTML = html;
@@ -292,8 +286,8 @@ export default ((win, doc) => {
      * @param {object} opts options
      */
     close(elem, opts) {
-      let modal = doc.getElementById(this.name.modal);
-      let content = doc.getElementById(this.name.content);
+      const modal = doc.getElementById(this.name.modal);
+      const content = doc.getElementById(this.name.content);
 
       if (this.isFixed) {
         this.fixedClose();
@@ -338,7 +332,7 @@ export default ((win, doc) => {
      */
     hideContent(elem, opts) {
       isChange = true;
-      let content = doc.getElementById(this.name.content);
+      const content = doc.getElementById(this.name.content);
 
       elem.classList.remove(this.state.open);
 
@@ -369,7 +363,7 @@ export default ((win, doc) => {
      * @param {object} data json parse
      */
     changeContent(template, data) {
-      let prev = this.getPrevElem();
+      const prev = this.getPrevElem();
       this.hideContent(prev, {
         onAfterClose: () => {
           this.showContent(template({
@@ -390,7 +384,13 @@ export default ((win, doc) => {
       let imgLoad = '';
       try {
         imgLoad = imagesLoaded(elem);
-      }catch(e) {}
+      }catch(e) {
+        if (console.warn) {
+          console.warn(e);
+        } else {
+          console.log(e);
+        }
+      }
 
       if (imgLoad) {
         imgLoad.on('always', () => {
@@ -413,10 +413,10 @@ export default ((win, doc) => {
      * fixedOpen
      */
     fixedOpen() {
-      let wrapper = doc.querySelector(this.wrapperElem);
+      const wrapper = doc.querySelector(this.wrapperElem);
       if (!wrapper) return;
 
-      let scrollY = win.pageYOffset || doc.documentElement.scrollTop;
+      const scrollY = win.pageYOffset || doc.documentElement.scrollTop;
       this.setScrollTop(scrollY);
 
       wrapper.style.position = 'fixed';
@@ -432,10 +432,10 @@ export default ((win, doc) => {
      * fixedClose
      */
     fixedClose() {
-      let wrapper = doc.querySelector(this.wrapperElem);
+      const wrapper = doc.querySelector(this.wrapperElem);
       if (!wrapper) return;
 
-      let html = doc.querySelector('html');
+      const html = doc.querySelector('html');
 
       html.classList.remove(this.state.open);
 
@@ -453,7 +453,7 @@ export default ((win, doc) => {
      * update
      */
     update() {
-      let modal = doc.getElementById(this.name.modal);
+      const modal = doc.getElementById(this.name.modal);
       if (!modal) return;
 
       if (this.isSetHeight) {
@@ -466,7 +466,7 @@ export default ((win, doc) => {
      * setHeight
      */
     setHeight() {
-      let modal = doc.getElementById(this.name.modal);
+      const modal = doc.getElementById(this.name.modal);
 
       let resizeTimer = false;
       (() => {
@@ -483,10 +483,10 @@ export default ((win, doc) => {
      * setAlign
      */
     setAlign() {
-      let wrapper = doc.getElementById(this.name.wrapper);
+      const wrapper = doc.getElementById(this.name.wrapper);
       if (!wrapper) return;
 
-      let alignRight = wrapper.querySelectorAll([
+      const alignRight = wrapper.querySelectorAll([
         this.baseElem,
         this.alignRightElem
       ].join(' '));
@@ -498,10 +498,10 @@ export default ((win, doc) => {
           clearTimeout(resizeTimer);
         }
         resizeTimer = setTimeout(() => {
-          let innerWidth = window.innerWidth;
-          let modalWidth = wrapper.clientWidth;
+          const innerWidth = window.innerWidth;
+          const modalWidth = wrapper.clientWidth;
 
-          let diffWidth = innerWidth - modalWidth;
+          const diffWidth = innerWidth - modalWidth;
 
           _.forEach(alignRight, (elem) => {
             elem.style.marginRight = `${diffWidth}px`;
@@ -514,9 +514,9 @@ export default ((win, doc) => {
      * setPosTop
      */
     setPosTop() {
-      let modalElem = doc.getElementById(this.name.modal);
-      let wrapperElem = doc.getElementById(this.name.wrapper);
-      let outerElem = doc.getElementById(this.name.outer);
+      const modalElem = doc.getElementById(this.name.modal);
+      const wrapperElem = doc.getElementById(this.name.wrapper);
+      const outerElem = doc.getElementById(this.name.outer);
 
       setTimeout(() => {
         if (modalElem) {
@@ -541,21 +541,21 @@ export default ((win, doc) => {
     getPager(elem, data) {
       if (!data) return;
 
-      let name = elem.getAttribute(this.dataAttr.name);
-      let split = name ? name.split(this.separater.page) : '';
-      let prefix = `${split[0]}${this.separater.page}`;
-      let num = split && split[1] ? parseInt(split[1]) : undefined;
+      const name = elem.getAttribute(this.dataAttr.name);
+      const split = name ? name.split(this.separater.page) : '';
+      const prefix = `${split[0]}${this.separater.page}`;
+      const num = split && split[1] ? parseInt(split[1]) : undefined;
 
       data.prev = `[${this.dataAttr.name}=${(prefix + (num - 1))}]`;
       data.next = `[${this.dataAttr.name}=${(prefix + (num + 1))}]`;
 
-      let prev = doc.querySelector(data.prev);
-      let next = doc.querySelector(data.next);
+      const prev = doc.querySelector(data.prev);
+      const next = doc.querySelector(data.next);
 
       data.prev = prev ? data.prev : false;
       data.next = next ? data.next : false;
 
-      let pager = {
+      const pager = {
         prev: prev || false,
         now: elem,
         next: next || false,
@@ -575,7 +575,7 @@ export default ((win, doc) => {
     getModal(template) {
       let modal = doc.getElementById(this.name.modal) || '';
       if (!modal) {
-        let elem = doc.querySelector(this.baseElem);
+        const elem = doc.querySelector(this.baseElem);
         modal = doc.createElement(`div`);
 
         modal.id = this.name.modal;
