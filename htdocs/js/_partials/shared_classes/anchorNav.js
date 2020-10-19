@@ -1,3 +1,5 @@
+import { getOffset, getWindowRect } from '../utilities/'
+
 export default ((win, doc) => {
   'use strict';
 
@@ -5,8 +7,12 @@ export default ((win, doc) => {
 
   /**
    * AnchorNav
-   * <a href="#hoge" data-anchor-nav="#hoge">hoge</a>
-   * <div id="hoge">hoge</div>
+   * <nav>
+   *   <a href="#hoge" data-anchor-nav="#hoge">hoge</a>
+   *   <a href="#huga" data-anchor-nav="#huga">huga</a>
+   * </nav>
+   * <div id="hoge" style="height: 1000px;">hoge</div>
+   * <div id="huga" style="height: 1000px;">huga</div>
    */
   return class AnchorNav {
 
@@ -54,7 +60,7 @@ export default ((win, doc) => {
      * update
      */
     update() {
-      let current = this.getCurrent();
+      const current = this.getCurrent();
       this.clearCurrent(current);
       this.setCurrent(current);
     }
@@ -65,7 +71,7 @@ export default ((win, doc) => {
      * @param {object} current nav
      */
     setCurrent(current) {
-      let elem = current && current.elem ? current.elem : '';
+      const elem = current && current.elem ? current.elem : '';
       if (elem && !elem.classList.contains(this.currentClassName)) {
         elem.classList.add(this.currentClassName);
         if (current.contentElem) {
@@ -81,16 +87,16 @@ export default ((win, doc) => {
      * @param {object} current nav
      */
     clearCurrent(current) {
-      let navs = this.getNavs();
+      const navs = this.getNavs();
 
       _.forEach(navs, (nav) => {
-        let targetData = this.getTargetData(nav);
-        let navSelector = nav.getAttribute(this.dataAttr.nav);
+        const targetRect = this.getElemRect(nav);
+        const navSelector = nav.getAttribute(this.dataAttr.nav);
         if (!current || (navSelector !== current.selector)) {
           if (nav.classList.contains(this.currentClassName)) {
             nav.classList.remove(this.currentClassName);
-            if (targetData.elem) {
-              targetData.elem.classList.remove(this.currentClassName);
+            if (targetRect.elem) {
+              targetRect.elem.classList.remove(this.currentClassName);
             }
             this.onOut && this.onOut(current);
           }
@@ -104,24 +110,24 @@ export default ((win, doc) => {
      * @returns {object} current
      */
     getCurrent() {
-      let navs = this.getNavs();
-      let windowData = this.getWindowData();
+      const navs = this.getNavs();
+      const windowRect = getWindowRect();
       let currentNavs = [];
 
       _.forEach(navs, (nav, i) => {
-        let targetData = this.getTargetData(nav);
+        const targetData = this.getElemRect(nav);
         let visualRange = 0;
 
         // 画面内
-        if (targetData.bottom >= windowData.top &&
-          windowData.bottom >= targetData.top) {
+        if (targetData.bottom >= windowRect.top &&
+          windowRect.bottom >= targetData.top) {
 
           // 上部見切れ
-          if (targetData.top <= windowData.top) {
-            visualRange = targetData.bottom - windowData.top;
+          if (targetData.top <= windowRect.top) {
+            visualRange = targetData.bottom - windowRect.top;
           // 下部見切れ
-          } else if (targetData.bottom > windowData.bottom) {
-            visualRange = windowData.bottom - targetData.top;
+          } else if (targetData.bottom > windowRect.bottom) {
+            visualRange = windowRect.bottom - targetData.top;
           // 見切れていない
           } else {
             visualRange = targetData.height;
@@ -145,10 +151,10 @@ export default ((win, doc) => {
         );
       }
 
-      let targetObject = currentNavs[0];
+      const targetObject = currentNavs[0];
       // ひとつだけの場合、コンテンツ自体の高さ1/5見えてるかどうか
       if (currentNavs.length <= 1 && targetObject) {
-        let targetHeight = this.getWindowData().height;
+        const targetHeight = getWindowRect().height;
         if ((targetHeight / 5) >= targetObject.visualRange) {
           targetObject.elem = null;
         }
@@ -167,17 +173,17 @@ export default ((win, doc) => {
     }
 
     /**
-     * getTargetData
+     * getElemRect
      *
      * @param {object} elem target
      * @returns {object}
      */
-    getTargetData(nav) {
-      let selector = nav.getAttribute(this.dataAttr.nav);
-      let elem = doc.querySelector(selector);
+    getElemRect(nav) {
+      const selector = nav.getAttribute(this.dataAttr.nav);
+      const elem = doc.querySelector(selector);
 
-      let top = this.getOffsetPos(elem).y;
-      let height = elem ? elem.getBoundingClientRect().height : 0;
+      const top = getOffset(elem).y;
+      const height = elem ? elem.getBoundingClientRect().height : 0;
 
       return {
         selector,
@@ -186,38 +192,6 @@ export default ((win, doc) => {
         height,
         bottom: (top + height)
       };
-    }
-
-    /**
-     * getWindowData
-     *
-     * @returns {object}
-     */
-    getWindowData() {
-      let top = win.pageYOffset;
-      let height = win.innerHeight;
-
-      return {
-        top,
-        height,
-        bottom: (top + height)
-      };
-    }
-
-    /**
-     * getOffsetPos
-     *
-     * @param {object} elem element
-     * @returns {object} position x, y
-     */
-    getOffsetPos(elem) {
-      let pos = {x: 0, y: 0};
-      while(elem){
-        pos.y += elem.offsetTop || 0;
-        pos.x += elem.offsetLeft || 0;
-        elem = elem.offsetParent;
-      }
-      return pos;
     }
 
   };
