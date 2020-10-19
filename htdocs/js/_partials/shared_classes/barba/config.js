@@ -1,7 +1,8 @@
-import barba from './barba';
+import { kebabToCamel } from '../../utilities/'
+import barba from './index';
 
-// import topPage from '../../_pages/top';
-// import testPage from '../../_pages/test';
+// import topPage from '../../../_pages/top';
+// import testPage from '../../../_pages/test';
 
 export default ((win, doc) => {
   'use strict';
@@ -61,7 +62,14 @@ export default ((win, doc) => {
                 if (!page) { return; }
                 page.mounted(data);
               },
+              afterOnce() {},
 
+              before() {},
+              beforeLeave() {},
+              leave(data) {
+                // const done = this.async();
+                // leaveFunction(done, data);
+              },
               // NOTE: call destroy
               afterLeave(data) {
                 const page = that.getPageName(data.current.namespace);
@@ -69,26 +77,6 @@ export default ((win, doc) => {
                 page.destroy(data);
               },
 
-              // NOTE: call mounted
-              afterEnter(data) {
-                const page = that.getPageName(data.next.namespace);
-                if (!page) { return; }
-                page.mounted(data);
-              },
-
-              beforeLeave() {
-              },
-
-              leave(data) {
-                // const done = this.async();
-                // leaveFunction(done, data);
-              },
-              enter(data) {
-                if ('scrollRestoration' in history) {
-                  history.scrollRestoration = 'manual';
-                }
-                window.scrollTo(0, 0);
-              },
               beforeEnter(data) {
                 barbaThis.replaceHeadTags(data.next);
 
@@ -99,6 +87,19 @@ export default ((win, doc) => {
                 page.initialize(data);
                 page.created(data);
               },
+              enter() {
+                if ('scrollRestoration' in history) {
+                  history.scrollRestoration = 'manual';
+                }
+                window.scrollTo(0, 0);
+              },
+              afterEnter() {},
+              // NOTE: call mounted
+              after(data) {
+                const page = that.getPageName(data.next.namespace);
+                if (!page) { return; }
+                page.mounted(data);
+              }
             }]
           }
         }
@@ -112,12 +113,6 @@ export default ((win, doc) => {
      * @returns {object} page class
      */
     getPageName(namespace) {
-      const kebabToCamel = (str) => {
-        str = str.charAt(0).toLowerCase() + str.slice(1);
-        return str.replace(/[-_](.)/g, function(match, headStr) {
-          return headStr.toUpperCase();
-        });
-      };
       return FN[`${kebabToCamel(namespace)}Page`]
     }
 
