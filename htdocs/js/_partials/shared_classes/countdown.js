@@ -1,3 +1,5 @@
+import { zeroPadding } from '../utilities/'
+
 export default ((win, doc) => {
   'use strict';
 
@@ -6,6 +8,12 @@ export default ((win, doc) => {
   /**
    * Countdown
    * @requires moment.js
+   * <div data-countdown-date>
+   *   <div data-countdown-units="days"></div>
+   *   <div data-countdown-units="hours"></div>
+   *   <div data-countdown-units="mins"></div>
+   *   <div data-countdown-units="secs"></div>
+   * </div>
    */
   return class Countdown {
 
@@ -51,7 +59,8 @@ export default ((win, doc) => {
       this.elems = doc.querySelectorAll(`[${this.dataAttr.units}]`);
 
       if (this.date) {
-        this.targetDate = this.date.getAttribute(this.dataAttr.date);
+        this.targetDate = this.date.getAttribute(this.dataAttr.date)
+          || this.targetDate;
       }
 
       if (this.isEnd()) {
@@ -75,7 +84,7 @@ export default ((win, doc) => {
      * setEnd
      */
     setEnd() {
-      let html = doc.querySelector(`html`);
+      const html = doc.querySelector(`html`);
       if (!html.classList.contains(this.initClassName)) {
         html.classList.add(this.endClassName);
       }
@@ -85,7 +94,7 @@ export default ((win, doc) => {
      * setInit
      */
     setInit() {
-      let html = doc.querySelector(`html`);
+      const html = doc.querySelector(`html`);
       if (!html.classList.contains(this.initClassName)) {
         html.classList.add(this.initClassName);
       }
@@ -95,7 +104,7 @@ export default ((win, doc) => {
      * setValues
      */
     setValues() {
-      let time = this.getDiffTimes();
+      const time = this.getDiffTimes();
       _.forEach(this.elems, (elem) => {
         this.setHTML(time, elem);
       });
@@ -109,8 +118,8 @@ export default ((win, doc) => {
      * @param {object} elem
      */
     setHTML(time, elem) {
-      let attr = elem.getAttribute(this.dataAttr.units);
-      let value = time[attr];
+      const attr = elem.getAttribute(this.dataAttr.units);
+      const value = time[attr];
       if (elem.getAttribute(this.dataAttr.value) == value) return;
       elem.setAttribute(this.dataAttr.value, value);
 
@@ -120,8 +129,8 @@ export default ((win, doc) => {
           break;
         }
         case `background`: {
-          let valueElems = elem.querySelectorAll(`[${this.dataAttr.value}]`);
-          let splits = value.split(``);
+          const valueElems = elem.querySelectorAll(`[${this.dataAttr.value}]`);
+          const splits = value.split(``);
 
           if (valueElems && valueElems.length) {
             _.forEach(splits, (split, i) => {
@@ -163,7 +172,7 @@ export default ((win, doc) => {
      * @returns {boolean}
      */
     isEnd() {
-      let diffTime = this.getTargetDate().diff(FN.moment());
+      const diffTime = this.getTargetDate().diff(FN.moment());
       return (this.getEnd() || !diffTime || diffTime <= 0) ? true : false;
     }
 
@@ -182,19 +191,18 @@ export default ((win, doc) => {
      * @returns {object} days, hours, mins, secs
      */
     getDiffTimes() {
-      let diffTime = this.getTargetDate().diff(FN.moment());
-      let duration = FN.moment.duration(diffTime);
+      const diffTime = this.getTargetDate().diff(FN.moment());
+      const duration = FN.moment.duration(diffTime);
 
       let days = Math.floor(duration.asDays());
-      // let days = duration.days();
       let hours = duration.hours();
       let mins = duration.minutes();
       let secs = duration.seconds();
 
-      days = this.setZeroPadding(days, '00', 3);
-      hours = this.setZeroPadding(hours, '0', 2);
-      mins = this.setZeroPadding(mins, '0', 2);
-      secs = this.setZeroPadding(secs, '0', 2);
+      days = zeroPadding(days, 3);
+      hours = zeroPadding(hours, 2);
+      mins = zeroPadding(mins, 2);
+      secs = zeroPadding(secs, 2);
 
       return {
         days,
@@ -202,18 +210,6 @@ export default ((win, doc) => {
         mins,
         secs
       };
-    }
-
-    /**
-     * setZeroPadding
-     *
-     * @param {number} num
-     * @param {string} pad padding
-     * @param {number} digit
-     * @returns {string}
-     */
-    setZeroPadding(num, pad = '0', digit = 2) {
-      return (pad + num).slice(-digit);
     }
 
   };
