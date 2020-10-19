@@ -1,3 +1,5 @@
+import { parseJSON, getWindowRect, getElemRect } from '../utilities/'
+
 export default ((win, doc) => {
   'use strict';
 
@@ -78,7 +80,8 @@ export default ((win, doc) => {
     initialize() {
       let elems = doc.querySelectorAll(`[${this.dataAttr}]`);
       _.forEach(elems, (elem, i) => {
-        let data = this.getParseData(elem);
+        const attr = elem.getAttribute(this.dataAttr) || '';
+        let data = parseJSON(attr);
         data = _.merge({}, this.options, data);
         if (elem.classList.contains(data.classname.init)) return;
 
@@ -93,32 +96,33 @@ export default ((win, doc) => {
      * update
      */
     update() {
-      let elems = doc.querySelectorAll(`[${this.dataAttr}]`);
-      let windowData = this.getWindowData();
-      let bodyHeight = parseInt(doc.body.getBoundingClientRect().height);
+      const elems = doc.querySelectorAll(`[${this.dataAttr}]`);
+      const windowRect = getWindowRect();
+      const bodyHeight = parseInt(doc.body.getBoundingClientRect().height);
 
       _.forEach(elems, (elem, i) => {
-        let data = this.getParseData(elem);
+        const attr = elem.getAttribute(this.dataAttr) || '';
+        let data = parseJSON(attr);
         data = _.merge({}, this.options, data);
 
         if (data.isOnce
           && elem.classList.contains(data.classname.in)) return;
 
-        let targetData = this.getTargetData(elem);
-        let thresholdDiff = windowData.height * data.threshold;
+        const targetRect = getElemRect(elem);
+        const thresholdDiff = windowRect.height * data.threshold;
 
         // thresholdDiff分の余白がない場合
-        if (((targetData.bottom + thresholdDiff) >= bodyHeight &&
-          windowData.bottom >= bodyHeight) ||
-          ((targetData.top - thresholdDiff) <= 0 &&
-            windowData.top <= 0)
+        if (((targetRect.bottom + thresholdDiff) >= bodyHeight &&
+          windowRect.bottom >= bodyHeight) ||
+          ((targetRect.top - thresholdDiff) <= 0 &&
+            windowRect.top <= 0)
         ) {
           this.setIn(elem, data);
         }
 
         // 余白含めて画面内
-        if (targetData.bottom >= windowData.top + thresholdDiff &&
-            windowData.bottom - thresholdDiff >= targetData.top) {
+        if (targetRect.bottom >= windowRect.top + thresholdDiff &&
+            windowRect.bottom - thresholdDiff >= targetRect.top) {
           this.setIn(elem, data);
         } else {
           // 一度きりの場合はoutクラスをつけない
@@ -171,81 +175,6 @@ export default ((win, doc) => {
             && this[data.callback.out](elem, data);
         }
       }
-    }
-
-    /**
-     * getParseData
-     *
-     * @param {object} elem
-     * @returns {object}
-     */
-    getParseData(elem) {
-      let data = elem.getAttribute(this.dataAttr) || '';
-      let parseData = null;
-
-      if (!data || (data && data === this.dataAttr)) return;
-
-      try {
-        parseData = JSON.parse(data);
-      } catch(e) {
-        if (console.warn) {
-          console.warn(e);
-        } else {
-          console.log(e);
-        }
-      }
-      return parseData;
-    }
-
-    /**
-     * getTargetData
-     *
-     * @param {object} elem target
-     * @returns {object}
-     */
-    getTargetData(elem) {
-      let top = this.getOffsetPos(elem).y
-                || elem.getBoundingClientRect().y + this.getWindowData().top
-                || 0;
-      let height = elem.getBoundingClientRect().height;
-
-      return {
-        top,
-        height,
-        bottom: (top + height)
-      };
-    }
-
-    /**
-     * getWindowData
-     *
-     * @returns {object}
-     */
-    getWindowData() {
-      let top = win.pageYOffset;
-      let height = win.innerHeight;
-
-      return {
-        top,
-        height,
-        bottom: (top + height)
-      };
-    }
-
-    /**
-     * getOffsetPos
-     *
-     * @param {object} elem element
-     * @returns {object} position x, y
-     */
-    getOffsetPos(elem) {
-      let pos = {x: 0, y: 0};
-      while(elem) {
-        pos.y += elem.offsetTop || 0;
-        pos.x += elem.offsetLeft || 0;
-        elem = elem.offsetParent;
-      }
-      return pos;
     }
 
   };
