@@ -19,8 +19,8 @@ export default ((win, doc) => {
         return new ageAuth(opts_);
       }
 
-      this.wrapId = `age-auth`;
-      this.elemSelector = this.wrapId;
+      this.wrapID = `age-auth`;
+      this.elemSelector = this.wrapID;
       this.openClassName = `is-auth-open`;
 
       this.htmlElem = doc.querySelector('html');
@@ -67,7 +67,7 @@ export default ((win, doc) => {
       // エラーページでは認証しない
       if (location.href.match(this.getErrorPageUrl())) return;
 
-      const elem = doc.querySelector(`#${this.wrapId}`);
+      const elem = doc.getElementById(this.wrapID);
       if (elem) return;
 
       const isCheckAge = this.getLocalData(this.dataName);
@@ -90,7 +90,7 @@ export default ((win, doc) => {
       this.isOpen = true;
 
       const node = doc.createElement(`div`);
-      node.id = this.wrapId;
+      node.id = this.wrapID;
       node.innerHTML = this.template;
 
       doc.body.appendChild(node);
@@ -107,7 +107,7 @@ export default ((win, doc) => {
      * setConfirmYes
      */
     setConfirmYes() {
-      const elem = doc.querySelector(`#${this.wrapId}`);
+      const elem = doc.querySelector(`#${this.wrapID}`);
       elem.parentNode.removeChild(elem);
       doc.body.classList.remove(this.openClassName);
 
