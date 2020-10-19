@@ -172,13 +172,13 @@ export default ((win, doc) => {
 
 })(window, document);
 
-// import barbaPage from '../_partials/shared_classes/barbaPage';
-// 
+// import barbaPage from '../_partials/shared_classes/barba/page';
+//
 // export default ((win, doc) => {
 //   'use strict';
-// 
+//
 //   const FN = win[NS];
-// 
+//
 //   return class Top extends barbaPage {
 //     /**
 //      * constructor
@@ -187,18 +187,18 @@ export default ((win, doc) => {
 //      */
 //     constructor(opts_) {
 //       super();
-// 
+//
 //       if (!(this instanceof Top)) {
 //         return new Top(opts_);
 //       }
-// 
+//
 //       this.pageName = `top`;
-// 
+//
 //       _.isObject(opts_) && _.extend(this, opts_);
-// 
+//
 //       // this.initialize();
 //     }
-// 
+//
 //     /**
 //      * mounted
 //      *
@@ -207,7 +207,7 @@ export default ((win, doc) => {
 //     mounted(data) {
 //       console.log('top mounted')
 //     }
-// 
+//
 //     /**
 //      * destroy
 //      *
@@ -216,9 +216,9 @@ export default ((win, doc) => {
 //     destroy(data) {
 //       console.log('top destroy')
 //     }
-// 
+//
 //   };
-// 
+//
 // })(window, document);
 
 
