@@ -34,11 +34,11 @@ export default ((win, doc) => {
      * initialize
      */
     update() {
-      let scrollPosX = win.pageXOffset || 0;
-      let elems = doc.querySelectorAll(`[${this.dataAttr}]`);
+      const scrollPosX = win.pageXOffset || 0;
+      const elems = doc.querySelectorAll(`[${this.dataAttr}]`);
 
       _.forEach(elems, (elem) => {
-        if(0 >= scrollPosX) {
+        if (0 >= scrollPosX) {
           elem.style.width = ``;
           elem.style.left = ``;
           return;
