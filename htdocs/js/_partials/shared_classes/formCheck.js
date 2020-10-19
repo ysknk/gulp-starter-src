@@ -1,3 +1,5 @@
+import { parseJSON, zenToHan, hanToZen } from '../utilities/'
+
 export default ((win, doc) => {
   'use strict';
 
@@ -83,8 +85,8 @@ export default ((win, doc) => {
         match: isOptsLiteral && opts_.literal.match || `%MATCH%`
       };
 
-      this.inputMessageTemplate = opts_.inputMessageTemplate || `入力してください`;
-      this.selectMessageTemplate = opts_.selectMessageTemplate || `お選びください`;
+      this.inputMessageTemplate = opts_ && opts_.inputMessageTemplate ? `入力してください` : '';
+      this.selectMessageTemplate = opts_ && opts_.selectMessageTemplate ? `お選びください` : '';
 
       this.messageTemplate = {
         commonName: `項目`,
@@ -361,7 +363,7 @@ export default ((win, doc) => {
       const name = elem.getAttribute(this.dataAttr.id);
       const optionsString = elem.getAttribute(this.dataAttr.options) || '';
       return this.getOptionData(num, name)
-        || this.getParseData(optionsString);
+        || parseJSON(optionsString);
     }
 
     /**
@@ -404,35 +406,13 @@ export default ((win, doc) => {
     }
 
     /**
-     * getParseData
-     *
-     * @param {string} json
-     * @returns {object}
-     */
-    getParseData(json) {
-      let data = json || '';
-      if (data) {
-        try {
-          data = JSON.parse(data);
-        }catch(e) {
-          if (console.warn) {
-            console.warn(e);
-          } else {
-            console.log(e);
-          }
-        }
-      }
-      return data
-    }
-
-    /**
      * setSubmitStatus
      *
      * @param {object} formElem
      * @param {boolean} isError
      */
     setSubmitStatus(formElem, isError) {
-      let buttonElems = formElem.querySelectorAll(this.buttonSelector);
+      const buttonElems = formElem.querySelectorAll(this.buttonSelector);
       _.forEach(buttonElems, (buttonElem) => {
         if (isError) {
           this.setButtonDisable(formElem, buttonElem);
@@ -480,11 +460,11 @@ export default ((win, doc) => {
       }
 
       if (options.replaceZen2Han) {
-        this.replaceZen2Han(elem);
+        elem.value = zenToHan(elem.value);
       }
 
       if (options.replaceHan2Zen) {
-        this.replaceHan2Zen(elem);
+        elem.value = hanToZen(elem.value);
       }
     }
 
@@ -499,7 +479,7 @@ export default ((win, doc) => {
       const length = [...elem.value].length;
       const type = this.getInputType(elem);
 
-      let message = this.messageTemplate;
+      const message = this.messageTemplate;
       let result = {
         status: true,
         message: '',
@@ -605,34 +585,6 @@ export default ((win, doc) => {
     }
 
     /**
-     * replaceZen2Han
-     *
-     * @param {object} elem
-     */
-    replaceZen2Han(elem) {
-      const replaceValue = (input) =>  {
-        return input.replace(/[！-～]/g, (input) => {
-          return String.fromCharCode(input.charCodeAt(0)-0xFEE0);
-        });
-      };
-      elem.value = replaceValue(elem.value);
-    }
-
-    /**
-     * replaceHan2Zen
-     *
-     * @param {object} elem
-     */
-    replaceHan2Zen(elem) {
-      const replaceValue = (input) =>  {
-        return input.replace(/[!-~]/g, (input) => {
-          return String.fromCharCode(input.charCodeAt(0)+0xFEE0);
-        });
-      };
-      elem.value = replaceValue(elem.value);
-    }
-
-    /**
      * getElems
      *
      * @param {object} options
@@ -703,8 +655,8 @@ export default ((win, doc) => {
      * @returns {object} {status, message}
      */
     checkArrayEmpty(elem) {
+      const groupElems = doc.querySelectorAll(`[name="${elem.name}"]`);
       let isChecked = false;
-      let groupElems = doc.querySelectorAll(`[name="${elem.name}"]`);
       _.forEach(groupElems, (groupElem) => {
         if (groupElem.checked) {
           // _.forEach(groupElems, (groupElem) => {
@@ -755,8 +707,8 @@ export default ((win, doc) => {
      * @returns {object} {status, message}
      */
     checkArrayIntegrity(elem, options) {
+      const groupElems = doc.querySelectorAll(`[name="${elem.name}"]`);
       let isChecked = false;
-      let groupElems = doc.querySelectorAll(`[name="${elem.name}"]`);
       _.forEach(groupElems, (groupElem) => {
         if (groupElem.checked) {
           isChecked = this.checkValuesMatch(groupElem.value, options)
