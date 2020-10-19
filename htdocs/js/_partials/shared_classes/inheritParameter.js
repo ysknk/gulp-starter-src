@@ -1,3 +1,5 @@
+import { getURLQuery } from '../utilities/'
+
 export default ((win, doc) => {
   'use strict';
 
@@ -36,7 +38,7 @@ export default ((win, doc) => {
 
       doc.addEventListener('click', (e) => {
         if (!e.target || !e.target.closest) return;
-        let elem = e.target.closest([// delegate
+        const elem = e.target.closest([// delegate
           this.baseElem,
           this.elem
         ].join(' '));
@@ -57,11 +59,11 @@ export default ((win, doc) => {
      */
     updateHref(elem) {
       _.forEach(this.queryNames, (queryName) => {
-        let value = this.getUrlParam(queryName);
+        const value = getURLQuery(queryName);
         if (!value) return;
 
-        let join = elem.href.match(/\?/) ? '&' : '?';
-        let param = `${queryName}=${value}`;
+        const join = elem.href.match(/\?/) ? '&' : '?';
+        const param = `${queryName}=${value}`;
         if (elem.href.match(param)) return;
 
         elem.href = `${elem.href}${join}${param}`;
@@ -79,27 +81,6 @@ export default ((win, doc) => {
       } else {
         window.open(elem.href);
       }
-    }
-
-    /**
-     * getUrlParam
-     *
-     * @param {string} name param name
-     * @param {string} url default location.href
-     * @returns {string} value
-     */
-    getUrlParam(name, url) {
-      if (!name) return;
-      if (!url) url = location.href;
-      name = name.replace(/[\[\]]/g, '\\$&');
-
-      let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
-      let results = regex.exec(url);
-
-      if (!results) return null;
-      if (!results[2]) return '';
-
-      return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
 
   };
