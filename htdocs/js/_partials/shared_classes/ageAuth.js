@@ -37,8 +37,7 @@ export default ((win, doc) => {
         `<div class="${this.elemSelector}">`,
           `<div class="${this.elemSelector}_inner">`,
             `<div class="${this.elemSelector}_lead">`,
-              `<p class="${this.elemSelector}_text">このキャンペーンはお酒に関する<br>内容を含んでいます。</p>`,
-              `<p class="${this.elemSelector}_text">未成年者の飲酒は法律で禁止されております。</p>`,
+              `<p class="${this.elemSelector}_text">年齢認証</p>`,
               `<p class="${this.elemSelector}_strong">あなたは20歳以上ですか？</p>`,
             `</div>`,
             `<ul class="${this.elemSelector}_buttons">`,
@@ -68,10 +67,10 @@ export default ((win, doc) => {
       // エラーページでは認証しない
       if (location.href.match(this.getErrorPageUrl())) return;
 
-      let elem = doc.querySelector(`#${this.wrapId}`);
+      const elem = doc.querySelector(`#${this.wrapId}`);
       if (elem) return;
 
-      let isCheckAge = this.getLocalData(this.dataName);
+      const isCheckAge = this.getLocalData(this.dataName);
 
       // 立ち上げ
       if (!isCheckAge) {
@@ -90,14 +89,14 @@ export default ((win, doc) => {
       if (this.isOpen) return;
       this.isOpen = true;
 
-      let node = doc.createElement(`div`);
+      const node = doc.createElement(`div`);
       node.id = this.wrapId;
       node.innerHTML = this.template;
 
       doc.body.appendChild(node);
       doc.body.classList.add(this.openClassName);
 
-      let event = (e) => {
+      const event = (e) => {
         e.preventDefault();
       };
       node.removeEventListener('touchmove', event, false);
@@ -108,7 +107,7 @@ export default ((win, doc) => {
      * setConfirmYes
      */
     setConfirmYes() {
-      let elem = doc.querySelector(`#${this.wrapId}`);
+      const elem = doc.querySelector(`#${this.wrapId}`);
       elem.parentNode.removeChild(elem);
       doc.body.classList.remove(this.openClassName);
 
@@ -119,7 +118,7 @@ export default ((win, doc) => {
      * setConfirmNo
      */
     setConfirmNo() {
-      let url = this.getErrorPageUrl();
+      const url = this.getErrorPageUrl();
       doc.body.classList.remove(this.openClassName);
       location.replace(url);
     }
@@ -130,7 +129,7 @@ export default ((win, doc) => {
      * @returns {string}
      */
     getErrorPageUrl() {
-      let dir = this.cpnCode ? `/${this.cpnCode}` : '';
+      const dir = this.cpnCode ? `/${this.cpnCode}` : '';
       return `${dir}${ERROR_PAGE_URL}`;
     }
 
@@ -143,7 +142,7 @@ export default ((win, doc) => {
     getLocalData(name) {
       if (this.dataType.match(/^localStorage$/i)) {
         if (!localStorage) return '';
-        let data = localStorage.getItem(this.dataWrap);
+        const data = localStorage.getItem(this.dataWrap);
         return data && JSON.parse(data)[name] || '';
       } else {
         return FN.cookies.get(name) || '';
@@ -161,7 +160,7 @@ export default ((win, doc) => {
       if (this.dataType.match(/^localStorage$/i)) {
         if (!localStorage) return;
 
-        let isData = this.getLocalData(this.dataWrap);
+        const isData = this.getLocalData(this.dataWrap);
         if (isData) return;
 
         try {
