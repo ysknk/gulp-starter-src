@@ -1,3 +1,5 @@
+import { getOffset, parseJSON } from '../utilities/'
+
 export default ((win, doc) => {
   'use strict';
 
@@ -71,9 +73,8 @@ export default ((win, doc) => {
      * updateAll
      */
     updateAll() {
-      let elems = doc.querySelectorAll(`[${this.dataAttr}]`);
+      const elems = doc.querySelectorAll(`[${this.dataAttr}]`);
       if (!elems || !elems.length) return;
-
       _.forEach(elems, (elem) => {
         this.update(elem);
       });
@@ -88,14 +89,14 @@ export default ((win, doc) => {
       if (elem.classList.contains(this.initializeClassName)) return;
       elem.classList.add(this.initializeClassName);
 
-      let data = this.getData(elem);
-      let childElems = this.getChildElems(data.content);
+      const data = this.getData(elem);
+      const childElems = this.getChildElems(data.content);
       if (!childElems) return;
 
       this.simpleClose(elem);
 
-      let innerHeight = childElems.innerElem.clientHeight;
-      let outerHeight = childElems.outerElem.clientHeight;
+      const innerHeight = childElems.innerElem.clientHeight;
+      const outerHeight = childElems.outerElem.clientHeight;
 
       // not expander initialize
       if (innerHeight < outerHeight) {
@@ -113,8 +114,8 @@ export default ((win, doc) => {
      * @param {object} elem
      */
     simpleClose(elem) {
-      let data = this.getData(elem);
-      let childElems = this.getChildElems(data.content);
+      const data = this.getData(elem);
+      const childElems = this.getChildElems(data.content);
       if (!childElems) return;
 
       childElems.outerElem.style.height = `${data.lineLimit || this.lineLimit}em`;
@@ -122,7 +123,7 @@ export default ((win, doc) => {
       childElems.buttonElem.innerHTML = data.expandLabel || this.expandLabel;
 
       if (this.isInitializeScroll && this.hasOpen(elem)) {
-        let contentPos = this.getOffsetPos(childElems.contentElem);
+        const contentPos = getOffset(childElems.contentElem);
         if (contentPos.y) {
           win.scrollTo(0, contentPos.y);
         }
@@ -139,17 +140,17 @@ export default ((win, doc) => {
      * @param {object} elem
      */
     close(elem) {
-      let data = this.getData(elem);
-      let childElems = this.getChildElems(data.content);
+      const data = this.getData(elem);
+      const childElems = this.getChildElems(data.content);
       if (!childElems) return;
 
-      let lineLimit = data.lineLimit || this.lineLimit;
-      let expandLabel = data.expandLabel || this.expandLabel;
+      const lineLimit = data.lineLimit || this.lineLimit;
+      const expandLabel = data.expandLabel || this.expandLabel;
 
       // 1emの高さを取得
-      let baseElem = this.createBaseElem(childElems.outerElem);
-      let baseHeight = baseElem.getBoundingClientRect().height;
-      let limitHeight = (baseHeight * lineLimit);
+      const baseElem = this.createBaseElem(childElems.outerElem);
+      const baseHeight = baseElem.getBoundingClientRect().height;
+      const limitHeight = (baseHeight * lineLimit);
 
       FN.anime.remove(childElems.outerElem);
 
@@ -160,7 +161,7 @@ export default ((win, doc) => {
         elem.classList.remove(this.openedClassName);
         childElems.buttonElem.innerHTML = expandLabel;
 
-        let contentPos = this.getOffsetPos(childElems.contentElem);
+        const contentPos = getOffset(childElems.contentElem);
         if (this.isCloseScroll && contentPos.y) {
           FN.scroll.goto(childElems.contentElem);
         }
@@ -188,8 +189,8 @@ export default ((win, doc) => {
     simpleOpen(elem) {
       if (this.hasOpen(elem)) return;
 
-      let data = this.getData(elem);
-      let childElems = this.getChildElems(data.content);
+      const data = this.getData(elem);
+      const childElems = this.getChildElems(data.content);
       if (!childElems) return;
 
       childElems.outerElem.style.height = '';
@@ -208,17 +209,17 @@ export default ((win, doc) => {
     open(elem) {
       if (this.hasOpen(elem)) return;
 
-      let data = this.getData(elem);
-      let childElems = this.getChildElems(data.content);
+      const data = this.getData(elem);
+      const childElems = this.getChildElems(data.content);
       if (!childElems) return;
 
-      let collapseLabel = data.collapseLabel || this.collapseLabel;
+      const collapseLabel = data.collapseLabel || this.collapseLabel;
 
       FN.anime.remove(childElems.outerElem);
       elem.classList.add(this.openClassName);
       childElems.buttonElem.innerHTML = collapseLabel;
 
-      let height = this.getHeight(childElems.outerElem);
+      const height = this.getHeight(childElems.outerElem);
 
       FN.anime({
         targets: childElems.outerElem,
@@ -242,11 +243,10 @@ export default ((win, doc) => {
      * @returns {object}
      */
     getHeight(elem) {
-      let now = elem.clientHeight;
-
+      const now = elem.clientHeight;
       elem.style.overflow = 'visible';
       elem.style.height = 'auto';
-      let max = elem.clientHeight;
+      const max = elem.clientHeight;
       elem.style.overflow = 'hidden';
       elem.style.height = now;
 
@@ -264,7 +264,7 @@ export default ((win, doc) => {
      */
     createBaseElem(elem) {
       let node = elem.querySelector(this.customTag) || '';
-      if (node) {return node;}
+      if (node) { return node; }
 
       node = doc.createElement(this.customTag);
       node.style.display = 'block';
@@ -290,8 +290,8 @@ export default ((win, doc) => {
      * @returns {object or boolean} elems or false
      */
     getChildElems(elem) {
-      let contentElem = doc.querySelector(elem);
-      let elems = {
+      const contentElem = doc.querySelector(elem);
+      const elems = {
         contentElem,
         outerElem: contentElem.querySelector(this.outerSelector),
         innerElem: contentElem.querySelector(this.innerSelector),
@@ -301,7 +301,7 @@ export default ((win, doc) => {
       if (!elems.outerElem ||
         !elems.innerElem ||
           !elems.outerElem ||
-            !elems.buttonElem) return false;
+            !elems.buttonElem) { return false; }
 
       return elems;
     }
@@ -313,10 +313,9 @@ export default ((win, doc) => {
      * @returns {object}
      */
     getData(elem) {
-      let data = elem.getAttribute(this.dataAttr);
-      if (!data) return false;
-
-      return JSON.parse(data);
+      const data = elem.getAttribute(this.dataAttr);
+      if (!data) { return false; }
+      return parseJSON(data);
     }
 
     /**
@@ -328,23 +327,6 @@ export default ((win, doc) => {
     hasOpen(elem) {
       return elem.classList.contains(this.openClassName);
     }
-
-    /**
-     * getOffsetPos
-     *
-     * @param {object} elem element
-     * @returns {object} position x, y
-     */
-    getOffsetPos(elem) {
-      let pos = {x: 0, y: 0};
-      while(elem){
-        pos.y += elem.offsetTop || 0;
-        pos.x += elem.offsetLeft || 0;
-        elem = elem.offsetParent;
-      }
-      return pos;
-    }
-
   };
 
 })(window, document);
