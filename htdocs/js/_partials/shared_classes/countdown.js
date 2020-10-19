@@ -115,11 +115,11 @@ export default ((win, doc) => {
       elem.setAttribute(this.dataAttr.value, value);
 
       switch(this.showType) {
-        case `text`:
+        case `text`: {
           elem.innerHTML = value;
           break;
-
-        case `background`:
+        }
+        case `background`: {
           let valueElems = elem.querySelectorAll(`[${this.dataAttr.value}]`);
           let splits = value.split(``);
 
@@ -129,14 +129,18 @@ export default ((win, doc) => {
             });
           }else{
             elem.innerHTML = ``;
-            _.forEach(splits, (split, i) => {
+            _.forEach(splits, (split) => {
               let span = doc.createElement(`span`);
               span.setAttribute(this.dataAttr.value, split);
               elem.appendChild(span);
             });
           }
           break;
-      };
+        }
+        default: {
+          break;
+        }
+      }
     }
 
     /**
