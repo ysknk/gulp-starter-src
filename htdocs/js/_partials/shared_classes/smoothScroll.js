@@ -1,3 +1,5 @@
+import { getOffset } from '../utilities/'
+
 export default ((win, doc) => {
   'use strict';
 
@@ -39,12 +41,12 @@ export default ((win, doc) => {
      * initialize
      */
     initialize() {
-      let html = doc.querySelector('html');
+      const html = doc.querySelector('html');
 
       // click to scroll
       doc.addEventListener('click', (e) => {
         if (!e.target || !e.target.closest) return;
-        let elem = e.target.closest([// delegate
+        const elem = e.target.closest([// delegate
           this.baseElem,
           this.elem
         ].join(' '));
@@ -79,11 +81,11 @@ export default ((win, doc) => {
      * locationHref
      */
     locationHref() {
-      let hash = this.getHash(location.href);
+      const hash = this.getHash(location.href);
       if (!hash) return;
 
       setTimeout(() => {
-        let elem = doc.querySelector(hash);
+        const elem = doc.querySelector(hash);
         if (!elem) return;
         this.goto(elem, false);
       }, 100);
@@ -98,8 +100,9 @@ export default ((win, doc) => {
     getHash(str) {
       if (!str) return false;
 
-      let dir = str.split('/');
-      let last = dir[dir.length - 1];
+      const dir = str.split('/');
+      const last = dir[dir.length - 1];
+
       let hash = '';
 
       if (last.match(/(\#\!)/)) return false;
@@ -132,22 +135,6 @@ export default ((win, doc) => {
     }
 
     /**
-     * getOffsetPos
-     *
-     * @param {object} elem element
-     * @returns {object} position x, y
-     */
-    getOffsetPos(elem) {
-      let pos = {x: 0, y: 0};
-      while (elem) {
-        pos.y += elem.offsetTop || 0;
-        pos.x += elem.offsetLeft || 0;
-        elem = elem.offsetParent;
-      }
-      return pos;
-    }
-
-    /**
      * goto
      *
      * @param {object} elem element
@@ -155,14 +142,14 @@ export default ((win, doc) => {
      * @param {function} cb callback
      */
     goto(elem, setHistory, cb) {
-      let baseElem = doc.querySelector(this.baseElem);
-      let elemPos = this.getOffsetPos(elem);
-      let scrollPos = {
+      const baseElem = doc.querySelector(this.baseElem);
+      const elemPos = getOffset(elem);
+      const scrollPos = {
         y: win.pageYOffset,
         x: win.pageXOffset
       };
 
-      let callback = () => {
+      const callback = () => {
         baseElem.classList.remove(this.isScrollingClassName);
         _.isFunction(cb) && cb();
         _.isFunction(this.onAfterScroll) && this.onAfterScroll(this);
