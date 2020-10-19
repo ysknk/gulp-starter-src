@@ -1,3 +1,5 @@
+import { parseJSON } from '../utilities/'
+
 export default ((win, doc) => {
   'use strict';
 
@@ -42,14 +44,15 @@ export default ((win, doc) => {
       // タブ切り替え
       doc.addEventListener('click', (e) => {
         if (!e.target || !e.target.closest) return;
-        let elem = e.target.closest([// delegate
+        const elem = e.target.closest([// delegate
           this.baseElem,
           `[${this.dataAttr}]`
         ].join(' '));
 
         if (e.target === doc || !elem) return;
 
-        data = this.toJson(elem.getAttribute(this.dataAttr));
+        data = parseJSON(elem.getAttribute(this.dataAttr));
+
         if (this.hasActive(elem)) {
           // @current close
           // this.onHide(elem, data);
@@ -64,16 +67,17 @@ export default ((win, doc) => {
      * setActive
      */
     setActive() {
-      let elems = doc.querySelectorAll([
+      const elems = doc.querySelectorAll([
         this.baseElem,
         `[${this.dataAttr}]`
       ].join(' '));
+
       let data;
 
       // set state
       _.forEach(elems, (elem) => {
         if (this.hasActive(elem)) {
-          data = this.toJson(elem.getAttribute(this.dataAttr));
+          data = parseJSON(elem.getAttribute(this.dataAttr));
           this.open(elem, data);
         }
       });
@@ -89,14 +93,14 @@ export default ((win, doc) => {
       if (this.getIsActive()) return;
       this.setIsActive(true);
 
-      let groups = doc.querySelectorAll([
+      const groups = doc.querySelectorAll([
         this.baseElem,
         data.group
       ].join(' '));
       if (!groups.length) return;
 
       // set btn class
-      let btns = doc.querySelectorAll([
+      const btns = doc.querySelectorAll([
         this.baseElem,
         data.btn
       ].join(' '));
@@ -111,7 +115,7 @@ export default ((win, doc) => {
       });
 
       // not current close
-      let name = data.category.replace(/^(\.|\#)/, '');
+      const name = data.category.replace(/^(\.|\#)/, '');
       let hideElems = [];
       let current = null;
 
@@ -148,16 +152,6 @@ export default ((win, doc) => {
      */
     hasActive(elem) {
       return elem.classList.contains(this.activeClassName);
-    }
-
-    /**
-     * toJson
-     *
-     * @param {string} str
-     * @returns {object} json
-     */
-    toJson(str) {
-      return JSON.parse(str);
     }
 
     /**
