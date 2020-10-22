@@ -85,12 +85,14 @@ export default ((win, doc) => {
       const thresholdDiff = data.window.height * this.threshold;
 
       // thresholdDiff分の余白がない場合
-      if (((target.bottom + thresholdDiff) >= data.bodyHeight &&
-        data.window.bottom >= data.bodyHeight) ||
-        ((target.top - thresholdDiff) <= 0 &&
-          data.window.top <= 0)
-      ) {
-        this.set(elem);
+      if (target.top && target.bottom) {
+        if (((target.bottom + thresholdDiff) >= data.bodyHeight &&
+          data.window.bottom >= data.bodyHeight) ||
+          ((target.top - thresholdDiff) <= 0 &&
+            data.window.top <= 0)
+        ) {
+          this.set(elem);
+        }
       }
 
       // 余白含めて画面内
