@@ -74,9 +74,13 @@ export default ((win, doc) => {
      * update
      *
      * @param {object} elem
-     * @param {object} data
+     * @param {object} options
      */
-    update(elem, data = this.getData()) {
+    update(elem, data = this.getData(), options) {
+      if (options && options.force) {
+        this.set(elem);
+        return;
+      }
       if (!data) { return; }
       if (elem.classList.contains(this.setClassName)) { return; }
       if (!this.isConditions(elem)) { return; }
