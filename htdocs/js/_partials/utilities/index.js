@@ -4,7 +4,6 @@
  * @param {string} txt
  * @returns {object}
  */
-// getParseData
 export function parseJSON(txt) {
   let result = null;
   if (!txt) { return result; }
@@ -27,7 +26,6 @@ export function parseJSON(txt) {
  * @param {object} elem element
  * @returns {object} position x, y
  */
-// getOffsetPos
 export function getOffset(elem) {
   const pos = {
     x: 0,
@@ -47,7 +45,6 @@ export function getOffset(elem) {
  *
  * @returns {object}
  */
-// getWindowData
 export function getWindowRect() {
   const width = window.innerWidth;
   const height = window.innerHeight;
@@ -68,7 +65,6 @@ export function getWindowRect() {
  * @param {object} elem target
  * @returns {object}
  */
-// getTargetData
 export function getElemRect(elem) {
   const rect = elem.getBoundingClientRect();
 
@@ -95,7 +91,6 @@ export function getElemRect(elem) {
  * @param {string} url default location.href
  * @returns {string} value
  */
-// getUrlParam
 export function getURLQuery(param, url) {
   if (!param) return;
   if (!url) url = location.href;
@@ -118,7 +113,6 @@ export function getURLQuery(param, url) {
  * @param {number} digit
  * @returns {string}
  */
-// setZeroPadding
 export function zeroPadding(num, digit = 2) {
   return (Array(digit).join('0') + num).slice(-digit);
 }
@@ -129,7 +123,6 @@ export function zeroPadding(num, digit = 2) {
  * @param {string} str
  * @returns {string}
  */
-// replaceZen2Han
 export function zenToHan(str) {
   const replaceStr = (input) =>  {
     return input.replace(/[！-～]/g, (input) => {
@@ -150,7 +143,6 @@ export function zenToHan(str) {
  * @param {string} str
  * @returns {string}
  */
-// replaceHan2Zen
 export function hanToZen(str) {
   const replaceStr = (input) =>  {
     return input.replace(/[!-~]/g, (input) => {
