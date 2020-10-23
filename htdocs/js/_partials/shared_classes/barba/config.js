@@ -84,10 +84,14 @@ export default ((win, doc) => {
                 if (!page) { return; }
                 barbaThis.sendAnalytics();
 
-                page.initialize(data);
                 page.created(data);
               },
-              enter() {
+              enter(data) {
+                const page = that.getPageName(data.next.namespace);
+                if (!page) { return; }
+
+                page.initialize(data);
+
                 if ('scrollRestoration' in history) {
                   history.scrollRestoration = 'manual';
                 }
