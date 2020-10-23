@@ -54,15 +54,18 @@ export default ((win, doc) => {
               beforeOnce(data) {
                 const page = that.getPageName(data.next.namespace);
                 if (!page) { return; }
-                page.initialize(data);
                 page.created(data);
               },
               once(data) {
                 const page = that.getPageName(data.next.namespace);
                 if (!page) { return; }
+                page.initialize(data);
+              },
+              afterOnce(data) {
+                const page = that.getPageName(data.next.namespace);
+                if (!page) { return; }
                 page.mounted(data);
               },
-              afterOnce() {},
 
               before() {},
               beforeLeave() {},
@@ -82,22 +85,20 @@ export default ((win, doc) => {
 
                 const page = that.getPageName(data.next.namespace);
                 if (!page) { return; }
-                barbaThis.sendAnalytics();
-
                 page.created(data);
+                barbaThis.sendAnalytics();
               },
-              enter(data) {
-                const page = that.getPageName(data.next.namespace);
-                if (!page) { return; }
-
-                page.initialize(data);
-
+              enter() {
                 if ('scrollRestoration' in history) {
                   history.scrollRestoration = 'manual';
                 }
                 window.scrollTo(0, 0);
               },
-              afterEnter() {},
+              afterEnter(data) {
+                const page = that.getPageName(data.next.namespace);
+                if (!page) { return; }
+                page.initialize(data);
+              },
               // NOTE: call mounted
               after(data) {
                 const page = that.getPageName(data.next.namespace);
