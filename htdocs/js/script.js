@@ -1,21 +1,6 @@
 import variable from './_partials/globals/variable';
 
-import reqAnimationFrame from './_partials/polyfills/requestAnimationFrame';
-import animationEnd from './_partials/polyfills/animationEnd';
-import closest from './_partials/polyfills/closest';
-import objectAssign from './_partials/polyfills/objectAssign';
-import arrayFind from './_partials/polyfills/arrayFind';
-import styles from './_partials/ponifills/styles';
-import detectUseStyle from './_partials/ponifills/detectUseStyle';
-
-import uaParserJs from 'ua-parser-js';
-import axios from 'axios';
-import anime from 'animejs';
-// import gsap from 'gsap';
-// import cookies from 'js-cookie';
-// import moment from 'moment-timezone';
-
-// import _ from 'lodash';//look for globals/variable
+import plugins from './_partials/plugins/';
 
 import raf from './_partials/shared_classes/raf';
 
@@ -44,16 +29,16 @@ import intersection from './_partials/shared_classes/intersection';
 
   const FN = win[NS];
 
-  FN.detectUseStyle = detectUseStyle;
+  FN.detectUseStyle = plugins.detectUseStyle;
 
-  FN.uaParser = new uaParserJs();
-  FN.axios = axios;
-  FN.anime = anime;
-  // FN.gsap = gsap;
-  // FN.cookies = cookies;
+  FN.uaParser = new plugins.uaParserJs();
+  FN.axios = plugins.axios;
+  FN.anime = plugins.anime;
+  // FN.gsap = plugins.gsap;
+  // FN.cookies = plugins.cookies;
 
-  // moment.tz.setDefault('Asia/Tokyo');
-  // FN.moment = moment;
+  // plugins.moment.tz.setDefault('Asia/Tokyo');
+  // FN.moment = plugins.moment;
 
   // device
   FN.device = new device();
