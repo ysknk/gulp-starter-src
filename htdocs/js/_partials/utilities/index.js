@@ -109,7 +109,6 @@ export function getURLQuery(param, url) {
  * zeroPadding
  *
  * @param {number} num
- * @param {string} pad padding
  * @param {number} digit
  * @returns {string}
  */
