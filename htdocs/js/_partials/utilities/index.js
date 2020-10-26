@@ -91,9 +91,8 @@ export function getElemRect(elem) {
  * @param {string} url default location.href
  * @returns {string} value
  */
-export function getURLQuery(param, url) {
+export function getURLQuery(param, url = location.href) {
   if (!param) return;
-  if (!url) url = location.href;
   param = param.replace(/[\[\]]/g, '\\$&');
 
   const regex = new RegExp('[?&]' + param + '(=([^&#]*)|&|#|$)');
