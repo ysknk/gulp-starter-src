@@ -19,7 +19,7 @@ npx gulp styleguide
 # gulp-iconfont
 npx gulp iconfont
 ```
-___* Gulp command only___
+___* Gulp task only___
 
 ## License
 
