@@ -1,18 +1,18 @@
 doctype html
 
-include ../_utilities/variables.pug
-include ../_utilities/mixins.pug
+include ../_utilities/variables
+include ../_utilities/mixins
 
 html.no-js(lang!=lang dir!=dir)
   head
-    include default_head.pug
+    include head
 
   body(class!=`${p}base`)
     // wrapper
     #wrapper(class!=`${p}wrapper ${p}${page_name}`)
       != '\n'
 
-      include header.pug
+      include header
       != '\n'
 
       // main
@@ -23,7 +23,7 @@ html.no-js(lang!=lang dir!=dir)
       // /main
       != '\n'
 
-      include footer.pug
+      include footer
       != '\n'
 
     // /wrapper
