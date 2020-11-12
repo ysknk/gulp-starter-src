@@ -43,7 +43,7 @@ import intersection from './_partials/shared_classes/intersection';
   // device
   FN.device = new device();
 
-  const html = doc.querySelector('html');
+  const html = doc.documentElement;
   html.classList.remove('no-js');
 
   // html class
