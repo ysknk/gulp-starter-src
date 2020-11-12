@@ -61,18 +61,18 @@ font_size_responsive($elem = body)
 
     if $i == 0
       @media (max-width: unit($wmin, "px"))
-        {$lsp}
-          {$elem}
-            font-size unit(round($fsp * $rate), "px")
-    @media (min-width: unit(round($diff), "px"))
-      {$lsp}
+        // {$lsp}
         {$elem}
           font-size unit(round($fsp * $rate), "px")
+    @media (min-width: unit(round($diff), "px"))
+      // {$lsp}
+      {$elem}
+        font-size unit(round($fsp * $rate), "px")
 
   @media (min-width: unit($wsp + 1, "px"))
-    {$lpc}
-      {$elem}
-        font-size unit($fpc, "px")
+    // {$lpc}
+    {$elem}
+      font-size unit($fpc, "px")
 
 center_margin()
   margin-right auto
