@@ -1,4 +1,4 @@
-const tests = require("./pages/tests")
+const tests = require("./pages/tests");
 
 module.exports = {
   tests
