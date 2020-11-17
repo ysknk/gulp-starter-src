@@ -215,10 +215,14 @@ module.exports = {
 
   /* mass_production */
   mass_production: {
-    src: `${define.path.htdocs}html/_layouts/default.pug`,
+    src: [
+      `${define.path.htdocs}html/_layouts/**/*`,
+      `${define.path.config}tasks/mass_production/src/templates/**/*`
+    ],
     dest: `${define.path.dest}${ROOT_PATH}`,
 
-    itemsfile: `${define.path.config}tasks/mass_production/src/items`,
+    templateDir: `${define.path.config}tasks/mass_production/src/templates/`,
+    contextDir: `${define.path.config}tasks/mass_production/src/`,
 
     extension: '.html',
 
