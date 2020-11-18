@@ -63,7 +63,7 @@ class MassProduction extends TaskMaster {
 
       switch (key) {
         case 'tests': {
-          const indexTemplate = path.resolve(`${this.task.data.templateDir}test.pug`);
+          const indexTemplate = path.resolve(`${this.task.data.templateDir}${key.split(/s$/)[0}.pug`);
           context.forEach((parent) => {
             const parentSlug = parent.slug || '';
             const {filename, slug} = this.getPath(parentSlug)
@@ -77,9 +77,8 @@ class MassProduction extends TaskMaster {
 
             parent.list.forEach((child) => {
               const childSlug = child.slug;
-              const pageslug = `${parentSlug}${childSlug}`;
-
-              const {filename, slug} = this.getPath(pageslug);
+              child.slug = `${parentSlug}${childSlug}`;
+              const {filename, slug} = this.getPath(child.slug);
 
               this.createPage({
                 dest: `${dest}${slug}`,
