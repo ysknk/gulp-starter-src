@@ -57,16 +57,18 @@ const head = {
 // class_name prefix
 const prefix_layout = 'l-';
 const prefix_component = 'c-';
-const prefix = prefix_component;
+const prefix_site = prefix_component;
 
 module.exports = {
   ...head,
 
   data,
 
-  p: prefix,
-  l: prefix_layout,
-  c: prefix_component,
+  p: {
+    s: prefix_site,
+    l: prefix_layout,
+    c: prefix_component
+  },
 
   page_name: 'common-page',
 
