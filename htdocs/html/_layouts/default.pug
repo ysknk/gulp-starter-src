@@ -6,17 +6,17 @@ html(lang!=lang dir!=dir)
   head
     include head
 
-  body(class!=`${p.l}base`)
+  body(class!=`${l}base`)
     // wrapper
-    #wrapper(class!=`${p.l}wrapper ${p.l}${page_name}`)
+    #wrapper(class!=`${l}wrapper ${l}${page_name}`)
       != '\n'
 
       include header
       != '\n'
 
       // main
-      main(role!="main" class!=`${p.l}main`)
-        article(class!=`${p.l}article`)
+      main(role!="main" class!=`${l}main`)
+        article(class!=`${l}article`)
           block content
             p content
       // /main
