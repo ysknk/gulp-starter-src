@@ -28,9 +28,9 @@ mixin img_src(path, alt)
 //- ex) +section('hoge')
 mixin section(name, tag="section", indent="          ")
   != `\n${indent}<!-- ${name}-->`
-  #{tag}(id=name class=`${p}section ${p}section--${name}`)&attributes(attributes)
-    div(class=`${p}section__outer`)
-      div(class=`${p}section__inner`)
+  #{tag}(id=name class=`${p.c}section ${p.c}section--${name}`)&attributes(attributes)
+    div(class=`${p.c}section__outer`)
+      div(class=`${p.c}section__inner`)
         if block
           block
         else
@@ -38,15 +38,15 @@ mixin section(name, tag="section", indent="          ")
   != `\n${indent}<!-- /${name}-->`
 
 mixin title(en, ja, h="h2")
-  #{h}(class=`${p}title ${p}title--${h}`)&attributes(attributes)
+  #{h}(class=`${p.c}title ${p.c}title--${h}`)&attributes(attributes)
     if block
-      span(class=`${p}title__inner`)
+      span(class=`${p.c}title__inner`)
         block
     else
       if en
-        span(class=`${p}title__en`)!= en
+        span(class=`${p.c}title__en`)!= en
       if ja
-        span(class=`${p}title__ja`)!= ja
+        span(class=`${p.c}title__ja`)!= ja
 
 //- sns
 //- ex) +set_sns(['twitter', 'facebook', 'line'])
