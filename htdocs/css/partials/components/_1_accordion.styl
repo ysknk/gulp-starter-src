@@ -32,15 +32,15 @@ accordion styles
 </div>
 ```
 ```jade
-div(class=`${p}accordion`)
-  p.is-open(class=`${p}accordion_button` data-accr=`#accordion_content1`)
+div(class=`${c}accordion`)
+  p.is-open(class=`${c}accordion_button` data-accr=`#accordion_content1`)
     a(href="javascript:void(0)")!= `button1`
-  div#accordion_content1(class=`${p}accordion_content`)
+  div#accordion_content1(class=`${c}accordion_content`)
     div
       p!= `accordion_content1`
 ```
 */
-.{$p}accordion
+.{$c}accordion
   $this = selector($component_selector)
 
   &_button
