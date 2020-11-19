@@ -1,10 +1,10 @@
-.{$p}base
+.{$l}base
   if $init_type == 'reset'
     @import "_reset"
   if $init_type == 'normalize'
     @import "_normalize"
 
-  .{$p}wrapper
+  .{$l}wrapper
     // overscroll-behavior-y none
 
     font-family $font_family
@@ -35,21 +35,21 @@
     // min-width ($wmin)px
     min-width 320px
 
-    .{$p}display-inline-block
+    .{$c}display-inline-block
       display inline-block
 
     +break_point('pc')
-      .{$p}display-none
+      .{$c}display-none
         &--pc
           display none !important
 
     +break_point('tab')
-      .{$p}display-none
+      .{$c}display-none
         &--tab
           display none !important
 
     +break_point('sp')
-      .{$p}display-none
+      .{$c}display-none
         &--sp
           display none !important
 
@@ -174,5 +174,5 @@
         cursor pointer
 
 // responsive fontsize
-font_size_responsive('.' + $p + 'base' + ' .' + $p + 'wrapper')
+font_size_responsive('.' + $l + 'base' + ' .' + $l + 'wrapper')
 
