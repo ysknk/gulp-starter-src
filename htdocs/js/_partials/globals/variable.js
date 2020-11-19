@@ -1,7 +1,7 @@
 export default ((win, doc) => {
   'use strict';
 
-  const PREFIX = meta.p;
+  const PREFIX = meta.p.s;
   if (win['PREFIX']) {
     console.error(`window.PREFIX [${PREFIX}] dupricated.`);
   } else {
