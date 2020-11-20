@@ -52,28 +52,41 @@ font_size($size, $def = $font_size_default)
     $def = $fsp
   font-size ceil(percent($size, $def))
 
-font_size_responsive($elem = body)
+font_size_responsive($elem = body, $pc = false)
   // wmin = wmin * 2
   // wsp = wsp * 2
   // fsp = fsp * 2
+
   for $i in (0..$font_size_split)
     $diff = $wmin + ($i * (($wsp - $wmin) / $font_size_split))
     $rate = $diff / $wsp
 
-    if $i == 0
-      @media (max-width: unit($wmin, "px"))
-        // {$lsp}
-        {$elem}
-          font-size unit(round($fsp * $rate), "px")
+    if !$pc
+      if $i == 0
+        @media (max-width: unit($wmin, "px"))
+          // {$lsp}
+          {$elem}
+            font-size unit(round($fsp * $rate), "px")
     @media (min-width: unit(round($diff), "px"))
       // {$lsp}
       {$elem}
         font-size unit(round($fsp * $rate), "px")
 
-  @media (min-width: unit($wsp + 1, "px"))
-    // {$lpc}
-    {$elem}
-      font-size unit($fpc, "px")
+  if !$pc
+    @media (min-width: unit($wsp + 1, "px"))
+      // {$lpc}
+      {$elem}
+        font-size unit($fpc, "px")
+
+  if $pc
+    for $i in (0..$font_size_split)
+      $diff = ($wsp + 1) + ($i * (($wpc - ($wsp + 1)) / $font_size_split))
+      $rate = $diff / $wpc
+      // 751(なり) <-> 1366(16)
+      @media (min-width: unit(round($diff), "px"))
+        // {$lsp}
+        {$elem}
+          font-size unit(round($fpc * $rate), "px")
 
 center_margin()
   margin-right auto
