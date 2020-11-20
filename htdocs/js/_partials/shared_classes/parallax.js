@@ -94,7 +94,7 @@ export default ((win, doc) => {
           if (data.prop) {
             if (data.prop === `opacity`) {
               elem.style[data.prop] = `${perPower / 100}`;
-            } else if (data.prop.match(/[x|y|z]/i)){
+            } else if (data.prop.match(/^[x|y|z]$/i)){
               elem.style.transform = translate;
             } else {
               elem.style[data.prop] = `${perPower}%`;
