@@ -28,6 +28,7 @@ export default ((win, doc) => {
         dir: true,// + or -
         power: 0.5,
         range: 0.4,
+        unit: "%",
         prop: ""// default transform
       };
 
@@ -90,14 +91,14 @@ export default ((win, doc) => {
 
         if (isSetTransform) {
           perPower = data.dir ? perPower : -perPower;
-          const translate = `translate${data.move.toUpperCase()}(${perPower}%)`;
+          const translate = `translate${data.move.toUpperCase()}(${perPower}${data.unit})`;
           if (data.prop) {
             if (data.prop === `opacity`) {
               elem.style[data.prop] = `${perPower / 100}`;
             } else if (data.prop.match(/^[x|y|z]$/i)){
               elem.style.transform = translate;
             } else {
-              elem.style[data.prop] = `${perPower}%`;
+              elem.style[data.prop] = `${perPower}${data.unit}`;
             }
           } else {
             elem.style.transform = translate;
