@@ -32,6 +32,7 @@ export default ((win, doc) => {
         prop: ""// default transform
       };
 
+      opts_.options = Object.assign({}, this.options, opts_.options);
       _.isObject(opts_) && _.extend(this, opts_);
 
       // this.initialize();
