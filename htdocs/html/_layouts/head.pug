@@ -70,13 +70,13 @@ if js
     for item, key in js
       if item
         if item.match(/\/\//) || item.match(/^\./)
-          script(src!=`${item}`)
+          script(src!=`${item}` defer)
         else
-          script(src!=`${js_path}${item}`)
+          script(src!=`${js_path}${item}` defer)
   if(typeof js === 'string')
     if item.match(/\/\//) || item.match(/^\./)
-      script(src!=`${js}`)
+      script(src!=`${js}` defer)
     else
-      script(src!=`${js_path}${js}`)
+      script(src!=`${js_path}${js}` defer)
 block js
 
