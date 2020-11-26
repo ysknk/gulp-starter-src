@@ -20,7 +20,7 @@ tab styles
 
 ```html
 <div class="site-tab">
-  <nav class="site-tab__nav">
+  <nav class="site-tab__navigation">
     <ul>
       <li><a class="is-active" href="javascript:void(0)" data-tab="{&quot;btn&quot;:&quot;.site-tab li a&quot;,&quot;group&quot;:&quot;.site-tab .site-tab__group > div&quot;,&quot;category&quot;:&quot;.content1&quot;}">nav1</a></li>
       <li><a href="javascript:void(0)" data-tab="{&quot;btn&quot;:&quot;.site-tab li a&quot;,&quot;group&quot;:&quot;.site-tab .site-tab__group > div&quot;,&quot;category&quot;:&quot;.content2&quot;}">nav2</a></li>
@@ -36,7 +36,7 @@ tab styles
 ```
 ```jade
 div(class=`${c}tab`)
-  nav(class=`${c}tab__nav`)
+  nav(class=`${c}tab__navigation`)
     ul
       li: a(class="is-active" href="javascript:void(0)" data-tab!="{&quot;btn&quot;:&quot;.site-tab li a&quot;,&quot;group&quot;:&quot;.site-tab .site-tab__group > div&quot;,&quot;category&quot;:&quot;.content1&quot;}") nav1
       li: a(href="javascript:void(0)" data-tab!="{&quot;btn&quot;:&quot;.site-tab li a&quot;,&quot;group&quot;:&quot;.site-tab .site-tab__group > div&quot;,&quot;category&quot;:&quot;.content2&quot;}") nav2
@@ -50,7 +50,7 @@ div(class=`${c}tab`)
 .{$c}tab
   $this = selector($component_selector)
 
-  &__nav
+  &__navigation
     li
       a
         &.is-active
