@@ -29,7 +29,7 @@ export default ((win, doc) => {
       };
 
       this.setClassName = 'set-src';
-      this.threshold = -.5;// (-1.0) - 1.0 -> screen top - bottom
+      this.threshold = -.5;// (-1.0) ~ 1.0
 
       this.isEventInitialize = true;
       this.throttleTime = 10;
