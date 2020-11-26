@@ -14,6 +14,10 @@ mixin inline(tag, name, attr)
     block
   </#{tag}>
 
+//- require width, height
+mixin lazy_image(src, alt=``, width, height, options)
+  img(src=`${spacer}` data-lazy-image=`${src}` alt!=alt width=`${width}` height=`${height}`)&attributes(attributes)
+
 //- responsive img
 //- ex) +img_device_src('/common/', 'hoge')
 mixin img_device_src(path, alt)
