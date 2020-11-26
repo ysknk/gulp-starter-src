@@ -39,6 +39,11 @@ ICON_ARROW1 = '\F001'
     display inline-block
     vertical-align middle
 
+  &--rotate
+    for $i in (1..8)
+      &-{$i * 45}
+        transform rotate(($i * 45)deg)
+
   &--arrow1
     &::before
       font_icon('icons1', ICON_ARROW1)
