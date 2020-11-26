@@ -6,6 +6,7 @@ import raf from './_partials/shared_classes/raf';
 
 import device from './_partials/shared_classes/device';
 import mediaQuery from './_partials/shared_classes/mediaQuery';
+import lazyImage from './_partials/shared_classes/lazyImage';
 import ajax from './_partials/shared_classes/ajax';
 import smoothScroll from './_partials/shared_classes/smoothScroll';
 import accordion from './_partials/shared_classes/accordion';
@@ -69,6 +70,11 @@ import intersection from './_partials/shared_classes/intersection';
   // mediaquery
   FN.mediaQuery = new mediaQuery();
 
+  // lazyImage
+  FN.lazyImage = new lazyImage({
+    isEventInitialize: false
+  });
+
   // ajax
   FN.ajax = new ajax();
 
@@ -126,7 +132,8 @@ import intersection from './_partials/shared_classes/intersection';
    * event procedure
    */
   doc.addEventListener('DOMContentLoaded', (e) => {
-    FN.mediaQuery.update();
+    FN.mediaQuery.update();    
+    FN.lazyImage.initialize();
     FN.accordion.setClose();
     FN.tab.setActive();
     // FN.expander.updateAll();
@@ -149,6 +156,7 @@ import intersection from './_partials/shared_classes/intersection';
   }, false);
 
   win.addEventListener('resize', _.debounce((e) => {
+    FN.lazyImage.updateAll();
     // FN.anchorNav.update();
     FN.intersection.update();
   }, 100), false);
@@ -157,6 +165,7 @@ import intersection from './_partials/shared_classes/intersection';
   // }, false);
 
   win.addEventListener('scroll', _.throttle((e) => {
+    FN.lazyImage.updateAll();
     // FN.modal.update();
     // FN.anchorNav.update();
     // FN.parallax.update();
