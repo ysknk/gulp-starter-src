@@ -29,16 +29,27 @@ mixin img_src(path, alt)
   img(src=`${img_path}${path}` alt!=alt)&attributes(attributes)
 
 //- section
-//- ex) +section('hoge')
+//- ex) +section('hoge'): +set('content')
 mixin section(name, tag="section", indent="          ")
   != `\n${indent}<!-- ${name}-->`
   #{tag}(id=name class=`${c}section ${c}section--${name}`)&attributes(attributes)
-    div(class=`${c}section__outer`)
-      div(class=`${c}section__inner`)
-        if block
-          block
-        else
-          p No content provided
+    - blocks = {}
+    block
+    //- +set('before')
+    if blocks.before
+      - blocks.before()
+    if blocks.content
+      div(class=`${c}section__outer`)
+        if blocks.outerBefore
+          - blocks.outerBefore()
+        div(class=`${c}section__inner`)
+          //- +set('content')
+          - blocks.content()
+        if blocks.outerAfter
+          - blocks.outerAfter()
+    //- +set('after')
+    if blocks.after
+      - blocks.after()
   != `\n${indent}<!-- /${name}-->`
 
 mixin title(en, ja, h="h2")
