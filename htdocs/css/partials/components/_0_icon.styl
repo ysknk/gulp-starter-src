@@ -40,9 +40,10 @@ ICON_ARROW1 = '\F001'
     vertical-align middle
 
   &--rotate
-    for $i in (1..8)
-      &-{$i * 45}
-        transform rotate(($i * 45)deg)
+    $split = 45
+    for $i in (1..(360 / $split))
+      &-{$i * $split}
+        transform rotate(($i * $split)deg)
 
   &--arrow1
     &::before
