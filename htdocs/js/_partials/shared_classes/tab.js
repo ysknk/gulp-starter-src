@@ -25,9 +25,6 @@ export default ((win, doc) => {
       this.dataAttr = 'data-tab';
       this.activeClassName = 'is-active';
 
-      this.duration = 1000;
-      this.easing = 'easeInOutQuart';
-
       _.isObject(opts_) && _.extend(this, opts_);
 
       // this.initialize();
