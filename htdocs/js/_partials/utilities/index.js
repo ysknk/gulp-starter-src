@@ -167,3 +167,14 @@ export function kebabToCamel (str) {
     return headStr.toUpperCase();
   });
 }
+
+/**
+ * isSupportedHistoryAPI
+ *
+ * @param {string} str
+ * @returns {string}
+ */
+export function isSupportedHistoryAPI () {
+  return (window.history && window.history.pushState);
+}
+
