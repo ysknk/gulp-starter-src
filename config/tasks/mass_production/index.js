@@ -153,6 +153,7 @@ class MassProduction extends TaskMaster {
     };
 
     gulp.src(template, {allowEmpty: true})
+      .pipe($.plumber(this.errorMessage()))
       .pipe($.rename(filename))
       .pipe($.data(() => {
         return this.setData(context_data)
