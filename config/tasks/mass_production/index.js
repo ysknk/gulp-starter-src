@@ -165,6 +165,7 @@ class MassProduction extends TaskMaster {
 
       .pipe($.size(this.sizeOptions()))
       .pipe(plugins.log())
+      .pipe(this.serv());
   }
 
   /**
