@@ -2,7 +2,6 @@ export default ((win, doc) => {
   'use strict';
 
   const FN = win[NS];
-  const ERROR_PAGE_URL = `/error/age.html`;
 
   /**
    * ageAuth
@@ -23,29 +22,30 @@ export default ((win, doc) => {
       this.elemSelector = this.wrapID;
       this.openClassName = `is-auth-open`;
 
-      this.htmlElem = doc.querySelector('html');
-      this.cpnCode = this.htmlElem.getAttribute(`data-cpn-code`) || ``;
-      this.cpnAuth = this.htmlElem.getAttribute(`data-cpn-auth`) || ``;
+      this.redirectURL = `/error/age.html`;
 
-      this.dataWrap = `mileage_data`
+      this.htmlElem = doc.documentElement;
+      this.siteAuth = this.htmlElem.getAttribute(`data-site-auth`) || ``;
+
+      this.dataWrap = `site_data`
       this.dataType = `Cookie`;// localStorage || Cookie[default]
-      this.dataName = `isAgreeAge`;
+      this.dataName = `is_agree_age`;
       this.dataValue = true;
       this.dataExpires = 365;
 
       this.template = [
         `<div class="${this.elemSelector}">`,
-          `<div class="${this.elemSelector}_inner">`,
-            `<div class="${this.elemSelector}_lead">`,
-              `<p class="${this.elemSelector}_text">年齢認証</p>`,
-              `<p class="${this.elemSelector}_strong">あなたは20歳以上ですか？</p>`,
+          `<div class="${this.elemSelector}__inner">`,
+            `<div class="${this.elemSelector}__lead">`,
+              `<p class="${this.elemSelector}__text">年齢認証</p>`,
+              `<p class="${this.elemSelector}__strong">あなたは20歳以上ですか？</p>`,
             `</div>`,
-            `<ul class="${this.elemSelector}_buttons">`,
-              `<li class="${this.elemSelector}_button -no">`,
-                `<a href="javascript:void(0)" onclick="javascript:${NS}.ageAuth.setConfirmNo()">いいえ</a>`,
+            `<ul class="${this.elemSelector}__buttons">`,
+              `<li class="${this.elemSelector}__button ${this.elemSelector}__button--no">`,
+                `<button onclick="javascript:${NS}.ageAuth.setConfirmNo()">いいえ</button>`,
               `</li>`,
-              `<li class="${this.elemSelector}_button -yes">`,
-                `<a href="javascript:void(0)" onclick="javascript:${NS}.ageAuth.setConfirmYes()">はい</a>`,
+              `<li class="${this.elemSelector}__button ${this.elemSelector}__button--yes">`,
+                `<button onclick="javascript:${NS}.ageAuth.setConfirmYes()">はい</button>`,
               `</li>`,
             `</ul>`,
           `</div>`,
@@ -63,7 +63,7 @@ export default ((win, doc) => {
      * initialize
      */
     initialize() {
-      if (!this.cpnAuth || !this.cpnAuth.match(/^age$/i)) return;
+      if (!this.siteAuth || !this.siteAuth.match(/^age$/i)) return;
       // エラーページでは認証しない
       if (location.href.match(this.getErrorPageUrl())) return;
 
@@ -74,7 +74,7 @@ export default ((win, doc) => {
 
       // 立ち上げ
       if (!isCheckAge) {
-        this.openConfirm(elem);
+        this.openConfirm();
       }else{
         this.setAgeData();
       }
@@ -82,10 +82,8 @@ export default ((win, doc) => {
 
     /**
      * openConfirm
-     *
-     * @param {object} elem
      */
-    openConfirm(elem) {
+    openConfirm() {
       if (this.isOpen) return;
       this.isOpen = true;
 
@@ -129,8 +127,7 @@ export default ((win, doc) => {
      * @returns {string}
      */
     getErrorPageUrl() {
-      const dir = this.cpnCode ? `/${this.cpnCode}` : '';
-      return `${dir}${ERROR_PAGE_URL}`;
+      return this.redirectURL;
     }
 
     /**
