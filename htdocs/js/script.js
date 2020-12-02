@@ -96,7 +96,6 @@ import intersection from './_partials/shared_classes/intersection';
 
   // tab
   FN.tab = new tab();
-  FN.tab.initialize();
 
   // pageShare
   // FN.pageShare = new pageShare();
@@ -135,7 +134,7 @@ import intersection from './_partials/shared_classes/intersection';
     FN.mediaQuery.update();    
     FN.lazyImage.initialize();
     FN.accordion.setClose();
-    FN.tab.setActive();
+    FN.tab.initialize();
     // FN.expander.updateAll();
     // FN.ellipsis.updateAll();
     // FN.countdown.update();
