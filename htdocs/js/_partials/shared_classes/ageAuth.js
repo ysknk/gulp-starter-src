@@ -24,6 +24,7 @@ export default ((win, doc) => {
 
       this.redirectURL = `/error/age.html`;
 
+      this.baseElemSelector = `body`;
       this.htmlElem = doc.documentElement;
       this.siteAuth = this.htmlElem.getAttribute(`data-site-auth`) || ``;
 
@@ -91,8 +92,9 @@ export default ((win, doc) => {
       node.id = this.wrapID;
       node.innerHTML = this.template;
 
-      doc.body.appendChild(node);
-      doc.body.classList.add(this.openClassName);
+      const baseElem = doc.querySelector(this.baseElemSelector);
+      baseElem.appendChild(node);
+      baseElem.classList.add(this.openClassName);
 
       const event = (e) => {
         e.preventDefault();
@@ -107,7 +109,8 @@ export default ((win, doc) => {
     setConfirmYes() {
       const elem = doc.querySelector(`#${this.wrapID}`);
       elem.parentNode.removeChild(elem);
-      doc.body.classList.remove(this.openClassName);
+      const baseElem = doc.querySelector(this.baseElemSelector);
+      baseElem.classList.remove(this.openClassName);
 
       this.setAgeData();
     }
@@ -117,7 +120,8 @@ export default ((win, doc) => {
      */
     setConfirmNo() {
       const url = this.getErrorPageUrl();
-      doc.body.classList.remove(this.openClassName);
+      const baseElem = doc.querySelector(this.baseElemSelector);
+      baseElem.classList.remove(this.openClassName);
       location.replace(url);
     }
 
