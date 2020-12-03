@@ -117,7 +117,7 @@ export default ((win, doc) => {
      * setConfirmYes
      */
     setConfirmYes() {
-      const elem = doc.querySelector(`#${this.wrapID}`);
+      const elem = doc.getElementById(this.wrapID);
       elem.parentNode.removeChild(elem);
       const baseElem = doc.querySelector(this.baseElemSelector);
       baseElem.classList.remove(this.openClassName);
