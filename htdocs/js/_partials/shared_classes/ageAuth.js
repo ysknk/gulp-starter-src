@@ -38,15 +38,15 @@ export default ((win, doc) => {
         `<div class="${this.elemSelector}">`,
           `<div class="${this.elemSelector}__inner">`,
             `<div class="${this.elemSelector}__lead">`,
-              `<p class="${this.elemSelector}__text">年齢認証</p>`,
-              `<p class="${this.elemSelector}__strong">あなたは20歳以上ですか？</p>`,
+              `<p class="${this.elemSelector}__text">age</p>`,
+              `<p class="${this.elemSelector}__strong">age > 20?</p>`,
             `</div>`,
             `<ul class="${this.elemSelector}__buttons">`,
               `<li class="${this.elemSelector}__button ${this.elemSelector}__button--no">`,
-                `<button onclick="javascript:${NS}.ageAuth.setConfirmNo()">いいえ</button>`,
+                `<button onclick="javascript:${NS}.ageAuth.setConfirmNo()">NO</button>`,
               `</li>`,
               `<li class="${this.elemSelector}__button ${this.elemSelector}__button--yes">`,
-                `<button onclick="javascript:${NS}.ageAuth.setConfirmYes()">はい</button>`,
+                `<button onclick="javascript:${NS}.ageAuth.setConfirmYes()">YES</button>`,
               `</li>`,
             `</ul>`,
           `</div>`,
@@ -65,7 +65,7 @@ export default ((win, doc) => {
      */
     initialize() {
       if (!this.siteAuth || !this.siteAuth.match(/^age$/i)) return;
-      // エラーページでは認証しない
+      // errorpage not auto
       if (location.href.match(this.getErrorPageUrl())) return;
 
       const elem = doc.getElementById(this.wrapID);
@@ -73,11 +73,11 @@ export default ((win, doc) => {
 
       const isCheckAge = this.getLocalData(this.dataName);
 
-      // 立ち上げ
+      // open
       if (!isCheckAge) {
         this.openConfirm();
       }else{
-        this.setAgeData();
+        this.setAuthData();
       }
     }
 
@@ -112,7 +112,7 @@ export default ((win, doc) => {
       const baseElem = doc.querySelector(this.baseElemSelector);
       baseElem.classList.remove(this.openClassName);
 
-      this.setAgeData();
+      this.setAuthData();
     }
 
     /**
@@ -175,9 +175,9 @@ export default ((win, doc) => {
     }
 
     /**
-     * setAgeData
+     * setAuthData
      */
-    setAgeData() {
+    setAuthData() {
       this.setLocalData(this.dataName, this.dataValue, {
         expires: this.dataExpires
       });
