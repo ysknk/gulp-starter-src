@@ -38,8 +38,8 @@ export default ((win, doc) => {
         `<div class="${this.elemSelector}">`,
           `<div class="${this.elemSelector}__inner">`,
             `<div class="${this.elemSelector}__lead">`,
-              `<p class="${this.elemSelector}__text">age</p>`,
-              `<p class="${this.elemSelector}__strong">age > 20?</p>`,
+              `<p class="${this.elemSelector}__text">age authorization</p>`,
+              `<p class="${this.elemSelector}__strong">is age over 20 ?</p>`,
             `</div>`,
             `<ul class="${this.elemSelector}__buttons">`,
               `<li class="${this.elemSelector}__button ${this.elemSelector}__button--no">`,
@@ -54,9 +54,11 @@ export default ((win, doc) => {
       ].join('');
 
       this.isOpen = false;
+      this.hasCheckBox = false;
 
       _.isObject(opts_) && _.extend(this, opts_);
 
+      this.initializeCheckConditions();
       // this.initialize();
     }
 
@@ -96,11 +98,11 @@ export default ((win, doc) => {
       baseElem.appendChild(node);
       baseElem.classList.add(this.openClassName);
 
-      const event = (e) => {
-        e.preventDefault();
-      };
-      node.removeEventListener('touchmove', event, false);
-      node.addEventListener('touchmove', event, false);
+      // const event = (e) => {
+      //   e.preventDefault();
+      // };
+      // node.removeEventListener('touchmove', event, false);
+      // node.addEventListener('touchmove', event, false);
     }
 
     /**
@@ -112,7 +114,9 @@ export default ((win, doc) => {
       const baseElem = doc.querySelector(this.baseElemSelector);
       baseElem.classList.remove(this.openClassName);
 
-      this.setAuthData();
+      if (this.isCheckConditions) {
+        this.setAuthData();
+      }
     }
 
     /**
@@ -123,6 +127,38 @@ export default ((win, doc) => {
       const baseElem = doc.querySelector(this.baseElemSelector);
       baseElem.classList.remove(this.openClassName);
       location.replace(url);
+    }
+
+    /**
+     * setTemplate
+     *
+     * @param {string} html
+     */
+    setTemplate(html) {
+      this.template = html;
+    }
+
+    /**
+     * setCheckConditions
+     *
+     * @param {boolean} bool
+     */
+    setCheckConditions(bool) {
+      this.isCheckConditions = bool;
+    }
+
+    /**
+     * initializeCheckConditions
+     */
+    initializeCheckConditions() {
+      this.isCheckConditions = !this.hasCheckBox;
+    }
+
+    /**
+     * clearCheckConditions
+     */
+    clearCheckConditions() {
+      this.initializeCheckConditions();
     }
 
     /**
