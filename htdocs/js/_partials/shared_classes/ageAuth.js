@@ -76,10 +76,10 @@ export default ((win, doc) => {
       const isCheckAge = this.getLocalData(this.dataName);
 
       // open
-      if (!isCheckAge) {
-        this.openConfirm();
-      }else{
+      if (isCheckAge) {
         this.setAuthData();
+      } else {
+        this.openConfirm();
       }
     }
 
