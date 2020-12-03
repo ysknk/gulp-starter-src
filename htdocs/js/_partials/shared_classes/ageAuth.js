@@ -201,7 +201,11 @@ export default ((win, doc) => {
         if (isData) return;
 
         try {
-          localStorage.setItem(this.dataWrap, `{"${name}": ${value}}`);
+          if (this.dataWrap) {
+            localStorage.setItem(this.dataWrap, `{"${name}": ${value}}`);
+          } else {
+            localStorage.setItem(name, value);
+          }
         } catch(e) {
           console.log(e);
         }
