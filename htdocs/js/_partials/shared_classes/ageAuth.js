@@ -73,14 +73,22 @@ export default ((win, doc) => {
       const elem = doc.getElementById(this.wrapID);
       if (elem) return;
 
-      const isCheckAge = this.getLocalData(this.dataName);
-
       // open
-      if (isCheckAge) {
+      if (this.isCheckAge()) {
         this.setAuthData();
       } else {
         this.openConfirm();
       }
+    }
+
+    /**
+     * isCheckAge
+     *
+     * @returns {boolean}
+     */
+    isCheckAge() {
+      const data = this.dataWrap || this.dataName;
+      return this.getLocalData(data) || this.getSessionData(data);
     }
 
     /**
@@ -117,6 +125,7 @@ export default ((win, doc) => {
       if (this.isCheckConditions) {
         this.setAuthData();
       }
+      this.beginSession();
     }
 
     /**
@@ -179,8 +188,8 @@ export default ((win, doc) => {
     getLocalData(name) {
       if (this.dataType.match(/^localStorage$/i)) {
         if (!localStorage) return '';
-        const data = localStorage.getItem(this.dataWrap);
-        return data && JSON.parse(data)[name] || '';
+        const data = localStorage.getItem(name);
+        return (JSON.parse(data) && JSON.parse(data)[name]) || data || '';
       } else {
         return FN.cookies.get(name) || '';
       }
@@ -197,8 +206,7 @@ export default ((win, doc) => {
       if (this.dataType.match(/^localStorage$/i)) {
         if (!localStorage) return;
 
-        const isData = this.getLocalData(this.dataWrap);
-        if (isData) return;
+        if (this.isCheckAge()) return;
 
         try {
           if (this.dataWrap) {
@@ -221,6 +229,45 @@ export default ((win, doc) => {
       this.setLocalData(this.dataName, this.dataValue, {
         expires: this.dataExpires
       });
+    }
+
+
+    /**
+     * getSessionData
+     *
+     * @param {string} name
+     * @returns {string}
+     */
+    getSessionData(name) {
+      if (!sessionStorage) return '';
+      const data = sessionStorage.getItem(name);
+      return (JSON.parse(data) && JSON.parse(data)[name]) || data || '';
+    }
+    /**
+     * setSessionData
+     *
+     * @param {string} name
+     * @param {string} value
+     * @param {object} options
+     */
+    setSessionData(name, value) {
+      if (!sessionStorage) return;
+      try {
+        if (this.dataWrap) {
+          sessionStorage.setItem(this.dataWrap, `{"${name}": ${value}}`);
+        } else {
+          sessionStorage.setItem(name, value);
+        }
+      } catch(e) {
+        console.log(e);
+      }
+    }
+
+    /**
+     * beginSession
+     */
+    beginSession() {
+      this.setSessionData(this.dataName, this.dataValue);
     }
 
   };
