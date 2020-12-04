@@ -29,7 +29,8 @@ export default ((win, doc) => {
         power: 0.5,
         range: 0.4,
         unit: "%",
-        prop: ""// default transform
+        prop: "",// default transform,
+        rect: ""// rect target
       };
 
       opts_.options = Object.assign({}, this.options, opts_.options);
@@ -52,7 +53,8 @@ export default ((win, doc) => {
 
       _.forEach(elems, (elem) => {
         const data = this.getMergeData(elem);
-        const targetRect = getElemRect(elem);
+        const rect = data.rect && doc.querySelector(data.rect);
+        const targetRect = getElemRect(rect || elem);
 
         const topLimit = targetRect.bottom >= windowRect.top;
         const bottomLimit = windowRect.bottom >= targetRect.top;
