@@ -72,7 +72,8 @@ export default ((win, doc) => {
      */
     isTouch() {
       if (navigator.msPointerEnabled) {
-        return true;
+        return false;
+        // return true;
       } else {
         if ('ontouchstart' in win) {
           return true;
