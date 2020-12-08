@@ -133,8 +133,8 @@ export default ((win, doc) => {
      */
     setConfirmNo() {
       const url = this.getErrorPageUrl();
-      const baseElem = doc.querySelector(this.baseElemSelector);
-      baseElem.classList.remove(this.openClassName);
+      // const baseElem = doc.querySelector(this.baseElemSelector);
+      // baseElem.classList.remove(this.openClassName);
       location.replace(url);
     }
 
