@@ -2,7 +2,7 @@
 
 ## Usage
 
-```
+``` sh
 ./_app
 npx gulp styleguide
 ```
