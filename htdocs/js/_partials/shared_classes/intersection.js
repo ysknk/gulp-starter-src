@@ -39,7 +39,7 @@ export default ((win, doc) => {
         }
       };
 
-      this.initializeStyle = `opacity: 0;`;
+      this.initializeStyle = ``;
 
       _.isObject(opts_) && _.extend(this, opts_);
 
