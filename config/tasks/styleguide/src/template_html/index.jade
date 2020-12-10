@@ -1,8 +1,9 @@
 doctype html
 //- project assets path
 - var assets_path = `${root == './' ? '' : root}../assets/`
-- var site_base_class = `site-base`//- css reset class
-html
+- var site_base_class = `l-base`//- css reset class
+- var site_wrapper_class = `l-wrapper`
+html.tm-html
   head
     meta(charset='utf-8')
     meta(name='viewport' content='width=device-width, initial-scale=1')
@@ -47,3 +48,21 @@ html
       .uk-offcanvas-bar
         aside
           include ./aside
+
+    script
+      !=`if (!window["styleguide"]) { window["styleguide"] = {}; }`
+      !=`window["styleguide"].baseClass = "${site_base_class}";`
+      !=`window["styleguide"].wrapperClass = "${site_wrapper_class}";`
+    script.
+      (function(doc, win) {
+        var previews = doc.querySelectorAll('.' + styleguide.baseClass);
+        previews.forEach(function(preview) {
+          var copy = preview.innerHTML;
+          preview.innerHTML = '';
+          var div = doc.createElement('div');
+          div.classList.add(styleguide.wrapperClass);
+          div.innerHTML = copy;
+          preview.appendChild(div);
+        });
+      })(document, window);
+
