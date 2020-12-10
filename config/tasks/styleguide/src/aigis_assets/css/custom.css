@@ -130,3 +130,10 @@ body > .uk-open > .uk-offcanvas-bar {
   color: #1e87f0;
 }
 
+.tm-html {
+  background: #fff;
+}
+.tm-html .tm-article .aigis-preview > div {
+  padding: 16px;
+  color: #666;
+}
