@@ -3,7 +3,8 @@
 ## Usage
 
 ```
-gulp styleguide
+./_app
+npx gulp styleguide
 ```
 
 edit `stylus`
