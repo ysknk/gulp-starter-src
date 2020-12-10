@@ -28,7 +28,7 @@ export default ((win, doc) => {
         return new Modal(opts_);
       }
 
-      this.baseElem = '#wrapper';
+      this.baseElem = 'body';
 
       this.isFixed = true;
       this.isSetHeight = false;
@@ -43,7 +43,7 @@ export default ((win, doc) => {
         opacity: 0
       };
 
-      this.wrapperElem = '#wrapper';
+      this.wrapperElem = 'body';
       this.alignRightElem = '.js-fixed-right';
 
       this.name = {};
