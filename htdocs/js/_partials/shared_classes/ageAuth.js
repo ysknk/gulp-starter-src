@@ -103,6 +103,7 @@ export default ((win, doc) => {
       node.innerHTML = this.template;
 
       const baseElem = doc.querySelector(this.baseElemSelector);
+      if (!baseElem) return;
       baseElem.appendChild(node);
       baseElem.classList.add(this.openClassName);
 
