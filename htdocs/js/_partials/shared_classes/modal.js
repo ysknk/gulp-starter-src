@@ -382,13 +382,14 @@ export default ((win, doc) => {
      */
     imgLoadEnd(elem, cb) {
       let imgLoad = '';
+
       try {
         imgLoad = imagesLoaded(elem);
       }catch(e) {
         if (console.warn) {
-          console.warn(e);
+          // console.warn(e);
         } else {
-          console.log(e);
+          // console.log(e);
         }
       }
 
