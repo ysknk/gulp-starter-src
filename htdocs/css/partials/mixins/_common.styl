@@ -63,17 +63,19 @@ font_size_responsive($elem = body, $pc = false)
     if !$pc
       if $i == 0
         @media (max-width: unit($wmin, "px"))
-          // {$lsp}
           {$elem}
             font-size unit(round($fsp * $rate), "px")
     @media (min-width: unit(round($diff), "px"))
-      // {$lsp}
-      {$elem}
-        font-size unit(round($fsp * $rate), "px")
+      if $mediaquery_type == "js"
+        {$lsp}
+          {$elem}
+            font-size unit(round($fsp * $rate), "px")
+      else
+        {$elem}
+          font-size unit(round($fsp * $rate), "px")
 
   if !$pc
     @media (min-width: unit($wsp + 1, "px"))
-      // {$lpc}
       {$elem}
         font-size unit($fpc, "px")
 
@@ -82,7 +84,6 @@ font_size_responsive($elem = body, $pc = false)
       $diff = ($wsp + 1) + ($i * (($wpc - ($wsp + 1)) / $font_size_split))
       $rate = $diff / $wpc
       @media (min-width: unit(round($diff), "px"))
-        // {$lsp}
         {$elem}
           font-size unit(round($fpc * $rate), "px")
 
