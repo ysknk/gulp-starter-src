@@ -41,7 +41,7 @@ export default ((win, doc) => {
      * initialize
      */
     initialize() {
-      const html = doc.querySelector('html');
+      const html = doc.documentElement;
 
       // click to scroll
       doc.addEventListener('click', (e) => {
