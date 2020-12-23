@@ -27,6 +27,11 @@ export default ((win, doc) => {
       this.questionStartKey = `1`;
       this.questionCount = 0;
 
+      this.checkedClassName = `is-checked`;
+      this.checkedDelay = 0;
+
+      this.completeClassName = `is-complete`;
+
       this.data = {
         "1": {
           "question": "question?", // question
@@ -87,9 +92,9 @@ export default ((win, doc) => {
      * initialize
      */
     initialize() {
-      this.elem = doc.querySelector(`[${this.dataAttr.content}]`);
+      this.contentElem = doc.querySelector(`[${this.dataAttr.content}]`);
 
-      if (!this.elem) { return; }
+      if (!this.contentElem) { return; }
 
       this.setTemplate(this.getTemplateHTML()
         ? this.getTemplateHTML()
@@ -106,7 +111,8 @@ export default ((win, doc) => {
         ].join(' '));
 
         if (e.target === doc || !elem) return;
-        this.setAnswer(elem);
+
+        this.procedure(elem);
       });
     }
 
@@ -125,7 +131,7 @@ export default ((win, doc) => {
      * @returns {string} html
      */
     getTemplateHTML() {
-      const id = this.elem.getAttribute(this.dataAttr.content);
+      const id = this.contentElem.getAttribute(this.dataAttr.content);
       if (!id) { return ``; }
 
       const templateElem = doc.querySelector(id);
@@ -187,29 +193,65 @@ export default ((win, doc) => {
     }
 
     /**
-     * setAnswer
+     * procedure
      *
      * @param {object} elem
      */
-    setAnswer(elem) {
-      const answerKey = elem.getAttribute(this.dataAttr.answer);
+    procedure(elem) {
+      if (this.contentElem.classList.contains(this.checkedClassName)) { return; }
 
-      const currentData = this.getCurrentData();
-      const answer = currentData.answers[answerKey];
-      answer.key = answerKey;
+      const answerKey = elem.getAttribute(this.dataAttr.answer);
+      const answer = this.formatAnswer(answerKey);
+
+      this.onCheckedBefore(elem, answer);
+      if (answer.result) {
+        this.onCompleteBefore(elem, answer);
+      }
 
       this.results.push({
         count: this.getQuestionCount(),
         data: answer
       });
 
-      if (answer.next) {
-        this.goto(answer.next, answer);
-      }
+      setTimeout(() => {
+        if (answer.next) {
+          this.onChecked(elem, answer);
+          this.onCheckedAfter(elem, answer);
+        }
 
-      if (answer.result) {
-        this.complete(answer.result, answer);
-      }
+        if (answer.result) {
+          this.onComplete(elem, answer);
+          this.onCompleteAfter(elem, answer);
+        }
+      }, this.checkedDelay);
+    }
+
+    /**
+     * setClassName
+     *
+     * @param {string} action add || remove
+     * @param {string} type
+     * @param {object} elem
+     */
+    setClassName(action, type, elem) {
+      this.contentElem.classList[action](this[`${type}ClassName`]);
+      elem.classList[action](this[`${type}ClassName`]);
+    }
+
+    /**
+     * formatAnswer
+     *
+     * @param {string} key
+     * @returns {object}
+     */
+    formatAnswer(key) {
+      const currentData = this.getCurrentData();
+      if (!currentData) { return; }
+
+      const answer = currentData.answers[key];
+      answer.key = key;
+
+      return answer
     }
 
     /**
@@ -227,20 +269,10 @@ export default ((win, doc) => {
 
       data = this.replaceAnswers(data);
 
-      this.elem.innerHTML = this.template({
+      this.contentElem.innerHTML = this.template({
         modal: this,
         data
       });
-    }
-
-    /**
-     * complete
-     *
-     * @param {string} id
-     * @param {object} options
-     */
-    complete(id, options = {}) {
-      location.href = `./result${id}/`;
     }
 
     /**
@@ -276,6 +308,69 @@ export default ((win, doc) => {
     getQuestionCount() {
       return this.questionCount;
     }
+
+    /**
+     * onCheckedBefore
+     *
+     * @param {object} elem
+     * @param {object} options
+     */
+    onCheckedBefore(elem, options = {}) {
+      this.setClassName(`add`, `checked`, elem);
+    }
+
+    /**
+     * onChecked
+     *
+     * @param {object} elem
+     * @param {object} options
+     */
+    onChecked(elem, options = {}) {
+      this.goto(options.next, options);
+    }
+
+    /**
+     * onCheckedAfter
+     *
+     * @param {object} elem
+     * @param {object} options
+     */
+    onCheckedAfter(elem, options = {}) {
+      this.setClassName(`remove`, `checked`, elem);
+    }
+
+    /**
+     * onCompleteBefore
+     *
+     * @param {object} elem
+     * @param {object} options
+     */
+    onCompleteBefore(elem, options = {}) {
+      this.setClassName(`add`, `complete`, elem);
+
+      const htmlElem = doc.documentElement;
+      const complete = this.completeClassName;
+      htmlElem.classList.add(complete);
+      htmlElem.classList.add(`${complete}--${options.result}`);
+    }
+
+    /**
+     * onComplete
+     *
+     * @param {object} elem
+     * @param {object} options
+     */
+    onComplete(elem, options = {}) {
+      location.href = `./result${options.result}/`;
+    }
+
+    /**
+     * onCompleteAfter
+     *
+     * @param {object} elem
+     * @param {object} options
+     */
+    onCompleteAfter(elem, options = {}) {}
 
   };
 
