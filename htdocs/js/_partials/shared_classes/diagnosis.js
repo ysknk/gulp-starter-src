@@ -270,7 +270,7 @@ export default ((win, doc) => {
       data = this.replaceAnswers(data);
 
       this.contentElem.innerHTML = this.template({
-        modal: this,
+        diagnosis: this,
         data
       });
     }
