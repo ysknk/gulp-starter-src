@@ -68,7 +68,7 @@ module.exports = {
       //     }
       //     return fs.readFileSync(filePath);
       //   }
-      // }],      
+      // }],
     }
   },
 
