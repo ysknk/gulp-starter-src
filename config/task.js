@@ -53,7 +53,19 @@ module.exports = {
       // ghostMode: false,
       // server: {
       //   baseDir: define.path.dest
-      // }
+      // },
+      // rewriteRules: [{
+      //   match: /<!--#include virtual="(.+)" -->/g,
+      //   // match: /<\?php include DOCUMENT_ROOT \. "(.+)"; \?>/g,
+      //   fn: function (req, res, match, filename) {
+      //     const filePath = path.resolve(__dirname, `../${define.path.dest}${filename}`);
+      //     console.log(filePath)
+      //     if (!fs.existsSync(filePath)) {
+      //       return `<span style="color: red">${filename} could not be found</span>`;
+      //     }
+      //     return fs.readFileSync(filePath);
+      //   }
+      // }],
     }
   },
 
