@@ -69,7 +69,7 @@ module.exports = {
     // minify_options: {},
     // ex: https://github.com/yaniswang/HTMLHint/wiki/Rules
     // lint_options: {},
-    root_path: `${START_PATH}`//base absolute path
+    root_path: `/`//base absolute path
   },
 
   /* css @stylus */
