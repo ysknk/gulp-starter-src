@@ -77,7 +77,7 @@ export default ((win, doc) => {
      * @param {object} options
      */
     update(elem, data = this.getData(), options) {
-      if (options && options.force) {
+      if (options && options.forced) {
         this.set(elem);
         return;
       }
