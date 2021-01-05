@@ -55,6 +55,7 @@ export function getWindowRect() {
     height,
 
     top,
+    middle: (top + (height / 2)),
     bottom: (top + height)
   };
 }
@@ -80,6 +81,7 @@ export function getElemRect(elem) {
     height,
 
     top,
+    middle: (top + (height / 2)),
     bottom: (top + height)
   };
 }
