@@ -86,7 +86,7 @@ export default ((win, doc) => {
         this.changePoint(currentPoint);
       }
 
-      if (options && options.force) {
+      if (options && options.forced) {
         this.changePoint(currentPoint);
       }
     }
