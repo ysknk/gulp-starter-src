@@ -72,7 +72,7 @@ export default ((win, doc) => {
           `<dl class="diagnosis__content">`,
             `<dt class="diagnosis__question">Q: <%= data.question %></dt>`,
             `<dd class="diagnosis__answers">`,
-              `<% for (const key in data.answers) { %>`,
+              `<% for (var key in data.answers) { %>`,
               `<% var answers = data.answers[key]; %>`,
               `<button data-diagnosis-answer="<%= key %>">`,
                 `<%= key %>: <%= answers.answer %>`,
