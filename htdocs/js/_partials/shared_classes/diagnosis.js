@@ -96,10 +96,8 @@ export default ((win, doc) => {
 
       if (!this.contentElem) { return; }
 
-      this.setTemplate(this.getTemplateHTML()
-        ? this.getTemplateHTML()
-        : this.template
-      );
+      const template = this.getTemplateHTML();
+      this.setTemplate(template || this.template);
 
       this.goto(this.questionStartKey);
 
@@ -122,6 +120,7 @@ export default ((win, doc) => {
      * @param {string} html ejs
      */
     setTemplate(html) {
+      if (!html) { return ``; }
       this.template = _.template(html);
     }
 
