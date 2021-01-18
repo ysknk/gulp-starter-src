@@ -23,7 +23,7 @@ export function parseJSON(txt) {
 /**
  * getOffset
  *
- * @param {object} elem element
+ * @param {object} elem elem
  * @returns {object} position x, y
  */
 export function getOffset(elem) {
@@ -163,7 +163,7 @@ export function hanToZen(str) {
  * @param {string} str
  * @returns {string}
  */
-export function kebabToCamel (str) {
+export function kebabToCamel(str) {
   str = str.charAt(0).toLowerCase() + str.slice(1);
   return str.replace(/[-_](.)/g, function(match, headStr) {
     return headStr.toUpperCase();
@@ -176,7 +176,47 @@ export function kebabToCamel (str) {
  * @param {string} str
  * @returns {string}
  */
-export function isSupportedHistoryAPI () {
+export function isSupportedHistoryAPI() {
   return (window.history && window.history.pushState);
 }
 
+/**
+ * getTranslateValues
+ *
+ * @param {object} elem
+ * @returns {object}
+ */
+export function getTranslateValues(elem) {
+  const style = window.getComputedStyle(elem)
+  const matrix = style['transform'] || style.webkitTransform || style.mozTransform
+
+  // No transform property. Simply return 0 values.
+  if (matrix === 'none') {
+    return { x: 0, y: 0, z: 0 };
+  }
+
+  // Can either be 2d or 3d transform
+  const matrixType = matrix.includes('3d') ? '3d' : '2d'
+  const matrixValues = matrix.match(/matrix.*\((.+)\)/)[1].split(', ')
+
+  // 2d matrices have 6 values
+  // Last 2 values are X and Y.
+  // 2d matrices does not have Z value.
+  if (matrixType === '2d') {
+    return {
+      x: matrixValues[4],
+      y: matrixValues[5],
+      z: 0
+    }
+  }
+
+  // 3d matrices have 16 values
+  // The 13th, 14th, and 15th values are X, Y, and Z
+  if (matrixType === '3d') {
+    return {
+      x: matrixValues[12],
+      y: matrixValues[13],
+      z: matrixValues[14]
+    }
+  }
+}
