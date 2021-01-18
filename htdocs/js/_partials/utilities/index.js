@@ -187,8 +187,8 @@ export function isSupportedHistoryAPI() {
  * @returns {object}
  */
 export function getTranslateValues(elem) {
-  const style = window.getComputedStyle(elem)
-  const matrix = style['transform'] || style.webkitTransform || style.mozTransform
+  const style = window.getComputedStyle(elem);
+  const matrix = style['transform'] || style.webkitTransform || style.mozTransform;
 
   // No transform property. Simply return 0 values.
   if (matrix === 'none') {
@@ -196,8 +196,8 @@ export function getTranslateValues(elem) {
   }
 
   // Can either be 2d or 3d transform
-  const matrixType = matrix.includes('3d') ? '3d' : '2d'
-  const matrixValues = matrix.match(/matrix.*\((.+)\)/)[1].split(', ')
+  const matrixType = matrix.includes('3d') ? '3d' : '2d';
+  const matrixValues = matrix.match(/matrix.*\((.+)\)/)[1].split(', ');
 
   // 2d matrices have 6 values
   // Last 2 values are X and Y.
@@ -207,7 +207,7 @@ export function getTranslateValues(elem) {
       x: matrixValues[4],
       y: matrixValues[5],
       z: 0
-    }
+    };
   }
 
   // 3d matrices have 16 values
@@ -217,6 +217,6 @@ export function getTranslateValues(elem) {
       x: matrixValues[12],
       y: matrixValues[13],
       z: matrixValues[14]
-    }
+    };
   }
 }
