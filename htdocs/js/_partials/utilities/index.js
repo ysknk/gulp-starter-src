@@ -23,7 +23,7 @@ export function parseJSON(txt) {
 /**
  * getOffset
  *
- * @param {object} elem elem
+ * @param {object} elem
  * @returns {object} position x, y
  */
 export function getOffset(elem) {
