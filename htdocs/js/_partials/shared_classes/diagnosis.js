@@ -83,6 +83,8 @@ export default ((win, doc) => {
         `</div>`
       ].join('');
 
+      this.isFixedHistoryBack = true;
+
       _.isObject(opts_) && _.extend(this, opts_);
 
       // this.initialize();
@@ -95,6 +97,13 @@ export default ((win, doc) => {
       this.contentElem = doc.querySelector(`[${this.dataAttr.content}]`);
 
       if (!this.contentElem) { return; }
+
+      // fixed history back
+      if (this.isFixedHistoryBack) {
+        this.fixedHistoryBack();
+      }
+
+      this.initializeClassName(this.contentElem);
 
       const template = this.getTemplateHTML();
       this.setTemplate(template || this.template);
@@ -111,6 +120,18 @@ export default ((win, doc) => {
         if (e.target === doc || !elem) return;
 
         this.procedure(elem);
+      });
+    }
+
+    /**
+     * fixedHistoryBack
+     */
+    fixedHistoryBack() {
+      if (history.replaceState) {
+        history.replaceState(null, doc.title, null);
+      }
+      win.addEventListener('popstate', (e) => {
+        win.location.reload();
       });
     }
 
@@ -223,6 +244,16 @@ export default ((win, doc) => {
           this.onCompleteAfter(elem, answer);
         }
       }, this.checkedDelay);
+    }
+
+    /**
+     * initializeClassName
+     *
+     * @param {object} elem
+     */
+    initializeClassName(elem) {
+      this.setClassName(`remove`, `checked`, elem);
+      this.setClassName(`remove`, `complete`, elem);
     }
 
     /**
