@@ -232,7 +232,6 @@ export default ((win, doc) => {
       });
     }
 
-
     /**
      * getSessionData
      *
