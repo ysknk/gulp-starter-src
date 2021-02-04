@@ -244,6 +244,7 @@ export default ((win, doc) => {
       const data = sessionStorage.getItem(name);
       return (JSON.parse(data) && JSON.parse(data)[name]) || data || '';
     }
+
     /**
      * setSessionData
      *
