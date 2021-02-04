@@ -93,6 +93,8 @@ module.exports = {
 
     // dist: `${ASSETS_PATH}css/`,
 
+    // minify: true,
+
     // autoprefixer_options: {
     //   browsers: ['last 2 versions', '> 2%'],
     // },
@@ -110,6 +112,7 @@ module.exports = {
 
     // dist: `${ASSETS_PATH}js/`,
 
+    // minify: true,
     // ex: https://webpack.js.org/plugins/terser-webpack-plugin/
     // minify_options: {},
 
