@@ -4,7 +4,8 @@ font_face($family_name, $name, $type, $weight, $style)
     font-family $family_name
 
     src url($font_path + $filename + '.eot')
-    src url($font_path + $filename + '.eot?#iefix') format('embedded-opentype'),
+    src local($family_name + ' ' + $type),
+      url($font_path + $filename + '.eot?#iefix') format('embedded-opentype'),
       url($font_path + $filename + '.woff2') format('woff2'),
       url($font_path + $filename + '.woff') format('woff'),
       url($font_path + $filename + '.otf') format('opentype'),
