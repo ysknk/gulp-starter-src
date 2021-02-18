@@ -1,15 +1,14 @@
-font_face($name, $type, $weight, $style)
-  $filedir = '../font/'
+font_face($family_name, $name, $type, $weight, $style)
   $filename = $name + ($type ? '-' + $type : '')
   @font-face
-    font-family $name
+    font-family $family_name
 
-    src url($filedir + $filename + '.eot')
-    src url($filedir + $filename + '.eot?#iefix') format('embedded-opentype'),
-      url($filedir + $filename + '.woff2') format('woff2'),
-      url($filedir + $filename + '.woff') format('woff'),
-      url($filedir + $filename + '.otf') format('opentype'),
-      url($filedir + $filename + '.ttf') format('truetype')
+    src url($font_path + $filename + '.eot')
+    src url($font_path + $filename + '.eot?#iefix') format('embedded-opentype'),
+      url($font_path + $filename + '.woff2') format('woff2'),
+      url($font_path + $filename + '.woff') format('woff'),
+      url($font_path + $filename + '.otf') format('opentype'),
+      url($font_path + $filename + '.ttf') format('truetype')
 
     font-display swap
 
