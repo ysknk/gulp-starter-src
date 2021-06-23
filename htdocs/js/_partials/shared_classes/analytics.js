@@ -43,7 +43,7 @@ export default ((win, doc) => {
       if (!this.isClickEvent) { return; }
       doc.addEventListener('click', (e) => {
         if (!e.target || !e.target.closest) return;
-        let elem = e.target.closest(`${this.baseSelector} [${this.dataAttr}]`);
+        const elem = e.target.closest(`${this.baseSelector} [${this.dataAttr}]`);
         if (e.target === doc || !elem) return;
 
         const data = elem.getAttribute(this.dataAttr);
