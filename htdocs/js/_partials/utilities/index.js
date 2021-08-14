@@ -220,3 +220,18 @@ export function getTranslateValues(elem) {
     };
   }
 }
+
+/**
+ * objectToArray
+ *
+ * @param {object}
+ * @returns {array}
+ */
+export function objectToArray(obj) {
+  return Object.keys(obj).map(function (key) {
+    return {
+      key: key,
+      value: obj[key]
+    }
+  })
+}
