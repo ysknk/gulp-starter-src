@@ -18,6 +18,8 @@ export default ((win, doc) => {
         return new TemplateHTML(opts_);
       }
 
+      this._ = _; // NOTE: lodash
+
       this.data = null; // NOTE: use template
       this.dataAttr = `data-template-html`;
 
