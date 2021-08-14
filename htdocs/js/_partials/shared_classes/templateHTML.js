@@ -33,17 +33,19 @@ export default ((win, doc) => {
      * initialize
      */
     initialize() {
-      this.contentElem = doc.querySelector(`[${this.dataAttr}]`);
+      this.contentElems = doc.querySelectorAll(`[${this.dataAttr}]`);
 
-      if (!this.contentElem) { return; }
+      if (!this.contentElems.length) { return; }
 
-      let template = this.getTemplateHTML();
+      _.forEach(this.contentElems, (elem) => {
+        let template = this.getTemplateHTML(elem);
 
-      if (this.islistRandom) {
-        template = this.shuffle(template);
-      }
+        if (this.islistRandom) {
+          template = this.shuffle(template);
+        }
 
-      this.setTemplate(template);
+        this.setTemplate(elem, template);
+      });
     }
 
     /**
@@ -68,12 +70,13 @@ export default ((win, doc) => {
     /**
      * setTemplate
      *
+     * @param {object} elem
      * @param {string} html ejs
      */
-    setTemplate(html) {
+    setTemplate(elem, html) {
       const template = _.template(html);
       // console.log({ ...this })
-      this.contentElem.innerHTML = template({
+      elem.innerHTML = template({
         ...this
       });
     }
@@ -81,10 +84,11 @@ export default ((win, doc) => {
     /**
      * getTemplateHTML
      *
+     * @param {object} elem
      * @returns {string} html
      */
-    getTemplateHTML() {
-      const id = this.contentElem.getAttribute(this.dataAttr);
+    getTemplateHTML(elem) {
+      const id = elem.getAttribute(this.dataAttr);
       if (!id) { return ``; }
 
       const templateElem = doc.querySelector(id);
