@@ -31,6 +31,7 @@ export default ((win, doc) => {
       };
 
       this.currentClassName = 'is-current';
+      this.minViewPercentage = 5
 
       _.isObject(opts_) && _.extend(this, opts_);
 
@@ -152,10 +153,10 @@ export default ((win, doc) => {
       }
 
       const targetObject = currentNavs[0];
-      // ひとつだけの場合、コンテンツ自体の高さ1/5見えてるかどうか
+      // ひとつだけの場合、コンテンツ自体の高さ1/${this.minViewPercentage}見えてるかどうか
       if (currentNavs.length <= 1 && targetObject) {
         const targetHeight = getWindowRect().height;
-        if ((targetHeight / 5) >= targetObject.visualRange) {
+        if ((targetHeight / this.minViewPercentage) >= targetObject.visualRange) {
           targetObject.elem = null;
         }
       }
