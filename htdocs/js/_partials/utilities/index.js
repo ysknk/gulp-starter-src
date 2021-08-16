@@ -235,3 +235,13 @@ export function objectToArray(obj) {
     }
   })
 }
+
+/**
+ * getObjectLength.
+ *
+ * @param {object} obj
+ * @returns {number}
+ */
+export function getObjectLength(obj) {
+  return Object.keys(obj).length;
+}
