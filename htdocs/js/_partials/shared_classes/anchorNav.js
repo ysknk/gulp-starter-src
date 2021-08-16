@@ -31,7 +31,7 @@ export default ((win, doc) => {
       };
 
       this.currentClassName = 'is-current';
-      this.minViewPercentage = 5
+      this.minViewPercentage = 5;
 
       _.isObject(opts_) && _.extend(this, opts_);
 
