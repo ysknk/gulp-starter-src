@@ -243,5 +243,5 @@ export function objectToArray(obj) {
  * @returns {number}
  */
 export function getObjectLength(obj) {
-  return Object.keys(obj).length;
+  return Object.keys(obj).length - 1;
 }
