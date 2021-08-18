@@ -7,7 +7,7 @@ export default ((win, doc) => {
 
   /**
    * ActionArea.
-   * <div data-action-area='{"top": 0, "bottom": "#footer"}'>hoge</div>
+   * <div data-action-area='{"bottom": "#footer"}'>hoge</div>
    */
   return class ActionArea {
 
