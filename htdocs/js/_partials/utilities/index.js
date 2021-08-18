@@ -237,7 +237,7 @@ export function objectToArray(obj) {
 }
 
 /**
- * getObjectLength.
+ * getObjectLength
  *
  * @param {object} obj
  * @returns {number}
@@ -245,3 +245,32 @@ export function objectToArray(obj) {
 export function getObjectLength(obj) {
   return Object.keys(obj).length - 1;
 }
+
+/**
+ * isNumber
+ *
+ * @param {number} n
+ */
+export function isNumber(n) {
+  if ( typeof(n) === 'number' && Number.isFinite(n) ) {
+    return true;
+  }
+  return false;
+}
+
+/**
+ * isNumberAllowString
+ *
+ * @param {number|string} n
+ */
+export function isNumberAllowString(n) {
+  const type = typeof(n);
+  if ( type === 'number' && Number.isFinite(n) ) {
+    return true;
+  }
+  if ( type === 'string' && n.trim() !== '' && Number.isFinite(n - 0) ) {
+    return true;
+  }
+  return false;
+}
+
