@@ -23,7 +23,7 @@ export default ((win, doc) => {
 
       this.dataAttr = `data-action-area`;
       this.options = {
-        top: 0,
+        // top: 0,
         bottom: 0
       };
       this.actionClassName = `is-action`;
@@ -61,6 +61,9 @@ export default ((win, doc) => {
       const bottom = windowRect.bottom;
 
       const attr = elem.getAttribute(this.dataAttr)
+
+      let conditions = null;
+
       let data = parseJSON(attr);
       data = _.merge({}, this.options, data);
 
@@ -69,11 +72,37 @@ export default ((win, doc) => {
         bottom: this.getValue(data.bottom)
       };
 
-      if (top >= data.top && bottom <= data.bottom) {
-        elem.classList.add(this.actionClassName);
+      if (isNaN(data.top - 0)) {
+        conditions = bottom <= data.bottom
+      } else if (isNaN(data.bottom - 0)) {
+        conditions = top >= data.top
       } else {
-        elem.classList.remove(this.actionClassName);
+        conditions = top >= data.top && bottom <= data.bottom
       }
+
+      if (conditions) {
+        this.onIn(elem);
+      } else {
+        this.onOut(elem);
+      }
+    }
+
+    /**
+     * onIn.
+     *
+     * @param {object} elem
+     */
+    onIn(elem) {
+      elem.classList.add(this.actionClassName);
+    }
+
+    /**
+     * onOut.
+     *
+     * @param {object} elem
+     */
+    onOut(elem) {
+      elem.classList.remove(this.actionClassName);
     }
 
     /**
@@ -87,7 +116,7 @@ export default ((win, doc) => {
         ? val
         : (() => {
           const elem = doc.querySelector(val);
-          return elem ? getElemRect(elem)[pos] : 0;
+          return elem ? getElemRect(elem)[pos] : undefined;
         })()
     }
   };
