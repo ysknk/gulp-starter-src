@@ -274,3 +274,16 @@ export function isNumberAllowString(n) {
   return false;
 }
 
+/**
+ * arraySlice
+ *
+ * @param {array} array
+ * @param {number} num
+ * @returns {array}
+*/
+export function arraySlice (array, num) {
+  const length = Math.ceil(array.length / num)
+  return new Array(length).fill().map((_, i) => {
+    return array.slice(i * num, (i + 1) * num)
+  })
+}
