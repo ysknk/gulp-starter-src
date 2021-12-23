@@ -144,6 +144,7 @@ export default ((win, doc) => {
     goto(elem, setHistory, cb) {
       const baseElem = doc.querySelector(this.baseElem);
       const elemPos = getOffset(elem);
+      const targetPosY = (elemPos.y - this.diffOffsetY);
       const scrollPos = {
         y: win.pageYOffset,
         x: win.pageXOffset
@@ -157,7 +158,6 @@ export default ((win, doc) => {
 
       _.isFunction(this.onBeforeScroll) && this.onBeforeScroll(this);
 
-      const targetPosY = (elemPos.y - this.diffOffsetY)
       if (scrollPos.y === targetPosY) {
         callback();
         return;
