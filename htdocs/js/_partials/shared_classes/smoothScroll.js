@@ -157,7 +157,8 @@ export default ((win, doc) => {
 
       _.isFunction(this.onBeforeScroll) && this.onBeforeScroll(this);
 
-      if (scrollPos.y === (elemPos.y - this.diffOffsetY)) {
+      const targetPosY = (elemPos.y - this.diffOffsetY)
+      if (scrollPos.y === targetPosY) {
         callback();
         return;
       }
@@ -166,7 +167,7 @@ export default ((win, doc) => {
 
       FN.anime({
         targets: scrollPos,
-        y: elemPos.y - this.diffOffsetY,
+        y: targetPosY,
         duration: this.duration,
         easing: this.easing,
         update: () => win.scroll(scrollPos.x, scrollPos.y),
