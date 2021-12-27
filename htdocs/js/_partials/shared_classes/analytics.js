@@ -25,6 +25,8 @@ export default ((win, doc) => {
         // eventLabel: ''
       };
 
+      win.dataLayer = win.dataLayer || [];
+
       this.baseSelector = 'body';
       this.dataAttr = 'data-analytics';
       this.isClickEvent = true;
@@ -60,13 +62,12 @@ export default ((win, doc) => {
      */
     sendEvent(obj) {
       obj = _.extend(this.trackEventDefault, obj);
-      const dataLayer = window.dataLayer || [];
       const data = obj;
       if (this.debug) {
         console.log(data);
         return false;
       }
-      return dataLayer.push(data);
+      return win.dataLayer.push(data);
     }
 
   };
