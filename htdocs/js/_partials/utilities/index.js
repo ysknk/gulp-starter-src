@@ -262,6 +262,7 @@ export function getObjectLength(obj) {
  * isNumber
  *
  * @param {number} n
+ * @returns {boolean}
  */
 export function isNumber(n) {
   if ( typeof(n) === 'number' && Number.isFinite(n) ) {
@@ -274,6 +275,7 @@ export function isNumber(n) {
  * isNumberAllowString
  *
  * @param {number|string} n
+ * @returns {boolean}
  */
 export function isNumberAllowString(n) {
   const type = typeof(n);
