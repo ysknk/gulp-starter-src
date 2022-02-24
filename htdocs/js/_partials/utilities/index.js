@@ -237,6 +237,18 @@ export function objectToArray(obj) {
 }
 
 /**
+ * getInnerText
+ *
+ * @param {string}
+ * @returns {string}
+ */
+export const getInnerText = (text) => {
+  const div = document.createElement('div')
+  div.innerHTML = text
+  return div.innerText
+}
+
+/**
  * getObjectLength
  *
  * @param {object} obj
