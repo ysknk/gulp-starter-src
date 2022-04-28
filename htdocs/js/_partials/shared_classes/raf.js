@@ -118,11 +118,13 @@ export default ((win, doc) => {
       const key = obj.key || this.animationKeyDefault;
 
       this.animationFrame[key] = false;
+      let i = 0;
       const proc = (elem, obj) => {
         const nowTime =  new Date().getTime();
         const time = nowTime - obj.startTime;
 
         let value = this.getOnTimeValue(time, obj);
+        if (i > 0 && !this.animationFrame[key]) { return }
 
         const callback = () => {
           win.requestAnimationFrame(() => {
@@ -146,6 +148,7 @@ export default ((win, doc) => {
 
         obj.step && obj.step(elem, obj, value);
         this.animationFrame[key] = win.requestAnimationFrame(proc.bind(this, elem, obj));
+        i++;
         return value;
       };
 
