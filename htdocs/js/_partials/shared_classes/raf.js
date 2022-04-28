@@ -119,8 +119,8 @@ export default ((win, doc) => {
 
       this.animationFrame[key] = false;
       const proc = (elem, obj) => {
-        let nowTime =  new Date().getTime();
-        let time = nowTime - obj.startTime;
+        const nowTime =  new Date().getTime();
+        const time = nowTime - obj.startTime;
 
         let value = this.getOnTimeValue(time, obj);
 
@@ -170,7 +170,7 @@ export default ((win, doc) => {
      * @param {object} obj start, end, duration, ease
      */
     getOnTimeValue(time, obj) {
-      let t = time;
+      const t = time;
       const b = obj.start;
       const c = obj.end - obj.start;
       const d = obj.duration
