@@ -125,8 +125,10 @@ export default ((win, doc) => {
         let value = this.getOnTimeValue(time, obj);
 
         const callback = () => {
-          obj.step && obj.step(elem, obj, value);
-          obj.complete && obj.complete(elem, obj, value);
+          win.requestAnimationFrame(() => {
+            obj.step && obj.step(elem, obj, value);
+            obj.complete && obj.complete(elem, obj, value);
+          });
           win.cancelAnimationFrame(this.animationFrame[key]);
         };
 
