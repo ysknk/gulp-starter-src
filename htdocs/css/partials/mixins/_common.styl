@@ -219,7 +219,7 @@ link_style($color, $decoration, $hover_color, $hover_decoration)
     color $color
     text-decoration $decoration
 
-rollover($type = 'opacity', $def = .7)
+rollover($type = 'opacity', $def = .6)
   if $type == 'opacity'
     transition opacity $trd $tre
     img
@@ -251,20 +251,7 @@ rollover($type = 'opacity', $def = .7)
     &.disabled,
     &:disabled
       cursor default
-      text-decoration none
-
-  // else if $type == 'background1'
-  //   transition background-color $trd $tre
-  //   text-decoration none
-  //   &:link,
-  //   &:visited,
-  //   &:active,
-  //   &:focus
-  //   &:hover
-  //     text-decoration none
-  //   {$dumouse} &
-  //     &:hover
-  //       background-color #fff
+      text-decoration none !important
 
   else if $type == 'none'
     text-decoration underline
@@ -279,7 +266,7 @@ rollover($type = 'opacity', $def = .7)
     &.disabled,
     &:disabled
       cursor default
-      text-decoration underline
+      text-decoration underline !important
 
   else if $type == 'false'
     text-decoration none
@@ -295,6 +282,7 @@ rollover($type = 'opacity', $def = .7)
     &.disabled,
     &:disabled
       cursor default
+      text-decoration none !important
       text-decoration none
 
 placeholder()
