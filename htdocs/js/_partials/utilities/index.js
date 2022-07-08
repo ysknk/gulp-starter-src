@@ -293,11 +293,42 @@ export function isNumberAllowString(n) {
  *
  * @param {array} array
  * @param {number} num
- * @returns {array}
-*/
+ * @returns {array}*/
 export function arraySlice (array, num) {
-  const length = Math.ceil(array.length / num)
+  const length = Math.ceil(array.length / num);
   return new Array(length).fill().map((_, i) => {
     return array.slice(i * num, (i + 1) * num)
   })
+}
+
+/**
+ * throttle
+ *
+ * @param {function} func
+ * @param {number} interval
+ * @returns {function}
+*/
+export function throttle (func, interval) {
+  let lastTime = Date.now() - interval;
+  return () => {
+    if ((lastTime + interval) < Date.now()) {
+      lastTime = Date.now();
+      func();
+    }
+  }
+}
+
+/**
+ * debounce
+ *
+ * @param {function} func
+ * @param {number} interval
+ * @returns {function}
+*/
+export function debounce (func, interval) {
+  let timer;
+  return () => {
+    clearTimeout(timer);
+    timer = setTimeout(func, interval);
+  }
 }
