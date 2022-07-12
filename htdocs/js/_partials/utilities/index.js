@@ -1,4 +1,14 @@
 /**
+ * sleep
+ *
+ * @param {number} ms
+ * @returns {promise}
+ */
+export const sleep = (ms) => {
+  return new Promise((resolve) => { return setTimeout(resolve, ms)})
+}
+
+/**
  * parseJSON
  *
  * @param {string} txt
