@@ -81,6 +81,7 @@ export default ((win, doc) => {
       const containerSelector = this.elem.getAttribute(this.dataAttr);
       this.containerElem = doc.querySelector(containerSelector);
       this.containerElem.style.overflow = 'visible';
+      this.containerElem.style.willChange = 'transform'
     }
 
     initializeBody () {
@@ -124,7 +125,8 @@ export default ((win, doc) => {
       this.cancelAnimationFrame();
       this.translateY = 0;
       this.scrollY = 0;
-      this.containerElem.style.transform = `translate3d(0, 0px, 0)`;
+      this.containerElem.style.transform = `translate3d(0, 0, 0)`
+      this.containerElem.style.willChange = `auto`
     }
 
     cancelAnimationFrame () {
