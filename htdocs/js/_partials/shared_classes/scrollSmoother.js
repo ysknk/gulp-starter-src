@@ -1,4 +1,4 @@
-import { throttle, debounce } from '../utilities/'
+import { throttle, debounce, getOffset } from '../utilities/'
 
 export default ((win, doc) => {
   'use strict';
@@ -57,9 +57,9 @@ export default ((win, doc) => {
 
       win.requestAnimationFrame(() => {
         if (doc.scrollingElement) {
-          doc.scrollingElement.scrollTop = elem.offsetTop;
+          doc.scrollingElement.scrollTop = getOffset(elem).y;
         } else {
-          doc.body.scrollTop = elem.offsetTop;
+          doc.body.scrollTop = getOffset(elem).y;
         }
       })
     }
