@@ -9,6 +9,24 @@ export const sleep = (ms) => {
 }
 
 /**
+ * isTouch
+ *
+ * @returns {boolean}
+ */
+export const isTouch = () => {
+  if (navigator.msPointerEnabled) {
+    return true
+  } else {
+    if ('ontouchstart' in window) {
+      return true
+    }
+    if ('onmousedown' in window) {
+      return false
+    }
+  }
+}
+
+/**
  * parseJSON
  *
  * @param {string} txt
