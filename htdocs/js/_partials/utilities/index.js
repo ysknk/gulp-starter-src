@@ -277,6 +277,17 @@ export const getInnerText = (text) => {
 }
 
 /**
+ * getByteLength
+ *
+ * @param {string}
+ * @returns {number}
+ */
+export const getByteLength = (text) => {
+  const encode = new Blob([text]);
+  return encode.size;
+}
+
+/**
  * getObjectLength
  *
  * @param {object} obj
@@ -293,7 +304,7 @@ export function getObjectLength(obj) {
  * @returns {boolean}
  */
 export function isNumber(n) {
-  if ( typeof(n) === 'number' && Number.isFinite(n) ) {
+  if (typeof(n) === 'number' && Number.isFinite(n)) {
     return true;
   }
   return false;
@@ -360,3 +371,4 @@ export function debounce (func, interval) {
     timer = setTimeout(func, interval);
   }
 }
+
