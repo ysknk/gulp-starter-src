@@ -47,7 +47,7 @@ export default ((win, doc) => {
         "2": {
           "question": "question2?",
           "answers": {
-            "type": "contat", // increment or contat[default]
+            "type": "concat", // increment or concat[default]
             "branches": { // It depends on the result
               "A": {
                 "A": { "answer": "answer2-1-1", "result": "1" },
