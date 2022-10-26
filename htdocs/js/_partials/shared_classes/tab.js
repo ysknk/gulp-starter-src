@@ -7,6 +7,21 @@ export default ((win, doc) => {
 
   /**
    * Tab
+   *
+   * <div class="c-tab">
+   *   <nav class="c-tab__navigation">
+   *     <ul>
+   *       <li><a class="is-active" href="javascript:void(0)" data-tab="{&quot;btn&quot;:&quot;.c-tab li a&quot;,&quot;group&quot;:&quot;.c-tab .c-tab__group > div&quot;,&quot;category&quot;:&quot;.content1&quot;}">nav1</a></li>
+   *       <li><a href="javascript:void(0)" data-tab="{&quot;btn&quot;:&quot;.c-tab li a&quot;,&quot;group&quot;:&quot;.c-tab .c-tab__group > div&quot;,&quot;category&quot;:&quot;.content2&quot;}">nav2</a></li>
+   *       <li><a href="javascript:void(0)" data-tab="{&quot;btn&quot;:&quot;.c-tab li a&quot;,&quot;group&quot;:&quot;.c-tab .c-tab__group > div&quot;,&quot;category&quot;:&quot;.content3&quot;}">nav3</a></li>
+   *     </ul>
+   *   </nav>
+   *   <div class="c-tab__group">
+   *     <div class="content1">content1</div>
+   *     <div class="content2">content2</div>
+   *     <div class="content3">content3</div>
+   *   </div>
+   * </div>
    */
   return class Tab {
 
