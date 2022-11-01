@@ -28,6 +28,8 @@ export default ((win, doc) => {
         background: `data-lazy-background`
       };
 
+      this.excludeLazySelector = '.js-exclude-lazy'
+      
       this.setClassName = 'set-src';
       this.threshold = -.5;// (-1.0) ~ 1.0
 
@@ -82,6 +84,9 @@ export default ((win, doc) => {
         return;
       }
       if (!data) { return; }
+      if (elem.closest(this.excludeLazySelector)) {
+        return;
+      }
       if (elem.classList.contains(this.setClassName)) { return; }
       if (!this.isConditions(elem)) { return; }
 
