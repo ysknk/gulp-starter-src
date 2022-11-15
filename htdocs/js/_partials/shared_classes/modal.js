@@ -171,7 +171,7 @@ export default ((win, doc) => {
           this.update();
         }
 
-        let content = doc.getElementById(this.name.content);
+        const content = doc.getElementById(this.name.content);
         content.innerHTML = html({
           modal: this,
           data: parseData
