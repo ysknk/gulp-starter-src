@@ -293,7 +293,7 @@ export const getByteLength = (text) => {
  * @param {object} obj
  * @returns {number}
  */
-export function getObjectLength(obj) {
+export const getObjectLength = (obj) => {
   return Object.keys(obj).length - 1;
 }
 
@@ -303,7 +303,7 @@ export function getObjectLength(obj) {
  * @param {number} n
  * @returns {boolean}
  */
-export function isNumber(n) {
+export const isNumber = (n) => {
   if (typeof(n) === 'number' && Number.isFinite(n)) {
     return true;
   }
@@ -316,7 +316,7 @@ export function isNumber(n) {
  * @param {number|string} n
  * @returns {boolean}
  */
-export function isNumberAllowString(n) {
+export const isNumberAllowString = (n) => {
   const type = typeof(n);
   if ( type === 'number' && Number.isFinite(n) ) {
     return true;
@@ -334,7 +334,7 @@ export function isNumberAllowString(n) {
  * @param {number} num
  * @returns {array}
  */
-export function arraySlice (array, num) {
+export const arraySlice = (array, num) => {
   const length = Math.ceil(array.length / num);
   return new Array(length).fill().map((_, i) => {
     return array.slice(i * num, (i + 1) * num)
@@ -365,9 +365,11 @@ export const openURL = (url, name='_blank', width=650, height=470) => {
   ].join(',')
 
   if (name.match(/_self/i)) {
-    location.href = url
+    location.href = url;
+  } else if (name.match(/replace/i)) {
+    location.replace(url);
   } else {
-    window.open(url, name, options)
+    window.open(url, name, options);
   }
 }
 
@@ -378,7 +380,7 @@ export const openURL = (url, name='_blank', width=650, height=470) => {
  * @param {number} interval
  * @returns {function}
 */
-export function throttle (func, interval) {
+export const throttle = (func, interval) => {
   let lastTime = Date.now() - interval;
   return () => {
     if ((lastTime + interval) < Date.now()) {
@@ -395,7 +397,7 @@ export function throttle (func, interval) {
  * @param {number} interval
  * @returns {function}
 */
-export function debounce (func, interval) {
+export const debounce = (func, interval) => {
   let timer;
   return () => {
     clearTimeout(timer);
