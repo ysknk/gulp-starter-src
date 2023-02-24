@@ -332,12 +332,43 @@ export function isNumberAllowString(n) {
  *
  * @param {array} array
  * @param {number} num
- * @returns {array}*/
+ * @returns {array}
+ */
 export function arraySlice (array, num) {
   const length = Math.ceil(array.length / num);
   return new Array(length).fill().map((_, i) => {
     return array.slice(i * num, (i + 1) * num)
   })
+}
+
+/**
+ * openURL
+ *
+ * @param {string} url
+ * @param {string} name
+ * @param {number} width
+ * @param {number} height
+ */
+export const openURL = (url, name='_blank', width=650, height=470) => {
+  const left = Number((window.screen.width - width) / 2);
+  const top = Number((window.screen.height - height) / 2);
+
+  const options = [
+    `width=${width}`,
+    `height=${height}`,
+    'personalbar=0',
+    'toolbar=0',
+    'scrollbars=1',
+    'sizable=1',
+    `left=${left}`,
+    `top=${top}`
+  ].join(',')
+
+  if (name.match(/_self/i)) {
+    location.href = url
+  } else {
+    window.open(url, name, options)
+  }
 }
 
 /**
