@@ -349,7 +349,7 @@ export const arraySlice = (array, num) => {
  * @param {number} width
  * @param {number} height
  */
-export const openURL = (url, name='_blank', width=650, height=470) => {
+export const openWindow = (url, name='_blank', width=650, height=470) => {
   const left = Number((window.screen.width - width) / 2);
   const top = Number((window.screen.height - height) / 2);
 
@@ -362,16 +362,11 @@ export const openURL = (url, name='_blank', width=650, height=470) => {
     'sizable=1',
     `left=${left}`,
     `top=${top}`
-  ].join(',')
+  ].join(',');
 
-  if (name.match(/_self/i)) {
-    location.href = url;
-  } else if (name.match(/replace/i)) {
-    location.replace(url);
-  } else {
-    window.open(url, name, options);
-  }
+  window.open(url, name, options);
 }
+
 
 /**
  * throttle
