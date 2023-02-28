@@ -342,12 +342,13 @@ export const arraySlice = (array, num) => {
 }
 
 /**
- * openURL
+ * openWindow
  *
  * @param {string} url
  * @param {string} name
  * @param {number} width
  * @param {number} height
+ * @returns {window}
  */
 export const openWindow = (url, name='_blank', width=650, height=470) => {
   const left = Number((window.screen.width - width) / 2);
@@ -364,7 +365,7 @@ export const openWindow = (url, name='_blank', width=650, height=470) => {
     `top=${top}`
   ].join(',');
 
-  window.open(url, name, options);
+  return window.open(url, name, options);
 }
 
 
