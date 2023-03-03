@@ -32,7 +32,7 @@ export const isTouch = () => {
  * @param {string} txt
  * @returns {object}
  */
-export function parseJSON(txt) {
+export const parseJSON = (txt) => {
   let result = null;
   if (!txt) { return result; }
 
@@ -54,7 +54,7 @@ export function parseJSON(txt) {
  * @param {object} elem
  * @returns {object} position x, y
  */
-export function getOffset(elem) {
+export const getOffset = (elem) => {
   const pos = {
     x: 0,
     y: 0
@@ -73,7 +73,7 @@ export function getOffset(elem) {
  *
  * @returns {object}
  */
-export function getWindowRect() {
+export const getWindowRect = () => {
   const width = window.innerWidth;
   const height = window.innerHeight;
   const top = window.pageYOffset;
@@ -94,7 +94,7 @@ export function getWindowRect() {
  * @param {object} elem target
  * @returns {object}
  */
-export function getElemRect(elem) {
+export const getElemRect = (elem) => {
   const rect = elem.getBoundingClientRect();
 
   const width = rect.width;
@@ -121,7 +121,7 @@ export function getElemRect(elem) {
  * @param {string} url default location.href
  * @returns {string} value
  */
-export function getURLQuery(param, url = location.href) {
+export const getURLQuery = (param, url = location.href) => {
   if (!param) return;
   param = param.replace(/[\[\]]/g, '\\$&');
 
@@ -141,7 +141,7 @@ export function getURLQuery(param, url = location.href) {
  * @param {number} digit
  * @returns {string}
  */
-export function zeroPadding(num, digit = 2) {
+export const zeroPadding = (num, digit = 2) => {
   return (Array(digit).join('0') + num).slice(-digit);
 }
 
@@ -151,7 +151,7 @@ export function zeroPadding(num, digit = 2) {
  * @param {string} str
  * @returns {string}
  */
-export function zenToHan(str) {
+export const zenToHan = (str) => {
   const replaceStr = (input) =>  {
     return input.replace(/[！-～]/g, (input) => {
       return String.fromCharCode(input.charCodeAt(0) - 0xFEE0);
@@ -171,7 +171,7 @@ export function zenToHan(str) {
  * @param {string} str
  * @returns {string}
  */
-export function hanToZen(str) {
+export const hanToZen = (str) => {
   const replaceStr = (input) =>  {
     return input.replace(/[!-~]/g, (input) => {
       return String.fromCharCode(input.charCodeAt(0) + 0xFEE0);
@@ -191,7 +191,7 @@ export function hanToZen(str) {
  * @param {string} str
  * @returns {string}
  */
-export function kebabToCamel(str) {
+export const kebabToCamel = (str) => {
   str = str.charAt(0).toLowerCase() + str.slice(1);
   return str.replace(/[-_](.)/g, function(match, headStr) {
     return headStr.toUpperCase();
@@ -204,7 +204,7 @@ export function kebabToCamel(str) {
  * @param {string} str
  * @returns {string}
  */
-export function isSupportedHistoryAPI() {
+export const isSupportedHistoryAPI = () => {
   return (window.history && window.history.pushState);
 }
 
@@ -214,7 +214,7 @@ export function isSupportedHistoryAPI() {
  * @param {object} elem
  * @returns {object}
  */
-export function getTranslateValues(elem) {
+export const getTranslateValues = (elem) => {
   const style = window.getComputedStyle(elem);
   const matrix = style['transform'] || style.webkitTransform || style.mozTransform;
 
@@ -255,7 +255,7 @@ export function getTranslateValues(elem) {
  * @param {object}
  * @returns {array}
  */
-export function objectToArray(obj) {
+export const objectToArray = (obj) => {
   return Object.keys(obj).map(function (key) {
     return {
       key: key,
