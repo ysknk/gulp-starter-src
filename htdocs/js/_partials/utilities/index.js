@@ -405,7 +405,7 @@ export const debounce = (func, interval) => {
  * filter
  *
  * @param {array} array
- * @param {predicate} function
+ * @param {function} predicate
  * @returns {array}
 */
 export const filter = (array, predicate) => {
@@ -423,3 +423,15 @@ export const filter = (array, predicate) => {
   return result
 }
 
+/**
+ * getRandomInt
+ *
+ * @param {number} min
+ * @param {number} max
+ * @returns {number}
+*/
+export const getRandomInt = (min, max) => {
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min) + min)
+}
