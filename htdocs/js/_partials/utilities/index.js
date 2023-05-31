@@ -122,14 +122,14 @@ export const getElemRect = (elem) => {
  * @returns {string} value
  */
 export const getURLQuery = (param, url = location.href) => {
-  if (!param) return;
+  if (!param || !url) { return ''; }
   param = param.replace(/[\[\]]/g, '\\$&');
 
   const regex = new RegExp('[?&]' + param + '(=([^&#]*)|&|#|$)');
   const results = regex.exec(url);
 
-  if (!results) return null;
-  if (!results[2]) return '';
+  if (!results) { return null; } 
+  if (!results[2]) { return ''; }
 
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
