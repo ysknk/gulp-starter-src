@@ -63,6 +63,49 @@ mixin title(en, ja, h="h2")
       if ja
         span(class=`${c}title__ja`)!= ja
 
+mixin link(href, target=false)
+  a(
+    class=`${c}link`
+    href=href
+    target=target
+    rel=target && target !== self ? 'noopener' : false
+  )&attributes(attributes)
+    block
+
+mixin image(src, alt="", width=false, height=false, isLazy=true)
+  img(
+    class=`${c}image`
+    src=src
+    alt=alt
+    width=width
+    height=height
+    loading=`${isLazy ? "lazy" : "eager"}`
+  )&attributes(attributes)
+
+mixin intersection(name, tag="div")
+  - var data = JSON.stringify({ "action": `intersection-${name}` })
+  #{tag}(class=`${c}intersection ${c}intersection--${name}` data-intersection=data)&attributes(attributes)
+    block
+
+mixin icon(type)
+  span(class=`${c}icon ${c}icon--${type}`)&attributes(attributes)
+
+mixin button(href, target)
+  if href
+    a(
+      class=`${c}button`
+      href=href
+      target=target
+    )&attributes(attributes)
+      span.c-button__inner
+        span.c-button__label
+          block
+        //- +icon('navigate-next').c-button__icon
+  else
+    button(class=`${c}button`)&attributes(attributes)
+      span.c-button__inner
+        block
+
 //- sns
 //- ex) +set_sns(['twitter', 'facebook', 'line'])
 mixin set_sns(btn, txt=title, url=og.url)
