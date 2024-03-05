@@ -14,20 +14,6 @@ mixin inline(tag, name, attr)
     block
   </#{tag}>
 
-//- require width, height
-mixin lazy_image(src, alt=``, width, height, options)
-  img(src=`${spacer}` data-lazy-image=`${src}` alt!=alt width=`${width}` height=`${height}`)&attributes(attributes)
-
-//- responsive img
-//- ex) +img_device_src('/common/', 'hoge')
-mixin img_device_src(path, alt)
-  img(src=`${img_path}pc/${path}` data-pc-src=`${assets_path}img/pc/${path}` data-sp-src=`${img_path}sp/${path}` alt!=alt)&attributes(attributes)
-
-//- img
-//- ex) +img_src('/common/', 'hoge')
-mixin img_src(path, alt)
-  img(src=`${img_path}${path}` alt!=alt)&attributes(attributes)
-
 //- section
 //- ex) +section('hoge'): +set('content')
 mixin section(name, tag="section", indent="          ")
@@ -81,6 +67,29 @@ mixin image(src, alt="", width=false, height=false, isLazy=true)
     height=height
     loading=`${isLazy ? "lazy" : "eager"}`
   )&attributes(attributes)
+
+mixin picture(pcsrc, pcwidth, pcheight, spsrc, spwidth, spheight, alt, isLazy=true)
+  - var $breakpoint = 750
+  picture(class=`${c}image`)
+    source(
+      media=`(min-width: ${$breakpoint + 1}px)`
+      srcset=pcsrc
+      width=pcwidth
+      height=pcheight
+    )
+    source(
+      media=`(max-width: ${$breakpoint}px)`
+      srcset=spsrc
+      width=spwidth
+      height=spheight
+    )
+    img(
+      srcset=pcsrc
+      width=pcwidth
+      height=pcheight
+      alt=alt
+      loading=`${isLazy ? "lazy" : "eager"}`
+    )
 
 mixin intersection(name, tag="div")
   - var data = JSON.stringify({ "action": `intersection-${name}` })
