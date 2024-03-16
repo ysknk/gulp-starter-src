@@ -378,10 +378,10 @@ export const openWindow = (url, name='_blank', width=650, height=470) => {
 */
 export const throttle = (func, interval) => {
   let lastTime = Date.now() - interval;
-  return () => {
+  return (...args) => {
     if ((lastTime + interval) < Date.now()) {
       lastTime = Date.now();
-      func();
+      func(...args);
     }
   }
 }
@@ -395,9 +395,11 @@ export const throttle = (func, interval) => {
 */
 export const debounce = (func, interval) => {
   let timer;
-  return () => {
+  return  (...args) => {
     clearTimeout(timer);
-    timer = setTimeout(func, interval);
+    timer = window.setTimeout(() => {
+      func(...args);
+    }, interval);
   }
 }
 
