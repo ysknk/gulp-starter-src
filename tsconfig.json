@@ -2,7 +2,10 @@
   "include": ["./htdocs/**/*"],
   "exclude": ["node_modules"],
   "compilerOptions": {
+    "target": "es5",
     "baseUrl": "./node_modules",
-    "typeRoots": ["./node_modules/@types"]
+    "typeRoots": ["./node_modules/@types"],
+    "lib": ["es6", "DOM", "DOM.Iterable"],
+    "esModuleInterop": true,
   }
 }
