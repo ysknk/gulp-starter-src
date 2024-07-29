@@ -57,6 +57,29 @@ module.exports = {
       // ghostMode: false,
       // server: {
       //   baseDir: define.path.dest
+        // NOTE: TEST API
+        // middleware: [
+        //   {
+        //     route: "/api",
+        //     handle: function (req, res, next) {
+        //       const reqPath = req.url.slice(1)
+        //       const result = {
+        //         status_code: 404
+        //       }
+        //       switch (reqPath) {
+        //         case '': {
+        //           break
+        //         }
+        //         default: {
+        //           break
+        //         }
+        //       }
+        //       res.setHeader('Content-Type', 'application/json; charset=utf-8')
+        //       res.end(JSON.stringify(result))
+        //       next()
+        //     }
+        //   }
+        // ]
       // },
       // rewriteRules: [{
       //   match: /<!--#include virtual="(.+)" -->/g,
