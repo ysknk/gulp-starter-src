@@ -65,23 +65,23 @@ module.exports = {
         //       const reqPath = req.url.slice(1)
         //       // NOTE: get POST body
         //       req.on('data', function(chunk) {
-        //         console.log("Received body data:");
-        //         console.log(chunk.toString());
+        //         const jsonstr = chunk.toString()
+        //         const body = JSON.parse(jsonstr)
+        //         let result = {
+        //           status_code: 404
+        //         }
+        //         switch (reqPath) {
+        //           case '': {
+        //             break
+        //           }
+        //           default: {
+        //             break
+        //           }
+        //         }
+        //         res.setHeader('Content-Type', 'application/json; charset=utf-8')
+        //         res.end(JSON.stringify(result))
+        //         next()
         //       })
-        //       let result = {
-        //         status_code: 404
-        //       }
-        //       switch (reqPath) {
-        //         case '': {
-        //           break
-        //         }
-        //         default: {
-        //           break
-        //         }
-        //       }
-        //       res.setHeader('Content-Type', 'application/json; charset=utf-8')
-        //       res.end(JSON.stringify(result))
-        //       next()
         //     }
         //   }
         // ]
