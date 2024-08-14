@@ -63,7 +63,9 @@ module.exports = {
         //     route: "/api",
         //     handle: function (req, res, next) {
         //       const reqPath = req.url.slice(1)
-        //       // if (req.method.match(/get/i)) {}
+        //       // if (req.method.match(/get/i)) {
+        //       // } else {
+        //       // }
         //       let result = {
         //         status_code: 404
         //       }
