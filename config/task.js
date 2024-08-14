@@ -63,13 +63,16 @@ module.exports = {
         //     route: "/api",
         //     handle: function (req, res, next) {
         //       const reqPath = req.url.slice(1)
+        //       // if (req.method.match(/get/i)) {}
+        //       let result = {
+        //         status_code: 404
+        //       }
+
         //       // NOTE: get POST body
         //       req.on('data', function(chunk) {
         //         const jsonstr = chunk.toString()
         //         const body = JSON.parse(jsonstr)
-        //         let result = {
-        //           status_code: 404
-        //         }
+
         //         switch (reqPath) {
         //           case '': {
         //             break
