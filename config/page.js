@@ -1,3 +1,6 @@
+import data from './data/index.js'
+// delete require.cache[require.resolve('./data')]
+
 const site_name = ``;
 const separator = ` | `;
 const title = `common title`;
@@ -27,6 +30,7 @@ const head = {
   // content_security_policy: "default-src 'self'; img-src https://*; child-src 'none';",
   x_ua_compatible: 'IE=edge',
   // robots: 'noindex,nofollow',
+
   format_detection: 'telephone=no',
   viewport: 'width=device-width,initial-scale=1,shrink-to-fit=no', // or -> width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no
 
@@ -55,8 +59,10 @@ const prefix_layout = 'l-';
 const prefix_component = 'c-';
 const prefix_site = prefix_component;
 
-module.exports = {
+export default {
   ...head,
+
+  data,
 
   p: {
     s: prefix_site,
@@ -72,7 +78,7 @@ module.exports = {
     title: 'top title',
     description: 'top description',
     keywords: 'top keywords',
-    // js: [...head.js, 'pages/top.js'],
+    js: [...head.js, 'pages/top.js'],
     // og: Object.assign({}, head.og, {
     //   type: `website`,
     //   title: 'top title',

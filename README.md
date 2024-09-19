@@ -9,6 +9,18 @@ cd $(root)/_src/
 npm run json-server
 ```
 
+## Custom task
+
+```Shell
+cd $(root)/_app
+
+# node-aigis
+npx gulp styleguide
+# gulp-iconfont
+npx gulp iconfont
+```
+___* Gulp task only___
+
 ## License
 
 Licensed under MIT  

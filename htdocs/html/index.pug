@@ -1,5 +1,15 @@
 extends ./_layouts/default
 
 block content
-  != `Hello Starter Kit!`
+  != `index`
 
+  //- TODO ↓↓DELETE↓↓
+  h2 text replace test
+  p test
+  p テスト
+  p 〜
+
+  p!= JSON.stringify(p)
+
+  h2 image change test
+  p: img(src=`${spacer}` data-pc-src=`${img_path}pc` data-sp-src=`${img_path}sp` alt="mediaquery")

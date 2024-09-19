@@ -1,0 +1,52 @@
+/*
+---
+name: icon
+category:
+  - components
+  - components/icon
+tag:
+  - base
+  - latest
+  - pc
+  - sp
+---
+
+icon styles
+
+* Base icon style.
+
+```html
+```
+```jade
+```
+*/
+font_face('icons1', 'icons1', '', normal, normal)
+
+ICON_ARROW1 = '\F001'
+
+.{$c}icon
+  $this = selector($component_selector)
+
+  display block
+  vertical-align middle
+  line-height 0
+  margin-right .3em
+  margin-left @margin-right
+  backface-visibility hidden
+
+  // & ~ {$this}__text
+  &__text
+    display block
+    vertical-align middle
+
+  &--rotate
+    $split = 45
+    for $i in (1..(360 / $split))
+      &-{$i * $split}
+        display inline-block
+        transform rotate(($i * $split)deg)
+
+  &--arrow1
+    &::before
+      font_icon('icons1', ICON_ARROW1)
+

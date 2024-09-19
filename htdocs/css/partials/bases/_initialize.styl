@@ -1,0 +1,186 @@
+.{$l}base
+  if $init_type == 'reset'
+    @import "_reset"
+  if $init_type == 'normalize'
+    @import "_normalize"
+
+  .{$l}wrapper
+    // overscroll-behavior-y none
+
+    font-family $font_family
+    // @media all and (-ms-high-contrast: none)
+    //   font-family $font_family
+
+    font-size ($fpc)px
+    // font-size (($fpc / ($wpc)) * 100)vw
+    // @media (min-width: unit($wpc, 'px'))
+    //   font-size ($fpc)px !important
+
+    line-height $lh
+
+    -webkit-font-smoothing antialiased
+    -moz-osx-font-smoothing grayscale
+    -webkit-text-size-adjust 100%
+
+    -webkit-print-color-adjust exact
+
+    font-feature-settings 'palt' 1
+    // font-variant-ligatures no-common-ligatures
+    // font-variant-numeric slashed-zero
+
+    // background $color_main
+    color $font_color_default
+    break_word()
+
+    // min-width ($wmin)px
+    // min-width 320px
+
+    .{$c}display-inline-block
+      display inline-block
+
+    +break_point('pc')
+      .{$c}display-none
+        &--pc
+          display none !important
+
+    +break_point('tab')
+      .{$c}display-none
+        &--tab
+          display none !important
+
+    +break_point('sp')
+      .{$c}display-none
+        &--sp
+          display none !important
+
+    a
+      link_style('', '', '', '')
+      &:focus
+        outline none
+
+    a,
+    input[type="submit"],
+    button
+    label
+      rollover()
+
+    img,
+    svg
+      max-width 100%
+      width 100%
+      height auto
+      vertical-align top
+
+    picture
+      max-width 100%
+
+    video
+      outline none
+
+    if $init_type == 'reset'
+      input,
+      textarea
+        margin 0
+        padding 0
+        background #fff
+        appearance none
+        line-height inherit
+        border none
+        font-size inherit
+        font-family inherit
+        font-weight inherit
+        outline none
+        color inherit
+        &:-ms-input-placeholder
+          relative top -.1em
+        &::-moz-focus-inner
+          border none
+        &:required
+        &:invalid
+          box-shadow none
+
+      button
+        margin 0
+        padding 0
+        background none
+        appearance none
+        line-height inherit
+        border none
+        font-size inherit
+        font-family inherit
+        font-weight inherit
+        outline none
+        color inherit
+        &::-moz-focus-inner
+          border none
+
+      input
+        &[type="text"],
+        &[type="search"],
+        &[type="datetime"],
+        &[type="datetime-local"],
+        &[type="date"],
+        &[type="week"],
+        &[type="month"],
+        &[type="time"],
+        &[type="color"],
+        &[type="password"],
+        &[type="url"],
+        &[type="email"],
+        &[type="number"]
+          min-height 2em
+
+        &[type="date"]
+          appearance none
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button,
+          &::-webkit-clear-button
+            appearance none
+            margin 0
+          &::-webkit-calendar-picker-indicator
+            position relative
+            padding .2em
+            background none
+            font-size .5em
+
+        &[type="number"]
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button
+            -webkit-appearance none
+            margin 0
+        &[type="number"]
+          -moz-appearance textfield
+
+      select
+        min-height 2em
+        appearance none
+        border-radius 0
+        background #fff url($spacer) no-repeat
+        background-position right center
+        background-size .5em
+        padding-right 1.5em
+        line-height inherit
+        font-size inherit
+        font-family inherit
+        font-weight inherit
+        color inherit
+        &:focus
+          outline none
+        &::-ms-expand
+          display none
+
+      input
+        appearance none
+        border-radius 0
+        &:focus
+          outline none
+
+      select,
+      input[type="submit"],
+      button,
+      label
+        cursor pointer
+
+// responsive fontsize
+font_size_responsive('.' + $l + 'base' + ' .' + $l + 'wrapper')
+

@@ -1,8 +1,9 @@
 doctype html
 
 include ../_utilities/variables
+include ../_utilities/mixins
 
-html(lang!=lang dir!=dir)
+html.no-js(lang!=lang dir!=dir)
   head
     include head
 

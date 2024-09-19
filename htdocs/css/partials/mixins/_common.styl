@@ -1,0 +1,293 @@
+font_face($family_name, $name, $type, $weight, $style)
+  $filename = $name + ($type ? '-' + $type : '')
+  @font-face
+    font-family $family_name
+
+    src url($font_path + $filename + '.eot')
+    src local($family_name + ' ' + $type),
+      url($font_path + $filename + '.eot?#iefix') format('embedded-opentype'),
+      url($font_path + $filename + '.woff2') format('woff2'),
+      url($font_path + $filename + '.woff') format('woff'),
+      url($font_path + $filename + '.otf') format('opentype'),
+      url($font_path + $filename + '.ttf') format('truetype')
+
+    font-display swap
+
+    if $weight
+      font-weight $weight
+    if $style
+      font-style $style
+
+font_icon($name, $type)
+  overflow hidden
+  display inline
+  font-family $name
+  content $type
+  line-height 1
+  speak none
+  font-weight normal
+  font-style normal
+  font-variant normal
+  text-transform none
+  text-rendering auto
+  vertical-align middle
+
+clearfix()
+  &::after
+    display block
+    clear both
+    height 0
+    visibility hidden
+    content ""
+
+// design size (width / 2)?
+adj($num)
+  ($num * 2)
+
+percent($num, $maxnum, $unit = '%')
+  unit(((($num / $maxnum) * 1000) / 10), $unit)
+
+font_size($size, $def = $font_size_default)
+  if $def == 'sp'
+    $def = $fsp
+  font-size ceil(percent($size, $def))
+
+font_size_responsive($elem = body, $pc = false)
+  // wmin = wmin * 2
+  // wsp = wsp * 2
+  // fsp = fsp * 2
+  for $i in (0..$font_size_split)
+    $diff = $wmin + ($i * (($wsp - $wmin) / $font_size_split))
+    $rate = $diff / $wsp
+
+    if !$pc
+      if $i == 0
+        @media (max-width: unit($wmin, "px"))
+          {$elem}
+            font-size unit(round($fsp * $rate), "px")
+    @media (min-width: unit(round($diff), "px"))
+      if $mediaquery_type == "js"
+        {$lsp}
+          {$elem}
+            font-size unit(round($fsp * $rate), "px")
+      else
+        {$elem}
+          font-size unit(round($fsp * $rate), "px")
+
+  if !$pc
+    @media (min-width: unit($wsp + 1, "px"))
+      {$elem}
+        font-size unit($fpc, "px")
+
+  if $pc
+    for $i in (0..$font_size_split)
+      $diff = ($wsp + 1) + ($i * (($wpc - ($wsp + 1)) / $font_size_split))
+      $rate = $diff / $wpc
+      @media (min-width: unit(round($diff), "px"))
+        {$elem}
+          font-size unit(round($fpc * $rate), "px")
+
+width_100()
+  max-width 100%
+  width 100%
+  height auto
+
+height_100()
+  max-width none
+  width auto
+  height 100%
+
+center_margin()
+  margin-right auto
+  margin-left auto
+
+letter_spacing($size)
+  letter-spacing ($size / 1000)em
+
+break_word()
+  // word-break break-all
+  word-wrap break-word
+  overflow-wrap break-word
+
+justify()
+  text-align justify
+  text-justify inter-ideograph
+
+// ex:margin: 10px - line_height(14, 1.5) 第二引数はem指定
+line_height($fontsize, $lineheight)
+  ((($fontsize * $lineheight) - $fontsize) / 2)
+
+hidden_text()
+  text-indent 100%
+  white-space nowrap
+  overflow hidden
+  line-height 1
+
+scrollbar_none()
+  -ms-overflow-style none
+  scrollbar-width none
+  &::-webkit-scrollbar
+    display none
+
+break_point($media, $type = $mediaquery_type)
+  if $type == 'js'
+    {$layout}{$media} &
+      {block}
+  else
+    if $wtab && $wtab >= 0
+      if $media == 'pc'
+        @media screen and (min-width: ($wpc + 1)px)
+          {block}
+      if $media == 'tab'
+        @media screen and (min-width: ($wtab)px) and (max-width: ($wpc)px)
+          {block}
+      if $media == 'sp'
+        @media screen and (max-width: ($wtab - 1)px)
+          {block}
+    else
+      if $media == 'pc'
+        @media screen and (min-width: ($wsp + 1)px)
+          {block}
+      if $media == 'sp'
+        @media screen and (max-width: ($wsp)px)
+          {block}
+
+link_color($link, $hover, $visited, $active)
+  if !$link || $link == ''
+    $link = $font_color_link_default
+  if !$hover || $hover == ''
+    $hover = $link
+  if !$visited || $visited == ''
+    $visited = $link
+  if !active || active == ''
+    $active = $link
+
+  color $link
+  &:visited
+    color $visited
+  {$dumouse} &
+    &:hover
+      color $hover
+  &:hover
+    color $link
+  &:active,
+  &:focus
+    color $active
+
+link_decoration($link, $hover, $visited, $active)
+  if !$link || $link == ''
+    $link = $link_decoration_default
+  if !$hover || $hover == ''
+    $hover = $link_decoration_hover
+  if !$visited || $visited == ''
+    $visited = $link
+  if !$active || $active == ''
+    $active = $link
+
+  text-decoration $link
+  &:visited
+    text-decoration $visited
+  {$dumouse} &
+    &:hover
+      text-decoration $hover
+  &:active,
+  &:focus
+    text-decoration $active
+
+link_style($color, $decoration, $hover_color, $hover_decoration)
+  if !$color || $color == ''
+    $color = $font_color_link_default
+  if !$hover_color || $hover_color == ''
+    $hover_color = $font_color_link_hover
+
+  if !$decoration || $decoration == ''
+    $decoration = $link_decoration_default
+  if !$hover_decoration || $hover_decoration == ''
+    $hover_decoration = $link_decoration_hover
+
+  color $color
+  text-decoration $decoration
+  &:visited
+    color $color
+    text-decoration $decoration
+  {$dumouse} &
+    &:hover
+      color $hover_color
+      text-decoration $hover_decoration
+  &:active,
+  &:focus
+    color $color
+    text-decoration $decoration
+
+rollover($type = 'opacity', $def = .6)
+  if $type == 'opacity'
+    transition opacity $trd $tre
+    img
+      box-shadow #000 0 0 0
+    &:link,
+    &:visited,
+    &:active,
+    &:focus
+      text-decoration none
+    {$dumouse} &
+      &:hover
+        opacity $def
+        text-decoration none
+    &.disabled,
+    &:disabled
+      cursor default
+      opacity 1 !important
+
+  else if $type == 'underline'
+    text-decoration none
+    &:link,
+    &:visited,
+    &:active,
+    &:focus
+      text-decoration none
+    {$dumouse} &
+      &:hover
+        text-decoration underline
+    &.disabled,
+    &:disabled
+      cursor default
+      text-decoration none !important
+
+  else if $type == 'none'
+    text-decoration underline
+    &:link,
+    &:visited,
+    &:active,
+    &:focus
+      text-decoration underline
+    {$dumouse} &
+      &:hover
+        text-decoration none
+    &.disabled,
+    &:disabled
+      cursor default
+      text-decoration underline !important
+
+  else if $type == 'false'
+    text-decoration none
+    &:link,
+    &:visited,
+    &:active,
+    &:focus
+      text-decoration none
+      // border-bottom 1px solid FONT_COLOR_LINK_DEFAULT
+    {$dumouse} &
+      &:hover
+        text-decoration none
+    &.disabled,
+    &:disabled
+      cursor default
+      text-decoration none !important
+
+placeholder()
+  &::-webkit-input-placeholder,
+  &:-moz-placeholder,
+  &::-moz-placeholder,
+  &:-ms-input-placeholder
+    {block}
+

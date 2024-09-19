@@ -1,0 +1,54 @@
+/*
+---
+name: accordion
+category:
+  - components
+  - components/accordion
+tag:
+  - base
+  - latest
+  - pc
+  - sp
+  - js
+  - data
+---
+
+accordion styles
+
+* Base accordion style.
+* Button has class `is-open` -> Set initial open.
+* Use [data-accr].
+
+```html
+<div class="site-accordion">
+  <p class="is-open site-accordion__button" data-accr="#accordion__content1">
+    <a href="javascript:void(0)">button1</a>
+  </p>
+  <div id="accordion__content1" class="site-accordion__content">
+    <div>
+      <p>accordion__content1</p>
+    </div>
+  </div>
+</div>
+```
+```jade
+div(class=`${c}accordion`)
+  p.is-open(class=`${c}accordion__button` data-accr=`#accordion__content1`)
+    a(href="javascript:void(0)")!= `button1`
+  div#accordion__content1(class=`${c}accordion__content`)
+    div
+      p!= `accordion__content1`
+```
+*/
+.{$c}accordion
+  $this = selector($component_selector)
+
+  &__button
+    & > a
+      display block
+      padding 1em
+      background #ccc
+  &__content
+    & > div
+      padding-bottom 10em
+

@@ -1,8 +1,19 @@
 @charset "UTF-8";
 
+support-for-ie = false;
 flex-version = flex;
 @import "nib"
 
-body
-  //
+@import "partials/variables/**/*"
+@import "partials/mixins/**/*"
 
+@import "partials/plugins/**/*"
+
+@import "partials/bases/_initialize"
+
+.{$l}base
+  .{$l}wrapper
+    // this = selector($component_selector)
+    @import "partials/components/**/*"
+    @import "partials/layouts/**/*"
+    @import "partials/pages/**/*"

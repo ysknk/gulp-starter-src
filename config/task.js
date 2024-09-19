@@ -1,12 +1,11 @@
 // options -> /_app/gulpfile.babel.js/task/config.js
+import meta from './page.js'
 
 const ROOT_PATH = ``;
 const START_PATH = `/${ROOT_PATH}`;
 const FILE_NAME = ``;// default index.html
 
 const ASSETS_PATH = `${START_PATH}assets/`
-
-let meta = require(`./page.js`);
 
 // const base_dir = {
 //   html: `html/`,
@@ -16,9 +15,12 @@ let meta = require(`./page.js`);
 //   static: `static/`,
 // };
 
-module.exports = {
+export default {
 
-  tasks: {},
+  tasks: {
+    iconfont: true,
+    mass_production: true,
+  },
 
   /* common */
   common: {
@@ -53,6 +55,39 @@ module.exports = {
       // ghostMode: false,
       // server: {
       //   baseDir: define.path.dest
+        // NOTE: TEST API
+        // middleware: [
+        //   {
+        //     route: "/api",
+        //     handle: function (req, res, next) {
+        //       const reqPath = req.url.slice(1)
+        //       // if (req.method.match(/get/i)) {
+        //       // } else {
+        //       // }
+        //       let result = {
+        //         status_code: 404
+        //       }
+
+        //       // NOTE: get POST body
+        //       req.on('data', function(chunk) {
+        //         const jsonstr = chunk.toString()
+        //         const body = JSON.parse(jsonstr)
+
+        //         switch (reqPath) {
+        //           case '': {
+        //             break
+        //           }
+        //           default: {
+        //             break
+        //           }
+        //         }
+        //         res.setHeader('Content-Type', 'application/json; charset=utf-8')
+        //         res.end(JSON.stringify(result))
+        //         next()
+        //       })
+        //     }
+        //   }
+        // ]
       // },
       // rewriteRules: [{
       //   match: /<!--#include virtual="(.+)" -->/g,
@@ -191,7 +226,7 @@ module.exports = {
 
   /* static */
   static: { // other filetype
-    // src: define.path.src('!(pug|styl|js|jsx|vue|tag|jpg|jpeg|png|gif|svg|d.ts|ts|tsx)')
+    // src: define.path.src('!(pug|styl|js|jsx|vue|tag|jpg|jpeg|png|gif|svg|d.ts|ts|tsx)'),
     // src: [`${define.path.srcDir}htdocs/${base_dir.static}**/*.*`],
     // dest: define.path.dest,
     // base_dir: base_dir.static,
@@ -201,6 +236,45 @@ module.exports = {
 
   /* delete */
   delete: { // all
+  },
+
+  /* iconfont */
+  /* ../tasks/iconfont/src/uF001-hoge1.svg */
+  /* ../tasks/iconfont/src/uF002-huga1.svg */
+  iconfont: {
+    src: [`${define.path.config}tasks/iconfont/**/*.svg`],
+    dest: `${define.path.dest}${ASSETS_PATH}font/`,
+    options: {
+      startUnicode: 0xF001,
+      fontName: 'icons1',
+      normalize: true,
+      fontHeight: 500,
+      prependUnicode: true,
+      formats: ['ttf', 'eot', 'woff', 'woff2'],
+    }
+  },
+
+  /* mass_production */
+  mass_production: {
+    src: [
+      `${define.path.htdocs}html/_layouts/**/*`,
+      `${define.path.config}tasks/mass_production/src/templates/**/*`
+    ],
+    dest: `${define.path.dest}${ROOT_PATH}`,
+
+    templateDir: `${define.path.config}tasks/mass_production/src/templates/`,
+    contextDir: `${define.path.config}tasks/mass_production/src/index.js`,
+
+    extension: '.html',
+
+    options: {
+      pretty: true
+    },
+
+    meta,
+
+    root_path: `${START_PATH}`,//base path
+    htdocsdir: define.path.htdocs
   }
 };
 
