@@ -19,7 +19,7 @@ export default {
 
   tasks: {
     iconfont: true,
-    mass_production: true,
+    mass_production: false,
   },
 
   /* common */
