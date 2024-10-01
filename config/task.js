@@ -251,7 +251,7 @@ export default {
       startUnicode: 0xF001,
       fontName: 'icons1',
       normalize: true,
-      fontHeight: 500,
+      fontHeight: 1001,
       prependUnicode: true,
       formats: ['ttf', 'eot', 'woff', 'woff2'],
     }
