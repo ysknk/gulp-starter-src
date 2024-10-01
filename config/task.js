@@ -246,15 +246,6 @@ export default {
   /* ../tasks/iconfont/src/uF002-huga1.svg */
   iconfont: {
     src: [`${define.path.config}tasks/iconfont/**/*.svg`],
-    dest: `${define.path.dest}${ASSETS_PATH}font/`,
-    options: {
-      startUnicode: 0xF001,
-      fontName: 'icons1',
-      normalize: true,
-      fontHeight: 1001,
-      prependUnicode: true,
-      formats: ['ttf', 'eot', 'woff', 'woff2'],
-    }
   },
 
   /* mass_production */
