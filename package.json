@@ -6,11 +6,15 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "json-server": "json-server --watch ./config/db.js -p 3003"
+    "json-server": "json-server --watch ./config/db.js -p 3003",
+    "sv2js": "sv2js",
+    "iconfont": "fantasticon"
   },
   "author": "ysknk",
   "license": "ISC",
   "dependencies": {
+    "@googlemaps/js-api-loader": "1.16.8",
+    "@googlemaps/markerclusterer": "2.5.3",
     "animejs": "^3.2.1",
     "axios": "^0.21.1",
     "js-cookie": "^2.2.1",
@@ -20,9 +24,11 @@
     "ua-parser-js": "^0.7.28"
   },
   "devDependencies": {
+    "@types/google.maps": "3.58.1",
     "babel-eslint": "^10.0.3",
     "eslint": "^7.24.0",
-    "gulp-iconfont": "^11.0.0",
-    "json-server": "^0.16.3"
+    "fantasticon": "3.0.0",
+    "json-server": "^0.16.3",
+    "sv2js": "github:ysknk/sv2js"
   }
 }
