@@ -92,11 +92,6 @@ mixin picture(pcsrc, pcwidth, pcheight, spsrc, spwidth, spheight, alt, isLazy=tr
     )
 
 mixin intersection(name, tag="div")
-  - var data = JSON.stringify({ "action": `intersection-${name}` })
-  #{tag}(class=`${c}intersection ${c}intersection--${name}` data-intersection=data)&attributes(attributes)
-    block
-
-mixin intersection(name, tag="div")
   //- - var data = JSON.stringify({ "once": false, "process": { "inout": `${name}` } })
   - var data = JSON.stringify({ "action": `intersection-${name}` })
   #{tag}(class=`${c}intersection ${c}intersection--${name}` data-intersection=data)&attributes(attributes)
