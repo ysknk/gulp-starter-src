@@ -47,7 +47,7 @@ class Iconfont extends TaskMaster {
       }))
       .pipe(gulp.dest(this.task.data.dest))
 
-      .pipe($.size(this.sizeOptions()))
+      // .pipe($.size(this.sizeOptions()))
 
       .on('finish', () => {done && done();});
   }
@@ -63,7 +63,7 @@ class Iconfont extends TaskMaster {
 
     // default task
     gulp.task(this.task.name, (done) => {
-      this[defaultTask](gulp.src(mergeSrc, {allowEmpty: true}), done);
+      this[defaultTask](gulp.src(mergeSrc, { allowEmpty: true, encoding: false }), done);
     });
   }
 
