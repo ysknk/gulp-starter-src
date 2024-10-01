@@ -1,7 +1,7 @@
 'use strict';
 
 import { default as TaskMaster } from '../../../../_app/gulpfiles/task/master.js';
-import plugin from 'gulp-iconfont';
+import { execSync } from 'child_process'
 
 /**
  * Set Const Variables
@@ -37,19 +37,9 @@ class Iconfont extends TaskMaster {
    * @param {object} stream gulp object
    * @param {function} done set complete
    */
-  procedure(stream, done) {
-    let runTimestamp = Math.round(Date.now() / 1000);
-
-    stream
-      .pipe(plugin({
-        ...this.task.data.options,
-        timestamp: runTimestamp,
-      }))
-      .pipe(gulp.dest(this.task.data.dest))
-
-      // .pipe($.size(this.sizeOptions()))
-
-      .on('finish', () => {done && done();});
+  build (stream, done) {
+    execSync(`cd ../_src/ && npm run fonticon`, { stdio: 'inherit' })
+    done && done()
   }
 
   /**
@@ -58,12 +48,25 @@ class Iconfont extends TaskMaster {
   setTask() {
     let defaultTask = this.task.types && this.task.types.length ?
       this.task.types[0] : 'procedure';
-    let src = this.getSrc();
-    let mergeSrc = src;
+    let src = this.task.data.src;
+    let mergeSrc = [...src];
 
     // default task
     gulp.task(this.task.name, (done) => {
-      this[defaultTask](gulp.src(mergeSrc, { allowEmpty: true, encoding: false }), done);
+      this[defaultTask](gulp.src(src, {allowEmpty: true}), done);
+    });
+
+    // watch task
+    gulp.task(this.task.name + ':watch', () => {
+      this.watch(this.task, mergeSrc);
+    });
+
+    // other types task
+    _.forEach(this.task.types, (type) => {
+      if(!this[type]) return;
+      gulp.task(this.task.name + ':' + type, (done) => {
+        this[type](gulp.src(src, {allowEmpty: true}), done);
+      });
     });
   }
 
