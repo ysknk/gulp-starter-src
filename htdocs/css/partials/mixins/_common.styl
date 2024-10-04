@@ -129,28 +129,39 @@ scrollbar_none()
   &::-webkit-scrollbar
     display none
 
+// break_point($media, $type = $mediaquery_type)
+//   if $type == 'js'
+//     {$layout}{$media} &
+//       {block}
+//   else
+//     if $wtab && $wtab >= 0
+//       if $media == 'pc'
+//         @media screen and (min-width: ($wpc + 1)px)
+//           {block}
+//       if $media == 'tab'
+//         @media screen and (min-width: ($wtab)px) and (max-width: ($wpc)px)
+//           {block}
+//       if $media == 'sp'
+//         @media screen and (max-width: ($wtab - 1)px)
+//           {block}
+//     else
+//       if $media == 'pc'
+//         @media screen and (min-width: ($wsp + 1)px)
+//           {block}
+//       if $media == 'sp'
+//         @media screen and (max-width: ($wsp)px)
+//           {block}
+
 break_point($media, $type = $mediaquery_type)
-  if $type == 'js'
-    {$layout}{$media} &
+  if $media == 'pc'
+    @media screen and (min-width: (($breakpoint) + 1)px)
       {block}
-  else
-    if $wtab && $wtab >= 0
-      if $media == 'pc'
-        @media screen and (min-width: ($wpc + 1)px)
-          {block}
-      if $media == 'tab'
-        @media screen and (min-width: ($wtab)px) and (max-width: ($wpc)px)
-          {block}
-      if $media == 'sp'
-        @media screen and (max-width: ($wtab - 1)px)
-          {block}
-    else
-      if $media == 'pc'
-        @media screen and (min-width: ($wsp + 1)px)
-          {block}
-      if $media == 'sp'
-        @media screen and (max-width: ($wsp)px)
-          {block}
+  if $media == 'sp'
+    @media screen and (max-width: ($breakpoint)px)
+      {block}
+  if $media == 'max'
+    @media screen and (min-width: ($wmax)px)
+      {block}
 
 link_color($link, $hover, $visited, $active)
   if !$link || $link == ''
