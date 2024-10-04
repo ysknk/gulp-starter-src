@@ -63,6 +63,7 @@ export default {
   ...head,
 
   data,
+  breakpoint: 780,
 
   p: {
     s: prefix_site,
