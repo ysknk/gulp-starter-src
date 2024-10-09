@@ -113,5 +113,10 @@ export class Modal {
 
     const { openClassName } = this.opts
     this.htmlElem.classList.remove(openClassName)
+    setTimeout(() => {
+      if (!this.hasOpen) {
+        this.elem.innerHTML = ''
+      }
+    }, 400) // NOTE: transition end
   }
 }
