@@ -1,3 +1,20 @@
+  timestamp: false,
+  reqCount: 0
+}) => {
+  payload = Object.assign({}, initFetchPayload, payload)
+  const { url, retryCount, delay } = payload
+  const reqUrl = options.reqCount === 0 && options?.timestamp
+    ? `${url + '?' + (new Date().getTime()) }`
+    : url
+  const recursive = async (): Promise<Response|false> => {
+    if (retryCount <= 1) {
+      return false
+    }
+    await sleep(delay)
+    options.reqCount++;
+    return richFetch({
+      url: reqUrl,
+      retryCount: retryCount - 1,
       delay,
     }, options)
   }
