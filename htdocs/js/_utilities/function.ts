@@ -129,7 +129,11 @@ export const initFetchPayload: FetchPayload = {
   delay: 1000,
   minDelay: 200,
 }
-export const richFetcher = async (payload = initFetchPayload, options: object = {}) => {
+export type Options = any
+export const richFetcher = async (payload = initFetchPayload, options: Options = {
+  timestamp: true,
+  reqCount: 0
+}) => {
   payload = Object.assign({}, initFetchPayload, payload)
   const { url, retryCount, delay, minDelay } = payload
   const startTime = new Date().getTime()
@@ -152,16 +156,22 @@ export const richFetcher = async (payload = initFetchPayload, options: object = 
 //   method: 'POST',
 //   body: JSON.stringify(${Object}),
 // }
-export const richFetch = async (payload = initFetchPayload, options: object = {}) => {
+export const richFetch = async (payload = initFetchPayload, options: Options = {
+  timestamp: false
+}) => {
   payload = Object.assign({}, initFetchPayload, payload)
   const { url, retryCount, delay } = payload
+  const reqUrl = options.reqCount === 0 && options?.timestamp
+    ? `${url + '?' + (new Date().getTime()) }`
+    : url
   const recursive = async (): Promise<Response|false> => {
     if (retryCount <= 1) {
       return false
     }
     await sleep(delay)
+    options.reqCount++;
     return richFetch({
-      url,
+      url: reqUrl,
       retryCount: retryCount - 1,
       delay,
     }, options)
