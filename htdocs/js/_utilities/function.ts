@@ -179,7 +179,7 @@ export const richFetch = async (payload = initFetchPayload, options: Options = {
   }
 
   try {
-    return await fetch(url, options)
+    return await fetch(reqUrl, options)
       .then(async (response: Response) => {
         if (!response.ok) {
           return await recursive()
