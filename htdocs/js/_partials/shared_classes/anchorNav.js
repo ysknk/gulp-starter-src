@@ -30,12 +30,18 @@ export default ((win, doc) => {
         nav: `data-anchor-nav`
       };
 
+      this.parentElemSelector = 'html';
+      this.isShowed = 'is-an-showed';
       this.currentClassName = 'is-current';
       this.minViewPercentage = 5;
 
       _.isObject(opts_) && _.extend(this, opts_);
 
       // this.initialize();
+    }
+
+    get parentElem () {
+      return doc.querySelector(this.parentElemSelector)
     }
 
     /**
@@ -145,11 +151,14 @@ export default ((win, doc) => {
       });
 
       if (currentNavs && currentNavs.length) {
+        this.parentElem?.classList.add(this.isShowed)
         currentNavs = _.orderBy(
           currentNavs,
           ['visualRange', 'num'],
           ['desc', 'desc']
         );
+      } else {
+        this.parentElem?.classList.remove(this.isShowed)
       }
 
       const targetObject = currentNavs[0];
@@ -198,4 +207,3 @@ export default ((win, doc) => {
   };
 
 })(window, document);
-
